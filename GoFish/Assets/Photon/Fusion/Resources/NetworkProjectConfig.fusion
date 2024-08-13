@@ -62,7 +62,8 @@
         "Assembly-CSharp-firstpass",
         "Fusion.Addons.Physics",
         "Fusion.Addons.FSM",
-        "Oculus.VR"
+        "Oculus.VR",
+        "PhotonVoice.Fusion"
     ],
     "UseSerializableDictionary": true,
     "NullChecksForNetworkedProperties": true,
