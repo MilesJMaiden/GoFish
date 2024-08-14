@@ -15,6 +15,9 @@ namespace Fusion.Addons.XRHandsSync
         protected bool areInputControlled = false;
         protected XRHand lastXRHand;
 
+        [SerializeField] bool disableGrabIfIndexIsPointed = false;
+        [SerializeField] float indexPointedThreshold = 20f;
+
         protected virtual void Awake()
         {
             hardwareHand = GetComponentInParent<HardwareHand>();
@@ -169,6 +172,23 @@ namespace Fusion.Addons.XRHandsSync
             var ringIntermediateAvailable = TryGetBonePose(hand, XRHandJointID.RingIntermediate, out var ringIntermediatePose, out _);
             var ringMetacarpalAvailable = TryGetBonePose(hand, XRHandJointID.RingMetacarpal, out var ringMetacarpalPose, out _);
             var middleMetacarpalAvailable = TryGetBonePose(hand, XRHandJointID.MiddleMetacarpal, out var middleMetacarpalPose, out _);
+
+
+            // disable the grab if the index is pointing
+            if (disableGrabIfIndexIsPointed)
+            {
+                var indexProximalAvailable = TryGetBonePose(hand, XRHandJointID.IndexProximal, out var indexProximalPose, out _);
+                var indexIntermediateAvailable = TryGetBonePose(hand, XRHandJointID.IndexIntermediate, out var indexIntermediatePose, out _);
+                if (indexProximalAvailable && indexIntermediateAvailable)
+                {
+                    var indexIX = NormalisedAngle((Quaternion.Inverse(indexProximalPose.rotation) * indexIntermediatePose.rotation).eulerAngles.x);
+
+                    if (indexIX < indexPointedThreshold)
+                    {
+                        return false;
+                    }
+                }
+            }
 
             // Grab
             if (middleMetacarpalAvailable && middleIntermediateAvailable && middleProximalAvailable && ringMetacarpalAvailable && ringProximalAvailable && ringIntermediateAvailable)

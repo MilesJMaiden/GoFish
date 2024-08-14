@@ -55,7 +55,10 @@ namespace Fusion.Addons.ConnectionManagerAddon
         [Header("Local user spawner")]
         public NetworkObject userPrefab;
 
-#region IUserSpawner
+        [Header("Scene settings")]
+        public LoadSceneMode loadSceneMode = LoadSceneMode.Additive;
+
+        #region IUserSpawner
         public NetworkObject UserPrefab { 
             get => userPrefab;
             set => userPrefab = value;
@@ -139,7 +142,7 @@ namespace Fusion.Addons.ConnectionManagerAddon
             var sceneInfo = new NetworkSceneInfo();
             if (sceneRef.IsValid)
             {
-                sceneInfo.AddSceneRef(sceneRef, LoadSceneMode.Single);
+                sceneInfo.AddSceneRef(sceneRef, loadSceneMode);
             }
             return sceneInfo;
         }

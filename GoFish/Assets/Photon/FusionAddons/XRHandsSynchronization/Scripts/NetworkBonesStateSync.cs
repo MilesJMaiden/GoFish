@@ -182,17 +182,33 @@ namespace Fusion.Addons.HandsSync
 
         Dictionary<HandSynchronizationBoneId, Pose> UnCompressHandPoses(ref HandState handState, ref CompressedHandState compressedHandState)
         {
-            var posesByBoneId = new Dictionary<HandSynchronizationBoneId, Pose>();
             compressedHandState.UncompressToHandState(ref handState, CompressionBonesInfo);
-            foreach (var boneId in handState.boneRotations.Keys)
+            return PosesWithDefaultPositions(handState.boneRotations);
+        }
+
+        Dictionary<HandSynchronizationBoneId, Pose> PosesWithDefaultPositions(Dictionary<HandSynchronizationBoneId, Quaternion> boneRotations)
+        {
+            var posesByBoneId = new Dictionary<HandSynchronizationBoneId, Pose>();
+            foreach (var boneId in boneRotations.Keys)
             {
                 var position = Vector3.zero;
-                if (defaultBonePositions.bonePositionsByBoneId.ContainsKey(boneId)) 
+                if (defaultBonePositions.bonePositionsByBoneId.ContainsKey(boneId))
                     position = defaultBonePositions.bonePositionsByBoneId[boneId];
-                posesByBoneId[boneId] = new Pose { position = position, rotation = handState.boneRotations[boneId] };
+                posesByBoneId[boneId] = new Pose { position = position, rotation = boneRotations[boneId] };
+            }
+            foreach(var boneId in defaultBonePositions.bonePositionsByBoneId.Keys)
+            {
+                if (posesByBoneId.ContainsKey(boneId))
+                {
+                    continue;
+                }
+                Debug.LogError("Missing rotation: "+ boneId);
+                var position = defaultBonePositions.bonePositionsByBoneId[boneId];
+                posesByBoneId[boneId] = new Pose { position = position, rotation = Quaternion.identity };
             }
             return posesByBoneId;
         }
+
 
         public void ApplyPoses(Dictionary<HandSynchronizationBoneId, Pose> posesByboneId)
         {
@@ -234,10 +250,19 @@ namespace Fusion.Addons.HandsSync
                 }
                 else if (localBoneCollecter != null && bonesReader != null && localBoneCollecter.CurrentHandTrackingMode == HandTrackingMode.FingerTracking)
                 {
-                    if (localBoneCollecter.CurrentBonesPoses.Count == 0)
-                        Debug.Log("CurrentBonesPoses not yet initialized: skipping this frame");
+                    var bonePoses = localBoneCollecter.CurrentBonesPoses;
+                    if (bonePoses != null)
+                    {
+                        if (localBoneCollecter.CurrentBonesPoses.Count == 0)
+                            Debug.Log("CurrentBonesPoses not yet initialized: skipping this frame");
+                        else
+                            ApplyPoses(localBoneCollecter.CurrentBonesPoses);
+                    } 
                     else
-                        ApplyPoses(localBoneCollecter.CurrentBonesPoses);
+                    {
+                        var poses = PosesWithDefaultPositions(localBoneCollecter.CurrentBoneRotations);
+                        ApplyPoses(poses);
+                    }
                 }
             }
             else

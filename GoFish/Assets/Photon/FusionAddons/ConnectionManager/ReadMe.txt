@@ -6,6 +6,7 @@ https://doc.photonengine.com/fusion/current/industries-samples/industries-addons
 
 ## Version & Changelog
 
+- Version 2.0.3: Fix for additive scenes
 - Version 2.0.2: 
     - Fix connectionManager callback subscription
     - Add automation capabilities

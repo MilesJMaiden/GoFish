@@ -69,6 +69,7 @@ namespace Fusion.XRShared.Demo
         {
             GameObject spawnedObject = null;
 
+            if (runner == null || runner.IsRunning == false) return null;
             if (prefab.GetComponentInChildren<NetworkObject>())
             {
                 var no = runner.Spawn(prefab, spawnerGrabbableReference.transform.position, spawnerGrabbableReference.transform.rotation);

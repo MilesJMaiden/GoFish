@@ -14,8 +14,7 @@ namespace Fusion.Addons.HandsSync
     {
         [SerializeField]
         NetworkBonesStateSync networkBonesStateSync;
-        [SerializeField]
-        NetworkHand networkHand;
+        public NetworkHand networkHand;
 
         public IHandRepresentation handRepresentation;
 

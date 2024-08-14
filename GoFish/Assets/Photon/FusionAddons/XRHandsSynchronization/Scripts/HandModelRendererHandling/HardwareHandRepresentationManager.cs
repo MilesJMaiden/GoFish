@@ -20,7 +20,10 @@ namespace Fusion.Addons.HandsSync
         Collider controllerModeGrabCollider;
         [SerializeField]
         Collider fingerTrackingModeGrabCollider;
-        
+
+        bool controllerModeIndexTipColliderInitialState = true;
+        bool fingerTrackingModeIndexTipColliderInitialState = true;
+
         [Header("Index tip Colliders")]
         [SerializeField]
         Collider controllerModeIndexTipCollider;
@@ -54,6 +57,9 @@ namespace Fusion.Addons.HandsSync
                     if (c != fingerTrackingModeGrabCollider) controllerModeGrabCollider = c;
             }
 
+            if (fingerTrackingModeIndexTipCollider != null) fingerTrackingModeIndexTipColliderInitialState = fingerTrackingModeIndexTipCollider.enabled;
+            if (controllerModeIndexTipCollider != null) controllerModeIndexTipColliderInitialState = controllerModeIndexTipCollider.enabled;
+
             if (fingerTrackingHandMeshRenderer == null && bonesCollector != null) fingerTrackingHandMeshRenderer = bonesCollector.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         }
 
@@ -76,10 +82,10 @@ namespace Fusion.Addons.HandsSync
             if (fingerTrackingModeIndexTipCollider && controllerModeIndexTipCollider)
             {
                 if (fingerTrackingModeIndexTipCollider)
-                    fingerTrackingModeIndexTipCollider.enabled = CurrentHandTrackingMode == HandTrackingMode.FingerTracking;
+                    fingerTrackingModeIndexTipCollider.enabled = CurrentHandTrackingMode == HandTrackingMode.FingerTracking && fingerTrackingModeIndexTipColliderInitialState;
 
                 if (controllerModeIndexTipCollider)
-                    controllerModeIndexTipCollider.enabled = CurrentHandTrackingMode == HandTrackingMode.ControllerTracking;
+                    controllerModeIndexTipCollider.enabled = CurrentHandTrackingMode == HandTrackingMode.ControllerTracking && controllerModeIndexTipColliderInitialState;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace Fusion.XR.Shared.Grabbing
             new Color(255f/255f, 246f/255f, 76f/255f, 1)
         };
 
-        private int colorIndex = 0;
+        protected int colorIndex = 0;
         [SerializeField] private float changeColorCoolDown = 1f;
         private float lastColorChangedTime = 0f;
 

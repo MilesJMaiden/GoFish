@@ -6,6 +6,10 @@ https://doc.photonengine.com/fusion/current/industries-samples/industries-addons
 
 ## Version & Changelog
 
+- Version 2.0.4: 
+    - Prevent disabled Grabber components from grabbing
+    - Add reference transforms to the hardware hand: it will be moved at the first active (in hierarchy) transform listed
+    - Add WeaverHelper (to check/edit assembliestoWeave in config) and improvement to PackagePresenceCheck
 - Version 2.0.3: 
     - Add IColorProvider and IFeedbackHandler interfaces
     - Add GrabbableColorSelection

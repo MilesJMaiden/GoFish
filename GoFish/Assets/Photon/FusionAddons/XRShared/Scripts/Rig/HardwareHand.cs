@@ -33,6 +33,9 @@ namespace Fusion.XR.Shared.Rig
         public HandCommand handCommand;
         public bool isGrabbing = false;
 
+        [Tooltip("If set, the HardwareHand will be moved at the first active in hierarchy transform listed")]
+        public List<Transform> referenceTransforms = new List<Transform>();
+
 #if ENABLE_INPUT_SYSTEM
         [Header("Hand pose input")]
         public InputActionProperty thumbAction;
@@ -60,7 +63,6 @@ namespace Fusion.XR.Shared.Rig
             gripAction.EnableWithDefaultXRBindings(side: side, new List<string> { "grip" });
             triggerAction.EnableWithDefaultXRBindings(side: side, new List<string> { "trigger" });
             indexAction.EnableWithDefaultXRBindings(side: side, new List<string> { "triggerTouched" });
-            gripAction.EnableWithDefaultXRBindings(side: side, new List<string> { "grip" });
             // We separate the hand grip action and the grab interaction action, as we may want to use different action for some hardware
             grabAction.EnableWithDefaultXRBindings(side: side, new List<string> { "grip" });
 #else
@@ -73,6 +75,17 @@ namespace Fusion.XR.Shared.Rig
 
         protected virtual void Update()
         {
+            int i = 0;
+            foreach(Transform referenceTransform in referenceTransforms)
+            {
+                if (referenceTransform.gameObject.activeInHierarchy)
+                {
+                    transform.position = referenceTransform.position;
+                    transform.rotation = referenceTransform.rotation;
+                    break;
+                }
+                i++;
+            }
 #if ENABLE_INPUT_SYSTEM
             // update hand pose
             if (updateHandCommandWithAction)
@@ -87,7 +100,6 @@ namespace Fusion.XR.Shared.Rig
 
             // update hand interaction
             if (updateGrabWithAction) isGrabbing = grabAction.action.ReadValue<float>() > grabThreshold;
-
 #else
             Debug.LogError("Missing com.unity.inputsystem package");
 #endif

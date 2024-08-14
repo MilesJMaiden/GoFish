@@ -17,8 +17,7 @@ namespace Fusion.Addons.HandsSync
         public SkinnedMeshRenderer controllerTrackingHandMeshRenderer;
 
         [Header("Override material")]
-        [SerializeField]
-        Material overrideMaterialForRenderers;
+        public Material overrideMaterialForRenderers;
         public enum MaterialOverrideMode
         {
             Override,

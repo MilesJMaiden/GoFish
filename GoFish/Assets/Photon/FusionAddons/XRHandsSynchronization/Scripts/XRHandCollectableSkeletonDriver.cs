@@ -22,12 +22,14 @@ namespace Fusion.Addons.XRHandsSync
         [DrawIf(nameof(controllerTrackingMode), (long)XRHandCollectableSkeletonDriver.ControllerTrackingMode.UseInputAction, CompareOperator.Equal, Hide = true)]
         public InputActionProperty controllerAvailableAction = new InputActionProperty();
 
-        [Header("Hand root")]
+        [Header("Hardware hand relativepositioning")]
         public Transform handRoot;
-        [Tooltip("Apply wrist pose to a prent object instead of the wrist bone")]
-        public bool applyWristPosetoHandroot = true;
+        [Tooltip("Apply wrist pose to a parent object instead of the wrist bone")]
+        public bool applyWristPoseToHandRoot = true;
+        [Tooltip("Force IBonesCollecter.CurrentBonesPoses to return Pose.identity for the wrist (useful if we consider the wrist to be at the root of the hand)")]
+        public bool forceWristPoseToIdentity = true;
 
-        XR.Shared.Rig.HardwareHand hardwareHand;
+        [SerializeField] XR.Shared.Rig.HardwareHand hardwareHand;
 
         [Header("Collected data")]
 
@@ -76,7 +78,7 @@ namespace Fusion.Addons.XRHandsSync
 
         private void Awake()
         {
-            hardwareHand = GetComponentInParent<XR.Shared.Rig.HardwareHand>();
+            if(hardwareHand == null) hardwareHand = GetComponentInParent<XR.Shared.Rig.HardwareHand>();
             if(hardwareHand == null) 
                 Debug.LogError("Missing hardware hand parent");
             if (controllerTrackingMode == ControllerTrackingMode.UseInputAction)
@@ -86,7 +88,7 @@ namespace Fusion.Addons.XRHandsSync
                     controllerAvailableAction.EnableWithDefaultXRBindings(side: hardwareHand.side, new List<string> { "isTracked" });
                 }
             }
-            if (applyWristPosetoHandroot && handRoot == null)
+            if (applyWristPoseToHandRoot && handRoot == null)
             {
                 if(hardwareHand)
                 {
@@ -131,7 +133,7 @@ namespace Fusion.Addons.XRHandsSync
 
         protected override void OnRootPoseUpdated(Pose rootPose)
         {
-            if (applyWristPosetoHandroot)
+            if (applyWristPoseToHandRoot && handRoot != null)
             {
                 var wristIndex = XRHandJointID.Wrist.ToIndex();
                 handRoot.localPosition = rootPose.position;
@@ -143,7 +145,7 @@ namespace Fusion.Addons.XRHandsSync
         protected override void OnJointsUpdated(XRHandJointsUpdatedEventArgs args)
         {
             UpdateJointLocalPoses(args);
-            if (applyWristPosetoHandroot)
+            if (applyWristPoseToHandRoot)
             {
                 var wristIndex = XRHandJointID.Wrist.ToIndex();
                 m_JointLocalPoses[wristIndex] = Pose.identity;
@@ -161,7 +163,14 @@ namespace Fusion.Addons.XRHandsSync
                 var jointId = XRHandJointIDUtility.FromIndex(i);
                 var boneId = jointId.AsHandSynchronizationBoneId();
                 var pose = m_JointLocalPoses[i];
-                _currentPoses[boneId] = pose;
+                if (forceWristPoseToIdentity && boneId == HandSynchronizationBoneId.Hand_WristRoot)
+                {
+                    _currentPoses[boneId] = Pose.identity;
+                }
+                else
+                {
+                    _currentPoses[boneId] = pose;
+                }
 #if UNITY_EDITOR
                 analyser.AddPose(index: i, pose, boneId);
 #endif

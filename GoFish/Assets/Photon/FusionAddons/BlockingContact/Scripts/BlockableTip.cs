@@ -196,7 +196,7 @@ namespace Fusion.Addons.BlockingContact
         void FixContactPosition(bool useInterpolationTargets)
         {
             lastContactDepth = 0;
-            if (IsGrabbed && IsInContact)
+            if (IsGrabbed && IsInContact && grabbable.CurrentGrabber && grabbable.CurrentGrabber.hand)
             {
                 Transform grabbableTransform = null;
                 Transform handTransform = null;

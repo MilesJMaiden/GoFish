@@ -30,6 +30,7 @@ namespace Fusion.XR.Shared.Grabbing {
 
         private void OnTriggerStay(Collider other)
         {
+            if (enabled == false) return;
             // Exit if an object is already grabbed
             if (grabbedObject != null)
             {
@@ -93,6 +94,7 @@ namespace Fusion.XR.Shared.Grabbing {
 
         public virtual void Ungrab(Grabbable grabbable)
         {
+            if (grabbedObject == null) return;
             grabbedObject.Ungrab();
             grabbedObject = null;
         }

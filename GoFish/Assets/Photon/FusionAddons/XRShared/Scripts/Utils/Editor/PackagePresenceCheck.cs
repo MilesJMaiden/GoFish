@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.PackageManager;
+using UnityEngine;
 
 namespace Fusion.XRShared.Tools
 {
@@ -15,6 +16,32 @@ namespace Fusion.XRShared.Tools
         SingleResultDelegate singleResultCallback;
 
         Dictionary<string, UnityEditor.PackageManager.PackageInfo> results = new Dictionary<string, UnityEditor.PackageManager.PackageInfo>();
+
+        public static void LookForPackage(string packageToSearch, SingleResultDelegate packageLookupCallback = null, string defineToAddIfDetected = null)
+        {
+            var packageCheck = new XRShared.Tools.PackagePresenceCheck(packageToSearch, (packageInfo) => {
+                var group = BuildPipeline.GetBuildTargetGroup(EditorUserBuildSettings.activeBuildTarget);
+                var defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
+
+                if (packageInfo != null)
+                {
+                    if (string.IsNullOrEmpty(defineToAddIfDetected) == false && defines.Contains(defineToAddIfDetected) == false) {
+                        defines = $"{defines};{defineToAddIfDetected}";
+                        PlayerSettings.SetScriptingDefineSymbolsForGroup(group, defines);
+                    }
+                    packageLookupCallback(packageInfo);
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(defineToAddIfDetected) == false && defines.Contains(defineToAddIfDetected) == true)
+                    {
+                        Debug.LogError($"Project define symbols include {defineToAddIfDetected}, while package {packageToSearch} is not installed anymore: it should be removed in the Player settings");
+                    }
+                    packageLookupCallback(null);
+                }
+            });
+        }
+
         public PackagePresenceCheck(string[] packageNames, ResultDelegate resultCallback, bool useOfflineMode = true)
         {
             this.packageNames = packageNames;
@@ -35,6 +62,7 @@ namespace Fusion.XRShared.Tools
         {
             if (request.IsCompleted)
             {
+                bool singleResultCallbackReturned = false;
                 results = new Dictionary<string, UnityEditor.PackageManager.PackageInfo>();
                 if (request.Status == StatusCode.Success)
                 {
@@ -46,13 +74,20 @@ namespace Fusion.XRShared.Tools
                             {
                                 results[checkedPackageName] = info;
                                 if (singleResultCallback != null)
+                                {
+                                    singleResultCallbackReturned = true;
                                     singleResultCallback(info);
+                                }
                                 break;
                             }
                         }
                     }
                 }
-                if(resultCallback != null)
+                if (singleResultCallback != null && singleResultCallbackReturned == false)
+                {
+                    singleResultCallback(null);
+                }
+                if (resultCallback != null)
                     resultCallback(results);
                 EditorApplication.update -= Progress;
             }

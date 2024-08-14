@@ -12,16 +12,13 @@ namespace Fusion.Addons.XRHandsSync
         public bool alwaysKeepHandCommandControl = false;
 
         [Header("Gesture threshold")]
-        [SerializeField]
-        float pinchThreshold = 0.02f;
-        [SerializeField]
-        bool grabWithPinch = true;
-        [SerializeField]
-        bool grabWithMiddleAndRing = true;
+        [SerializeField]    float pinchThreshold = 0.02f;
+        public bool grabWithPinch = true;
+        public bool grabWithMiddleAndRing = true;
         float indexFingerPressedThreshold = 0.05f;
         float thumFingerPressedThreshold = 0.05f;
-        float grabbingProximalMinXRot = 40f;
-        float grabbingIntermediateMinXRot = 40f;
+        [SerializeField] float grabbingProximalMinXRot = 65f;
+        [SerializeField] float grabbingIntermediateMinXRot = 65f;
 
         [Header("Grabbing collider")]
         public Collider colliderWhileFingerTracked;
@@ -64,9 +61,11 @@ namespace Fusion.Addons.XRHandsSync
         }
 
 
+        public bool grabbing = false;
         bool IsGrabbing(XRHand hand)
         {
-            return IsGrabbing(hand, grabbingProximalMinXRot, grabbingIntermediateMinXRot);
+            grabbing = IsGrabbing(hand, grabbingProximalMinXRot, grabbingIntermediateMinXRot);
+            return grabbing;
         }
 
         public bool IsGrabbing()
