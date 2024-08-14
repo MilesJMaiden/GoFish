@@ -13,7 +13,7 @@
     <meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only" />
     <meta-data android:name="com.oculus.ossplash.background" android:value="passthrough-contextual" />
     <meta-data android:name="com.oculus.telemetry.project_guid" android:value="94e0d199-ab85-48d7-9d35-0d2566497f66" />
-    <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2|questpro|eureka" />
+    <meta-data android:name="com.oculus.supportedDevices" android:value="quest2|questpro|eureka" />
   </application>
   <uses-feature android:name="android.hardware.vr.headtracking" android:version="1" android:required="true" />
   <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API" />
