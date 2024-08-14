@@ -24,7 +24,7 @@ public class CheckVisionOsHelpersPackage
             {
                 string packagesStr = (packagesToInstall.Length <= 1) ? "package " : "packages ";
                 packagesStr += string.Join(", ", packagesToInstall);
-                Debug.LogError($"For the VisionOS helpers work, you need to install {packagesStr} (available in Unity 2022.x)");
+                //Debug.LogError($"For the VisionOS helpers work, you need to install {packagesStr} (available in Unity 2022.x)");
             }
         });
     }
