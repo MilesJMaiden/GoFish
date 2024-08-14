@@ -63,9 +63,10 @@
         "Fusion.Addons.Physics",
         "Fusion.Addons.FSM",
         "Oculus.VR",
-        "PhotonVoice.Fusion"
+        "PhotonVoice.Fusion",
+        "Meta.XR.MultiplayerBlocks.Fusion"
     ],
-    "UseSerializableDictionary": true,
+    "UseSerializableDictionary": false,
     "NullChecksForNetworkedProperties": true,
     "CheckRpcAttributeUsage": false,
     "CheckNetworkedPropertiesBeingEmpty": true
