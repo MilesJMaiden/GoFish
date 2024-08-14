@@ -1,6 +1,3 @@
-using Oculus.Interaction.Locomotion;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FishingRodInteraction : MonoBehaviour
@@ -8,29 +5,29 @@ public class FishingRodInteraction : MonoBehaviour
     public enum State { Idle, Casting, Catching, Reeling }
     State currentState = State.Idle;
 
-    [Header("Casting")]
-    public AudioClip waterSplash;
-
-    [Header("Catching")]
-    public AudioClip rodTension;
-    [Header("Reeling")]
-    
-    
-    public AudioClip fishStruggle;
-    public GameObject splashEffect;
-    public GameObject bubbleEffect;
-    public GameObject fishOnHook;
-    public GameObject rod;
+    [Header("Idle")]
     public Animator rodAnimator;
-
+    public GameObject rod;
     private AudioSource audioSource;
     private float stateTimer = 0f;
     public float animTimespan = 2f;
-
     public bool startGoFish = false;
+
+    [Header("Casting")]
+    public AudioClip waterSplash;
+    public GameObject splashEffect;
     public bool rodCasting = false;
+
+    [Header("Catching")]
+    public GameObject bubbleEffect;
+    public AudioClip rodTension;
+    public AudioClip fishStruggle;
     public bool bubblePoppinEnd = false;
+
+    [Header("Reeling")]
+    public GameObject fishOnHook;
     public bool fishComesOut = false;
+
 
     void Start()
     {
@@ -56,59 +53,49 @@ public class FishingRodInteraction : MonoBehaviour
     {
         switch (currentState)
         {
+            case State.Idle:
+                stateTimer = 0f;
+                fishOnHook.SetActive(false);
+                rod.SetActive(false);
+                break;
+
             case State.Casting:
-                // Enable the rod
-                HandleRod(true);
-                // Instruct player to cast
-                IntructPlayerToCast();
-                // If the rod touch the collider, trigger the effect and play the sound
+                
+                BeforeCast(true);
+
                 if (rodCasting)
                 {
-                    HandleRodCast();
+                    HandleRodCast("waterSplash",waterSplash, splashEffect);
                     
-                    // Change the state
-                    currentState = State.Catching;
 
-                    // Reset the timer
+                    currentState = State.Catching;
                     stateTimer = 0f;
                 }
              
                 break;
 
             case State.Catching:
-                // Intantiate bubble poppin vfx for 2 sec
-                BubblePoppin();
+                
+                BeforeCatching("waterSplash", waterSplash, splashEffect);
 
-
-                // Instantiate biting hook animation 
-                // if the selecting rod bool is true, swtich to reeling
                 if (bubblePoppinEnd)
                 {
-                    PlayAnimation("BitingHook");
-                    stateTimer = 0f;
+                    HandleCatching("waterSplash", waterSplash, splashEffect);
+
                     currentState = State.Reeling;
+                    stateTimer = 0f;                  
                 }               
                 
                 break;
 
             case State.Reeling:
-                // Enable fish gameobject
-                fishOnHook.SetActive(true);
 
-                // Play sound and effects for reeling
+                BeforeReeling();
+
                 if (fishComesOut)
                 {
-                    PlaySound(waterSplash);
-                    TriggerEffect(splashEffect);
-                    PlayAnimation("ReelIn");
+                    HandleReeling("ReelIn", waterSplash, splashEffect);
 
-                    // Count the time of animation
-                    stateTimer += Time.deltaTime;
-                    if (stateTimer > animTimespan) // Assuming reeling takes 2 seconds
-                    {
-                        currentState = State.Idle; // Reset to idle
-                        HandleRod(false);
-                    }
                 }
                 
                 break;
@@ -116,11 +103,15 @@ public class FishingRodInteraction : MonoBehaviour
     }
 
 
-
-    void HandleRod(bool rodvisibility)
+    void BeforeCast(bool rodvisibility)
     {
-        rod.SetActive(rodvisibility);
+        rod.SetActive(rodvisibility);// Enable the rod
+        
+        // Instruct player to cast
+        IntructPlayerToCast();
+
     }
+
 
     void IntructPlayerToCast()
     {
@@ -128,14 +119,18 @@ public class FishingRodInteraction : MonoBehaviour
         Debug.Log("I'm intructing the player to cast rod!");
     }
 
-    void HandleRodCast()
+    void HandleRodCast(string animName, AudioClip clip, GameObject vfx)
     {
-        PlaySound(waterSplash);
-        TriggerEffect(splashEffect);
-        PlayAnimation("CastRod");
-    }
 
-    void BubblePoppin()
+        rodAnimator.SetTrigger(animName);
+
+        audioSource.PlayOneShot(clip);
+
+        vfx.SetActive(true);
+    }
+   
+
+    void BeforeCatching(string animName, AudioClip clip, GameObject vfx)
     {
         // Instantiate the vfx
 
@@ -146,22 +141,34 @@ public class FishingRodInteraction : MonoBehaviour
         // Turn the bool to true
     }
 
-    void PlayAnimation(string name)
+    void HandleCatching(string animName, AudioClip clip, GameObject vfx)
     {
-        rodAnimator.SetTrigger(name);
-    }
+        rodAnimator.SetTrigger(animName);
 
-    void PlaySound(AudioClip clip)
-    {
         audioSource.PlayOneShot(clip);
+
+        vfx.SetActive(true);
+
     }
 
-    void TriggerEffect(GameObject effect)
+    void BeforeReeling()
     {
-        // Intantiate the VFX prefab in the dedicated place
-        effect.SetActive(true);
+        fishOnHook.SetActive(true);// Enable fish gameobject
 
-        // Destroy it after a cerrtain timespan
+        // Check if the fish comes out
+    }
+
+    void HandleReeling(string animName, AudioClip clip, GameObject vfx)
+    {
+        rodAnimator.SetTrigger(animName);
+
+        audioSource.PlayOneShot(clip);
+
+        vfx.SetActive(true);
+
+
+        // After a few amount of time, turn everything to idle
+
     }
 
 
