@@ -9007,7 +9007,6 @@ GameObject:
   - component: {fileID: 1697558003}
   - component: {fileID: 1697558002}
   - component: {fileID: 1697558001}
-  - component: {fileID: 1697558000}
   m_Layer: 0
   m_Name: '[BuildingBlock] Colocation'
   m_TagString: Untagged
@@ -9015,20 +9014,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1697558000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697557999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1541381998, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Guid:
-    RawGuidValue: 8ee45e6a80f151e48a85e55c1f12b1b1
 --- !u!114 &1697558001
 MonoBehaviour:
   m_ObjectHideFlags: 0
