@@ -22,7 +22,14 @@ public class CardSort : MonoBehaviour
     private float maxHeightDisplacement;
 
     [SerializeField]
+    [Range(-90f, 0f)]
+    private float spreadMulti;
+
+    [SerializeField]
     private ZoomConfig zoomConfig;
+
+    [SerializeField]
+    private AnimationSpeedConfig animationSpeedConfig;
 
     [Header("Events")]
     [SerializeField]
@@ -70,7 +77,7 @@ public class CardSort : MonoBehaviour
 
             // Pass child card any extra config it should be aware of
             wrapper.zoomConfig = zoomConfig;
-            //wrapper.animationSpeedConfig = animationSpeedConfig;
+            wrapper.animationSpeedConfig = animationSpeedConfig;
             wrapper.eventsConfig = eventsConfig;
             //wrapper.preventCardInteraction = preventCardInteraction;
             wrapper.container = this;
@@ -202,7 +209,7 @@ public class CardSort : MonoBehaviour
         var currentX = transform.position.x - width / 2;
         foreach (CardWrapper child in allCards)
         {
-            var adjustedChildWidth = child.width * child.transform.lossyScale.x;
+            var adjustedChildWidth = child.width * child.transform.lossyScale.x + spreadMulti;
             child.targetPosition = new Vector2(currentX + adjustedChildWidth / 2, transform.position.y);
             currentX += adjustedChildWidth + distanceBetweenChildren;
         }

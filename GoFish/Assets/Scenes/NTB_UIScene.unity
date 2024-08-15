@@ -240,6 +240,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6325579368246879766, guid: adc0848669f012544952608fd51beb24,
         type: 3}
       propertyPath: m_Layer
@@ -374,6 +379,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5611102583125747604, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 2528d8191d4ef944fab1acf6c924bc7e, type: 2}
     - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
         type: 3}
       propertyPath: m_Name
@@ -383,6 +393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6325579368246879766, guid: adc0848669f012544952608fd51beb24,
         type: 3}
@@ -636,7 +651,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 420.5, y: 288.5}
-  m_SizeDelta: {x: 841, y: 577}
+  m_SizeDelta: {x: 4000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &504514383
 MonoBehaviour:
@@ -688,7 +703,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 418898052}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -817,16 +832,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd7907e98336f34fa8d233297275340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCardRotation: -25
-  maxHeightDisplacement: 40
+  maxCardRotation: -15
+  maxHeightDisplacement: 35
+  spreadMulti: -35
   zoomConfig:
     zoomOnHover: 1
     multiplier: 1.2
-    overrideYPosition: 80
+    overrideYPosition: -1
     defaultSortOrder: 0
     bringToFrontOnHover: 1
     zoomedSortOrder: 100
     resetRotationOnZoom: 1
+  animationSpeedConfig:
+    rotation: 60
+    position: 500
+    releasePosition: 2000
+    zoom: 5
   eventsConfig:
     OnCardHover:
       m_PersistentCalls:
@@ -1116,6 +1137,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5611102583125747604, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: c732a613b472be944874bac45b47b7cc, type: 3}
+    - target: {fileID: 5611102583125747604, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: b62d45ebd0888f24a9d21dd70bb92919, type: 2}
     - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
         type: 3}
       propertyPath: m_Name
@@ -1125,6 +1156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6325579368246879766, guid: adc0848669f012544952608fd51beb24,
         type: 3}
@@ -1337,6 +1373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6325579368246879766, guid: adc0848669f012544952608fd51beb24,
         type: 3}
@@ -1791,6 +1832,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5611102583125747604, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 6217fdcf16631054ab478851eca4599d, type: 2}
     - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
         type: 3}
       propertyPath: m_Name
@@ -1800,6 +1846,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075050452243932256, guid: adc0848669f012544952608fd51beb24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6325579368246879766, guid: adc0848669f012544952608fd51beb24,
         type: 3}
