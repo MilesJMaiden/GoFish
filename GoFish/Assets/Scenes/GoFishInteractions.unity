@@ -1938,7 +1938,7 @@ PrefabInstance:
     - target: {fileID: 7862253097353011795, guid: 9d6c6919d6902be408735839cd19f00a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8694045178394982818, guid: 9d6c6919d6902be408735839cd19f00a,
         type: 3}
@@ -2895,6 +2895,9 @@ MonoBehaviour:
   waterBubblingEffect: {fileID: 1967216952}
   fishStruggleSound: {fileID: 8300000, guid: e48212e2d3cb3234d943965ad3170251, type: 3}
   fishOnHook: 0
+  hapticDuration: 10
+  vibrationFrequency: 1
+  vibrationAmplitude: 1
   reelSplashSound: {fileID: 8300000, guid: e48212e2d3cb3234d943965ad3170251, type: 3}
   fishSplashEffect: {fileID: 1802249801}
   fishComesOut: 0
@@ -12522,7 +12525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2137093493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12536,6 +12539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splashSound: {fileID: 8300000, guid: 96439fdce0245e347a8498bb4ce6bf8d, type: 3}
+  bobbingAmplitude: 0.5
+  bobbingSpeed: 1
 --- !u!54 &2137093494
 Rigidbody:
   m_ObjectHideFlags: 0

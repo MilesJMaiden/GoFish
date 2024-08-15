@@ -1,4 +1,5 @@
 using Oculus.Interaction;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,6 +39,12 @@ public class FishingRodInteraction : MonoBehaviour
     public AudioClip fishStruggleSound;
     public bool fishOnHook = false;
 
+    public float hapticDuration = 5f;
+    public float vibrationFrequency = 1.0f;
+    public float vibrationAmplitude = 1.0f;
+
+
+
     [Header("Reeling")]
     public AudioClip reelSplashSound;
     public GameObject fishSplashEffect;
@@ -48,6 +55,19 @@ public class FishingRodInteraction : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         waterCollision = gamespace.GetComponent<Collider>();
     }
+
+    private IEnumerator TriggerHapticFeedback(OVRInput.Controller controller)
+    {
+        // Start the vibration
+        OVRInput.SetControllerVibration(vibrationFrequency, vibrationAmplitude, controller);
+
+        // Wait for the specified duration
+        yield return new WaitForSeconds(hapticDuration);
+
+        // Stop the vibration
+        OVRInput.SetControllerVibration(0, 0, controller);
+    }
+
 
     void Update()
     {
@@ -151,7 +171,7 @@ public class FishingRodInteraction : MonoBehaviour
                 lureRB.AddForce(leftControllerVelocity*10);
             } else
             {
-                lureRB.AddForce(rightControllerVelocity);
+                lureRB.AddForce(rightControllerVelocity*10);
             }
         }
 
@@ -159,24 +179,36 @@ public class FishingRodInteraction : MonoBehaviour
         {
             Debug.Log("In Catching state: Attempting to catch a fish.");
             //ExecuteCatching("CatchFish", rodTensionSound, fishStruggleSound, waterBubblingEffect);
+            ExecuteFishStruggle(fishStruggleSound);
 
-            if (fishOnHook)
+            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
             {
-                Debug.Log("Fish on hook! Switching to Reeling state.");
-                currentState = State.Reeling;
-                stateTimer = 0f;
+                Debug.Log("Trigger is pressed");
+                leftControllerVelocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
+                if (leftControllerVelocity.z < -forwardVelocityThreshold)
+                {
+                    currentState = State.Reeling;
+                }
+            }
+            else if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+            {
+                Debug.Log("Trigger is pressed");
+                rightControllerVelocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+                if (rightControllerVelocity.z < -forwardVelocityThreshold)
+                {
+                    currentState = State.Reeling;
+                }
             }
         }
 
         void HandleReelingState()
         {
             Debug.Log("In Reeling state: Preparing to reel in the fish.");
-            PrepareReeling();
+            ExecuteReeling();
 
             if (fishComesOut)
             {
                 Debug.Log("Fish comes out of the water! Returning to Idle state.");
-                ExecuteReeling("ReelInFish", reelSplashSound, fishSplashEffect);
                 currentState = State.Idle;
             }
         }
@@ -197,37 +229,51 @@ public class FishingRodInteraction : MonoBehaviour
             Debug.Log("Instructing the player to cast the rod!");
         }
 
+
+        /*
         void ExecuteRodCast(string animName, AudioClip splashSound, GameObject splashEffect)
         {
             Debug.Log("Executing rod cast with animation: " + animName);
             rodAnimator.SetTrigger(animName);
             PlaySound(splashSound);
             ActivateEffect(splashEffect);
-        }
+        } */
 
-        void ExecuteCatching(string animName, AudioClip tensionSound, AudioClip struggleSound, GameObject bubblingEffect)
+        void ExecuteFishStruggle(AudioClip struggleSound)
         {
-            Debug.Log("Executing catching sequence with animation: " + animName);
-            rodAnimator.SetTrigger(animName);
-            PlaySound(tensionSound);
-            PlaySound(struggleSound);
-            ActivateEffect(bubblingEffect);
+            Debug.Log("Executing catching sequence with animation: ");
+
+            StartCoroutine(TriggerHapticFeedback(OVRInput.Controller.RTouch));
+            //PlaySound(struggleSound);
         }
 
-        void PrepareReeling()
+        void ExecuteReeling()
         {
             Debug.Log("Preparing to reel in the fish.");
             fishOnHook = true;
-            rodAnimator.SetTrigger("ReelIn");
-        }
 
+            StopCoroutine(TriggerHapticFeedback(OVRInput.Controller.RTouch));
+            //play exit sound
+            PlaySound(reelSplashSound);
+
+            //turn off center reel
+            
+            
+            //Turn off rod
+            rod.SetActive(false);
+
+            //rodAnimator.SetTrigger("ReelIn");
+            fishComesOut = true;
+        }
+        
+        /*
         void ExecuteReeling(string animName, AudioClip splashSound, GameObject splashEffect)
         {
             Debug.Log("Executing reeling with animation: " + animName);
             rodAnimator.SetTrigger(animName);
             PlaySound(splashSound);
             ActivateEffect(splashEffect);
-        }
+        } */
 
         void PlaySound(AudioClip clip)
         {
