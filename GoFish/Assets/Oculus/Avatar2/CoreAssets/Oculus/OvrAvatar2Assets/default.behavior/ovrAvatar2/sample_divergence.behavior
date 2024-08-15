@@ -1,0 +1,40 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "inputs": [
+        {
+          "name": "inputPose",
+          "type": "pose",
+          "defaultLink": "ovrAvatar2/default_root:pose"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        },
+        {
+          "name": "pose3P",
+          "type": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "sawtoothOscillator",
+          "name": "clipPhaseOscillator"
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "walkForwardClip",
+          "clip": "loco_walk_fwd_master"
+        } 
+      ],
+      "links": [
+        [ ":inputPose", ":pose" ],
+        [ "clipPhaseOscillator:output", "walkForwardClip:inputPhase" ],
+        [ "walkForwardClip:outputPose", ":pose3P" ]
+      ]
+    }
+  ]
+}

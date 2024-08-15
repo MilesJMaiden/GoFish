@@ -1,0 +1,103 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "getGazeWeights",
+          "name": "getGazeWeights",
+          "maxPitchDeg": 90.0,
+          "minPitchDeg": -45.0,
+          "maxYawDeg": 95.0
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "gazeLookUp",
+          "clip": "eyeDirection_lookUp",
+          "rate": 0.0,
+          "phase": 0.0
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "gazeLookDown",
+          "clip": "eyeDirection_lookDown",
+          "rate": 0.0,
+          "phase": 0.0
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "gazeLeftEyeLookLeft",
+          "clip": "eyeDirection_L_lookLeft",
+          "rate": 0.0,
+          "phase": 0.0
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "gazeLeftEyeLookRight",
+          "clip": "eyeDirection_L_lookRight",
+          "rate": 0.0,
+          "phase": 0.0
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "gazeRightEyeLookLeft",
+          "clip": "eyeDirection_R_lookLeft",
+          "rate": 0.0,
+          "phase": 0.0
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "gazeRightEyeLookRight",
+          "clip": "eyeDirection_R_lookRight",
+          "rate": 0.0,
+          "phase": 0.0
+        },
+        {
+          "type": "layerPoses",
+          "name": "gazeLayers",
+          "layers": [
+            {
+              "name": "gaze_up"
+            },
+            {
+              "name": "gaze_down"
+            },
+            {
+              "name": "gaze_lefEyeLeft"
+            },
+            {
+              "name": "gaze_rightEyeLeft"
+            },
+            {
+              "name": "gaze_lefEyeRight"
+            },
+            {
+              "name": "gaze_rightEyeRight"
+            }
+          ]
+        }
+      ],
+      "links": [
+        [ "gazeLookUp:outputPose", "gazeLayers.layers[gaze_up]:inputPose" ],
+        [ "getGazeWeights:outputUp", "gazeLayers.layers[gaze_up]:inputWeight" ],
+        [ "gazeLookDown:outputPose", "gazeLayers.layers[gaze_down]:inputPose" ],
+        [ "getGazeWeights:outputDown", "gazeLayers.layers[gaze_down]:inputWeight" ],
+        [ "gazeLeftEyeLookLeft:outputPose", "gazeLayers.layers[gaze_lefEyeLeft]:inputPose" ],
+        [ "getGazeWeights:outputLeftEyeLeft", "gazeLayers.layers[gaze_lefEyeLeft]:inputWeight" ],
+        [ "gazeRightEyeLookLeft:outputPose", "gazeLayers.layers[gaze_rightEyeLeft]:inputPose" ],
+        [ "getGazeWeights:outputRightEyeLeft", "gazeLayers.layers[gaze_rightEyeLeft]:inputWeight" ],
+        [ "gazeLeftEyeLookRight:outputPose", "gazeLayers.layers[gaze_lefEyeRight]:inputPose" ],
+        [ "getGazeWeights:outputLeftEyeRight", "gazeLayers.layers[gaze_lefEyeRight]:inputWeight" ],
+        [ "gazeRightEyeLookRight:outputPose", "gazeLayers.layers[gaze_rightEyeRight]:inputPose" ],
+        [ "getGazeWeights:outputRightEyeRight", "gazeLayers.layers[gaze_rightEyeRight]:inputWeight" ],
+        [ "gazeLayers:outputPose", ":pose" ]
+      ]
+    }
+  ]
+}

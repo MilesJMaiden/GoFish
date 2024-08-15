@@ -1,0 +1,229 @@
+{
+    "graphs": [
+        {
+            "name": "main",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "inTrackingPose",
+                    "defaultLink": "locomotion_prototype/tracking_cloner:tracking2"
+                },
+                {
+                    "type": "pose",
+                    "name": "inPose",
+                    "defaultLink": "locomotion_prototype/eyegaze:pose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "blendRootTransform",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_BlendRootTransform"
+                },
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "trackingBlendUpperInput",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TrackingUpperBlend"
+                },
+                {
+                    "name": "trackingAdditiveOverrideX",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TrackingAdditiveOverrideX"
+                },
+                {
+                    "name": "trackingAdditiveOverrideY",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TrackingAdditiveOverrideY"
+                },
+                {
+                    "name": "trackingAdditiveOverrideZ",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TrackingAdditiveOverrideZ"
+                },
+                {
+                    "name": "inPose_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inTrackingPose_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inTrackingPose_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "GetRootTransform",
+                    "type": "getJointTransform",
+                    "jointName": "RTRig_Root",
+                    "applyAsOffset": true
+                },
+                {
+                    "name": "SetRootTransformOverride",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Root",
+                    "applyAsOffset": true
+                },
+                {
+                    "name": "OverrideRootTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "BreakTrackingTransform",
+                    "type": "getComponentOfTransform"
+                },
+                {
+                    "name": "RootVector",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "GraphConst0",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "featherBlend",
+                    "type": "featherBlend",
+                    "blendPoses": [
+                        {
+                            "depth": 1,
+                            "blendSpace": "character",
+                            "blendJoint": "RTRig_SpineStart"
+                        }
+                    ]
+                },
+                {
+                    "name": "blendWrapper_oneDimensionBlendspace",
+                    "type": "oneDimensionalBlendSpace",
+                    "poseInputs": [
+                        {
+                            "axisValue": 0.0
+                        },
+                        {
+                            "axisValue": 1.0
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                [
+                    ":inPose",
+                    "inPose_clone_0:input"
+                ],
+                [
+                    "inPose_clone_0:output1",
+                    "inPose_clone_1:input"
+                ],
+                [
+                    "inPose_clone_1:output1",
+                    "inPose_clone_2:input"
+                ],
+                [
+                    ":inTrackingPose",
+                    "inTrackingPose_clone_0:input"
+                ],
+                [
+                    "inTrackingPose_clone_0:output1",
+                    "inTrackingPose_clone_1:input"
+                ],
+                [
+                    "inTrackingPose_clone_0:output2",
+                    "GetRootTransform:inputPose"
+                ],
+                [
+                    "GetRootTransform:outputTransform",
+                    "BreakTrackingTransform:transform"
+                ],
+                [
+                    "trackingAdditiveOverrideX",
+                    "RootVector:inputX"
+                ],
+                [
+                    "trackingAdditiveOverrideY",
+                    "RootVector:inputY"
+                ],
+                [
+                    "trackingAdditiveOverrideZ",
+                    "RootVector:inputZ"
+                ],
+                [
+                    "RootVector:outputVec3",
+                    "OverrideRootTransform:position"
+                ],
+                [
+                    "BreakTrackingTransform:rotation",
+                    "OverrideRootTransform:rotation"
+                ],
+                [
+                    "inPose_clone_0:output2",
+                    "SetRootTransformOverride:inputPose"
+                ],
+                [
+                    "OverrideRootTransform:transform",
+                    "SetRootTransformOverride:inputTransform"
+                ],
+                [
+                    "SetRootTransformOverride:outputPose",
+                    "featherBlend:inputPose"
+                ],
+                [
+                    "inTrackingPose_clone_1:output2",
+                    "featherBlend.blendPoses[0]:inputPose"
+                ],
+                [
+                    "trackingBlendUpperInput",
+                    "featherBlend.blendPoses[0]:jointBaseWeight"
+                ],
+                [
+                    "trackingBlendUpperInput",
+                    "featherBlend.blendPoses[0]:floatWeight"
+                ],
+                [
+                    "GraphConst0:outputValue",
+                    "featherBlend.blendPoses[0]:eventWeight"
+                ],
+                [
+                    "inPose_clone_1:output2",
+                    "blendWrapper_oneDimensionBlendspace.poseInputs[0]:inputPose"
+                ],
+                [
+                    "featherBlend:outputPose",
+                    "blendWrapper_oneDimensionBlendspace.poseInputs[1]:inputPose"
+                ],
+                [
+                    "blendRootTransform",
+                    "blendWrapper_oneDimensionBlendspace:inputAxis"
+                ],
+                [
+                    "blendWrapper_oneDimensionBlendspace:outputPose",
+                    ":pose"
+                ]
+            ]
+        }
+    ]
+}

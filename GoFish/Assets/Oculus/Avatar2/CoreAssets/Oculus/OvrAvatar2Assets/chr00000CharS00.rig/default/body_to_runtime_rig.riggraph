@@ -1,0 +1,1073 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "nodes": [
+        {
+          "name": "Chest_input_joint",
+          "type": "inputJoint",
+          "jointName": "Chest"
+        },
+        {
+          "name": "Head_input_joint",
+          "type": "inputJoint",
+          "jointName": "Head"
+        },
+        {
+          "name": "Hips_input_joint",
+          "type": "inputJoint",
+          "jointName": "Hips"
+        },
+        {
+          "name": "Hips_input_joint_2",
+          "type": "inputJoint",
+          "jointName": "Hips"
+        },
+        {
+          "name": "Hips_input_joint_3",
+          "type": "inputJoint",
+          "jointName": "Hips"
+        },
+        {
+          "name": "LeftArmLower_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftArmLower"
+        },
+        {
+          "name": "LeftFootAnkle_has_input",
+          "type": "hasInputV2",
+          "jointName": "LeftFootAnkle"
+        },
+        {
+          "name": "LeftFootAnkle_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftFootAnkle"
+        },
+        {
+          "name": "LeftHandIndexDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandIndexDistal"
+        },
+        {
+          "name": "LeftHandIndexIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandIndexIntermediate"
+        },
+        {
+          "name": "LeftHandIndexMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandIndexMeta"
+        },
+        {
+          "name": "LeftHandIndexProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandIndexProximal"
+        },
+        {
+          "name": "LeftHandMiddleDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandMiddleDistal"
+        },
+        {
+          "name": "LeftHandMiddleIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandMiddleIntermediate"
+        },
+        {
+          "name": "LeftHandMiddleMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandMiddleMeta"
+        },
+        {
+          "name": "LeftHandMiddleProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandMiddleProximal"
+        },
+        {
+          "name": "LeftHandPinkyDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandPinkyDistal"
+        },
+        {
+          "name": "LeftHandPinkyIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandPinkyIntermediate"
+        },
+        {
+          "name": "LeftHandPinkyMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandPinkyMeta"
+        },
+        {
+          "name": "LeftHandPinkyProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandPinkyProximal"
+        },
+        {
+          "name": "LeftHandRingDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandRingDistal"
+        },
+        {
+          "name": "LeftHandRingIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandRingIntermediate"
+        },
+        {
+          "name": "LeftHandRingMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandRingMeta"
+        },
+        {
+          "name": "LeftHandRingProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandRingProximal"
+        },
+        {
+          "name": "LeftHandThumbDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandThumbDistal"
+        },
+        {
+          "name": "LeftHandThumbMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandThumbMeta"
+        },
+        {
+          "name": "LeftHandThumbProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandThumbProximal"
+        },
+        {
+          "name": "LeftHandWrist_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftHandWrist"
+        },
+        {
+          "name": "LeftLegLower_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftLegLower"
+        },
+        {
+          "name": "LeftShoulder_input_joint",
+          "type": "inputJoint",
+          "jointName": "LeftShoulder"
+        },
+        {
+          "name": "LeftShoulder_input_joint_2",
+          "type": "inputJoint",
+          "jointName": "LeftShoulder"
+        },
+        {
+          "name": "Neck_input_joint",
+          "type": "inputJoint",
+          "jointName": "Neck"
+        },
+        {
+          "name": "RTRig_Chest_cmd_1",
+          "type": "parentConstraintV2"
+        },
+        {
+          "name": "RTRig_Chest_cmd_2",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_Chest_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_Chest"
+        },
+        {
+          "name": "RTRig_Chest_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_Chest"
+        },
+        {
+          "name": "RTRig_Head_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_Head_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_Head"
+        },
+        {
+          "name": "RTRig_L_Ankle_cmd",
+          "type": "parentConstraintV2"
+        },
+        {
+          "name": "RTRig_L_Ankle_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Ankle"
+        },
+        {
+          "name": "RTRig_L_Ankle_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Ankle"
+        },
+        {
+          "name": "RTRig_L_Clavicle_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_Clavicle_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Clavicle"
+        },
+        {
+          "name": "RTRig_L_Hip_aim_cmd",
+          "type": "aimConstraintV2"
+        },
+        {
+          "name": "RTRig_L_Hip_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Hip"
+        },
+        {
+          "name": "RTRig_L_Hip_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Hip"
+        },
+        {
+          "name": "RTRig_L_Hip_pointParentConstraint_cmd",
+          "type": "pointParentConstraintV2"
+        },
+        {
+          "name": "RTRig_L_IndexDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_IndexDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_IndexDistal"
+        },
+        {
+          "name": "RTRig_L_IndexIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_IndexIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_IndexIntermediate"
+        },
+        {
+          "name": "RTRig_L_IndexMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_IndexMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_IndexMeta"
+        },
+        {
+          "name": "RTRig_L_IndexProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_IndexProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_IndexProximal"
+        },
+        {
+          "name": "RTRig_L_MiddleDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_MiddleDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_MiddleDistal"
+        },
+        {
+          "name": "RTRig_L_MiddleIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_MiddleIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_MiddleIntermediate"
+        },
+        {
+          "name": "RTRig_L_MiddleMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_MiddleMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_MiddleMeta"
+        },
+        {
+          "name": "RTRig_L_MiddleProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_MiddleProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_MiddleProximal"
+        },
+        {
+          "name": "RTRig_L_PinkyDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_PinkyDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_PinkyDistal"
+        },
+        {
+          "name": "RTRig_L_PinkyIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_PinkyIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_PinkyIntermediate"
+        },
+        {
+          "name": "RTRig_L_PinkyMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_PinkyMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_PinkyMeta"
+        },
+        {
+          "name": "RTRig_L_PinkyProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_PinkyProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_PinkyProximal"
+        },
+        {
+          "name": "RTRig_L_RingDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_RingDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_RingDistal"
+        },
+        {
+          "name": "RTRig_L_RingIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_RingIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_RingIntermediate"
+        },
+        {
+          "name": "RTRig_L_RingMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_RingMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_RingMeta"
+        },
+        {
+          "name": "RTRig_L_RingProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_RingProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_RingProximal"
+        },
+        {
+          "name": "RTRig_L_Shoulder_aim_cmd",
+          "type": "aimConstraintV2"
+        },
+        {
+          "name": "RTRig_L_Shoulder_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Shoulder"
+        },
+        {
+          "name": "RTRig_L_Shoulder_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Shoulder"
+        },
+        {
+          "name": "RTRig_L_Shoulder_pointParentConstraint_cmd",
+          "type": "pointParentConstraintV2"
+        },
+        {
+          "name": "RTRig_L_ThumbDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_ThumbDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_ThumbDistal"
+        },
+        {
+          "name": "RTRig_L_ThumbMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_ThumbMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_ThumbMeta"
+        },
+        {
+          "name": "RTRig_L_ThumbProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_L_ThumbProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_ThumbProximal"
+        },
+        {
+          "name": "RTRig_L_Wrist_cmd",
+          "type": "parentConstraintV2"
+        },
+        {
+          "name": "RTRig_L_Wrist_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Wrist"
+        },
+        {
+          "name": "RTRig_L_Wrist_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_L_Wrist"
+        },
+        {
+          "name": "RTRig_Neck_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_Neck_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_Neck"
+        },
+        {
+          "name": "RTRig_Pelvis_cmd",
+          "type": "parentConstraintV2",
+          "maintainPositionOffset": false
+        },
+        {
+          "name": "RTRig_Pelvis_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_Pelvis"
+        },
+        {
+          "name": "RTRig_R_Ankle_cmd",
+          "type": "parentConstraintV2"
+        },
+        {
+          "name": "RTRig_R_Ankle_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Ankle"
+        },
+        {
+          "name": "RTRig_R_Ankle_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Ankle"
+        },
+        {
+          "name": "RTRig_R_Clavicle_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_Clavicle_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Clavicle"
+        },
+        {
+          "name": "RTRig_R_Hip_aim_cmd",
+          "type": "aimConstraintV2"
+        },
+        {
+          "name": "RTRig_R_Hip_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Hip"
+        },
+        {
+          "name": "RTRig_R_Hip_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Hip"
+        },
+        {
+          "name": "RTRig_R_Hip_pointParentConstraint_cmd",
+          "type": "pointParentConstraintV2"
+        },
+        {
+          "name": "RTRig_R_IndexDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_IndexDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_IndexDistal"
+        },
+        {
+          "name": "RTRig_R_IndexIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_IndexIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_IndexIntermediate"
+        },
+        {
+          "name": "RTRig_R_IndexMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_IndexMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_IndexMeta"
+        },
+        {
+          "name": "RTRig_R_IndexProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_IndexProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_IndexProximal"
+        },
+        {
+          "name": "RTRig_R_MiddleDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_MiddleDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_MiddleDistal"
+        },
+        {
+          "name": "RTRig_R_MiddleIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_MiddleIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_MiddleIntermediate"
+        },
+        {
+          "name": "RTRig_R_MiddleMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_MiddleMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_MiddleMeta"
+        },
+        {
+          "name": "RTRig_R_MiddleProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_MiddleProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_MiddleProximal"
+        },
+        {
+          "name": "RTRig_R_PinkyDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_PinkyDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_PinkyDistal"
+        },
+        {
+          "name": "RTRig_R_PinkyIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_PinkyIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_PinkyIntermediate"
+        },
+        {
+          "name": "RTRig_R_PinkyMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_PinkyMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_PinkyMeta"
+        },
+        {
+          "name": "RTRig_R_PinkyProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_PinkyProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_PinkyProximal"
+        },
+        {
+          "name": "RTRig_R_RingDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_RingDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_RingDistal"
+        },
+        {
+          "name": "RTRig_R_RingIntermediate_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_RingIntermediate_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_RingIntermediate"
+        },
+        {
+          "name": "RTRig_R_RingMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_RingMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_RingMeta"
+        },
+        {
+          "name": "RTRig_R_RingProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_RingProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_RingProximal"
+        },
+        {
+          "name": "RTRig_R_Shoulder_aim_cmd",
+          "type": "aimConstraintV2"
+        },
+        {
+          "name": "RTRig_R_Shoulder_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Shoulder"
+        },
+        {
+          "name": "RTRig_R_Shoulder_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Shoulder"
+        },
+        {
+          "name": "RTRig_R_Shoulder_pointParentConstraint_cmd",
+          "type": "pointParentConstraintV2"
+        },
+        {
+          "name": "RTRig_R_ThumbDistal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_ThumbDistal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_ThumbDistal"
+        },
+        {
+          "name": "RTRig_R_ThumbMeta_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_ThumbMeta_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_ThumbMeta"
+        },
+        {
+          "name": "RTRig_R_ThumbProximal_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_R_ThumbProximal_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_ThumbProximal"
+        },
+        {
+          "name": "RTRig_R_Wrist_cmd",
+          "type": "parentConstraintV2"
+        },
+        {
+          "name": "RTRig_R_Wrist_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Wrist"
+        },
+        {
+          "name": "RTRig_R_Wrist_output_joint2",
+          "type": "outputJoint",
+          "jointName": "RTRig_R_Wrist"
+        },
+        {
+          "name": "RTRig_Root_cmd",
+          "type": "parentConstraintV2"
+        },
+        {
+          "name": "RTRig_Root_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_Root"
+        },
+        {
+          "name": "RTRig_SpineStart_cmd",
+          "type": "orientConstraintV2"
+        },
+        {
+          "name": "RTRig_SpineStart_output_joint",
+          "type": "outputJoint",
+          "jointName": "RTRig_SpineStart"
+        },
+        {
+          "name": "RightArmLower_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightArmLower"
+        },
+        {
+          "name": "RightFootAnkle_has_input",
+          "type": "hasInputV2",
+          "jointName": "RightFootAnkle"
+        },
+        {
+          "name": "RightFootAnkle_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightFootAnkle"
+        },
+        {
+          "name": "RightHandIndexDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandIndexDistal"
+        },
+        {
+          "name": "RightHandIndexIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandIndexIntermediate"
+        },
+        {
+          "name": "RightHandIndexMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandIndexMeta"
+        },
+        {
+          "name": "RightHandIndexProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandIndexProximal"
+        },
+        {
+          "name": "RightHandMiddleDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandMiddleDistal"
+        },
+        {
+          "name": "RightHandMiddleIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandMiddleIntermediate"
+        },
+        {
+          "name": "RightHandMiddleMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandMiddleMeta"
+        },
+        {
+          "name": "RightHandMiddleProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandMiddleProximal"
+        },
+        {
+          "name": "RightHandPinkyDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandPinkyDistal"
+        },
+        {
+          "name": "RightHandPinkyIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandPinkyIntermediate"
+        },
+        {
+          "name": "RightHandPinkyMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandPinkyMeta"
+        },
+        {
+          "name": "RightHandPinkyProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandPinkyProximal"
+        },
+        {
+          "name": "RightHandRingDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandRingDistal"
+        },
+        {
+          "name": "RightHandRingIntermediate_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandRingIntermediate"
+        },
+        {
+          "name": "RightHandRingMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandRingMeta"
+        },
+        {
+          "name": "RightHandRingProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandRingProximal"
+        },
+        {
+          "name": "RightHandThumbDistal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandThumbDistal"
+        },
+        {
+          "name": "RightHandThumbMeta_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandThumbMeta"
+        },
+        {
+          "name": "RightHandThumbProximal_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandThumbProximal"
+        },
+        {
+          "name": "RightHandWrist_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightHandWrist"
+        },
+        {
+          "name": "RightLegLower_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightLegLower"
+        },
+        {
+          "name": "RightShoulder_input_joint",
+          "type": "inputJoint",
+          "jointName": "RightShoulder"
+        },
+        {
+          "name": "RightShoulder_input_joint_2",
+          "type": "inputJoint",
+          "jointName": "RightShoulder"
+        },
+        {
+          "name": "Root_input_joint",
+          "type": "inputJoint",
+          "jointName": "Root"
+        },
+        {
+          "name": "SpineLower_input_joint",
+          "type": "inputJoint",
+          "jointName": "SpineLower"
+        },
+        {
+          "name": "SpineUpper_input_joint",
+          "type": "inputJoint",
+          "jointName": "SpineUpper"
+        },
+        {
+          "name": "dstCharForward",
+          "type": "destinationCharacterForward"
+        },
+        {
+          "name": "dstCharForward2",
+          "type": "destinationCharacterForward"
+        },
+        {
+          "name": "getLeftElbowLocator",
+          "type": "Vec4Variable",
+          "varName": "leftElbowPoleTarget"
+        },
+        {
+          "name": "getRightElbowLocator",
+          "type": "Vec4Variable",
+          "varName": "rightElbowPoleTarget"
+        },
+        {
+          "name": "hasLeftFootAnkleAndRightFootAnkle",
+          "type": "BooleanAnd"
+        },
+        {
+          "name": "leftElbowPoleTargetEquation",
+          "type": "mathExpression",
+          "expression": "pos - 10.0 * charForward"
+        },
+        {
+          "name": "leftElbowPoleTarget_cmd",
+          "type": "pointParentConstraintV2"
+        },
+        {
+          "name": "rightElbowPoleTargetEquation",
+          "type": "mathExpression",
+          "expression": "pos - 10.0 * charForward"
+        },
+        {
+          "name": "rightElbowPoleTarget_cmd",
+          "type": "pointParentConstraintV2"
+        },
+        {
+          "name": "shouldRetargetAnklesL1",
+          "type": "SelectByBoolV2"
+        },
+        {
+          "name": "shouldRetargetAnklesL2",
+          "type": "SelectByBoolV2"
+        },
+        {
+          "name": "shouldRetargetAnklesR1",
+          "type": "SelectByBoolV2"
+        },
+        {
+          "name": "shouldRetargetAnklesR2",
+          "type": "SelectByBoolV2"
+        }
+      ],
+      "links": [
+        [ "Chest_input_joint:rot", "RTRig_Chest_cmd_2:in" ],
+        [ "Head_input_joint:rot", "RTRig_Head_cmd:in" ],
+        [ "Hips_input_joint:transform", "RTRig_Pelvis_cmd:in" ],
+        [ "Hips_input_joint_2:transform", "RTRig_R_Hip_pointParentConstraint_cmd:in" ],
+        [ "Hips_input_joint_3:transform", "RTRig_L_Hip_pointParentConstraint_cmd:in" ],
+        [ "LeftArmLower_input_joint:pos", "leftElbowPoleTargetEquation:var[pos]" ],
+        [ "LeftArmLower_input_joint:transform", "leftElbowPoleTarget_cmd:in" ],
+        [ "LeftFootAnkle_has_input:bool", "hasLeftFootAnkleAndRightFootAnkle:inputA" ],
+        [ "LeftFootAnkle_input_joint:transform", "RTRig_L_Ankle_cmd:in" ],
+        [ "LeftHandIndexDistal_input_joint:rot", "RTRig_L_IndexDistal_cmd:in" ],
+        [ "LeftHandIndexIntermediate_input_joint:rot", "RTRig_L_IndexIntermediate_cmd:in" ],
+        [ "LeftHandIndexMeta_input_joint:rot", "RTRig_L_IndexMeta_cmd:in" ],
+        [ "LeftHandIndexProximal_input_joint:rot", "RTRig_L_IndexProximal_cmd:in" ],
+        [ "LeftHandMiddleDistal_input_joint:rot", "RTRig_L_MiddleDistal_cmd:in" ],
+        [ "LeftHandMiddleIntermediate_input_joint:rot", "RTRig_L_MiddleIntermediate_cmd:in" ],
+        [ "LeftHandMiddleMeta_input_joint:rot", "RTRig_L_MiddleMeta_cmd:in" ],
+        [ "LeftHandMiddleProximal_input_joint:rot", "RTRig_L_MiddleProximal_cmd:in" ],
+        [ "LeftHandPinkyDistal_input_joint:rot", "RTRig_L_PinkyDistal_cmd:in" ],
+        [ "LeftHandPinkyIntermediate_input_joint:rot", "RTRig_L_PinkyIntermediate_cmd:in" ],
+        [ "LeftHandPinkyMeta_input_joint:rot", "RTRig_L_PinkyMeta_cmd:in" ],
+        [ "LeftHandPinkyProximal_input_joint:rot", "RTRig_L_PinkyProximal_cmd:in" ],
+        [ "LeftHandRingDistal_input_joint:rot", "RTRig_L_RingDistal_cmd:in" ],
+        [ "LeftHandRingIntermediate_input_joint:rot", "RTRig_L_RingIntermediate_cmd:in" ],
+        [ "LeftHandRingMeta_input_joint:rot", "RTRig_L_RingMeta_cmd:in" ],
+        [ "LeftHandRingProximal_input_joint:rot", "RTRig_L_RingProximal_cmd:in" ],
+        [ "LeftHandThumbDistal_input_joint:rot", "RTRig_L_ThumbDistal_cmd:in" ],
+        [ "LeftHandThumbMeta_input_joint:rot", "RTRig_L_ThumbMeta_cmd:in" ],
+        [ "LeftHandThumbProximal_input_joint:rot", "RTRig_L_ThumbProximal_cmd:in" ],
+        [ "LeftHandWrist_input_joint:transform", "RTRig_L_Wrist_cmd:in" ],
+        [ "LeftLegLower_input_joint:pos", "RTRig_L_Hip_aim_cmd:polePos" ],
+        [ "LeftShoulder_input_joint:rot", "RTRig_L_Clavicle_cmd:in" ],
+        [ "LeftShoulder_input_joint_2:transform", "RTRig_L_Shoulder_pointParentConstraint_cmd:in" ],
+        [ "Neck_input_joint:rot", "RTRig_Neck_cmd:in" ],
+        [ "RTRig_Chest_cmd_1:out", "RTRig_Chest_output_joint:transform" ],
+        [ "RTRig_Chest_cmd_2:out", "RTRig_Chest_output_joint2:rot" ],
+        [ "RTRig_Head_cmd:out", "RTRig_Head_output_joint:rot" ],
+        [ "RTRig_L_Ankle_cmd:out", "shouldRetargetAnklesL2:inputTrue" ],
+        [ "LeftFootAnkle_input_joint:pos", "RTRig_L_Hip_aim_cmd:targetPos" ],
+        [ "RTRig_L_Clavicle_cmd:out", "RTRig_L_Clavicle_output_joint:rot" ],
+        [ "RTRig_L_Hip_aim_cmd:aimingRot", "shouldRetargetAnklesL1:inputTrue" ],
+        [ "RTRig_L_Hip_output_joint2:pos", "RTRig_L_Hip_aim_cmd:startPos" ],
+        [ "RTRig_L_Hip_pointParentConstraint_cmd:out", "RTRig_L_Hip_output_joint2:pos" ],
+        [ "RTRig_L_IndexDistal_cmd:out", "RTRig_L_IndexDistal_output_joint:rot" ],
+        [ "RTRig_L_IndexIntermediate_cmd:out", "RTRig_L_IndexIntermediate_output_joint:rot" ],
+        [ "RTRig_L_IndexMeta_cmd:out", "RTRig_L_IndexMeta_output_joint:rot" ],
+        [ "RTRig_L_IndexProximal_cmd:out", "RTRig_L_IndexProximal_output_joint:rot" ],
+        [ "RTRig_L_MiddleDistal_cmd:out", "RTRig_L_MiddleDistal_output_joint:rot" ],
+        [ "RTRig_L_MiddleIntermediate_cmd:out", "RTRig_L_MiddleIntermediate_output_joint:rot" ],
+        [ "RTRig_L_MiddleMeta_cmd:out", "RTRig_L_MiddleMeta_output_joint:rot" ],
+        [ "RTRig_L_MiddleProximal_cmd:out", "RTRig_L_MiddleProximal_output_joint:rot" ],
+        [ "RTRig_L_PinkyDistal_cmd:out", "RTRig_L_PinkyDistal_output_joint:rot" ],
+        [ "RTRig_L_PinkyIntermediate_cmd:out", "RTRig_L_PinkyIntermediate_output_joint:rot" ],
+        [ "RTRig_L_PinkyMeta_cmd:out", "RTRig_L_PinkyMeta_output_joint:rot" ],
+        [ "RTRig_L_PinkyProximal_cmd:out", "RTRig_L_PinkyProximal_output_joint:rot" ],
+        [ "RTRig_L_RingDistal_cmd:out", "RTRig_L_RingDistal_output_joint:rot" ],
+        [ "RTRig_L_RingIntermediate_cmd:out", "RTRig_L_RingIntermediate_output_joint:rot" ],
+        [ "RTRig_L_RingMeta_cmd:out", "RTRig_L_RingMeta_output_joint:rot" ],
+        [ "RTRig_L_RingProximal_cmd:out", "RTRig_L_RingProximal_output_joint:rot" ],
+        [ "RTRig_L_Shoulder_aim_cmd:aimingRot", "RTRig_L_Shoulder_output_joint:rot" ],
+        [ "RTRig_L_Shoulder_output_joint2:pos", "RTRig_L_Shoulder_aim_cmd:startPos" ],
+        [ "RTRig_L_Shoulder_pointParentConstraint_cmd:out", "RTRig_L_Shoulder_output_joint2:pos" ],
+        [ "RTRig_L_ThumbDistal_cmd:out", "RTRig_L_ThumbDistal_output_joint:rot" ],
+        [ "RTRig_L_ThumbMeta_cmd:out", "RTRig_L_ThumbMeta_output_joint:rot" ],
+        [ "RTRig_L_ThumbProximal_cmd:out", "RTRig_L_ThumbProximal_output_joint:rot" ],
+        [ "RTRig_L_Wrist_cmd:out", "RTRig_L_Wrist_output_joint2:transform" ],
+        [ "RTRig_L_Wrist_output_joint:pos", "RTRig_L_Shoulder_aim_cmd:targetPos" ],
+        [ "RTRig_Neck_cmd:out", "RTRig_Neck_output_joint:rot" ],
+        [ "RTRig_Pelvis_cmd:out", "RTRig_Pelvis_output_joint:transform" ],
+        [ "RTRig_R_Ankle_cmd:out", "shouldRetargetAnklesR2:inputTrue" ],
+        [ "RightFootAnkle_input_joint:pos", "RTRig_R_Hip_aim_cmd:targetPos" ],
+        [ "RTRig_R_Clavicle_cmd:out", "RTRig_R_Clavicle_output_joint:rot" ],
+        [ "RTRig_R_Hip_aim_cmd:aimingRot", "shouldRetargetAnklesR1:inputTrue" ],
+        [ "RTRig_R_Hip_output_joint2:pos", "RTRig_R_Hip_aim_cmd:startPos" ],
+        [ "RTRig_R_Hip_pointParentConstraint_cmd:out", "RTRig_R_Hip_output_joint2:pos" ],
+        [ "RTRig_R_IndexDistal_cmd:out", "RTRig_R_IndexDistal_output_joint:rot" ],
+        [ "RTRig_R_IndexIntermediate_cmd:out", "RTRig_R_IndexIntermediate_output_joint:rot" ],
+        [ "RTRig_R_IndexMeta_cmd:out", "RTRig_R_IndexMeta_output_joint:rot" ],
+        [ "RTRig_R_IndexProximal_cmd:out", "RTRig_R_IndexProximal_output_joint:rot" ],
+        [ "RTRig_R_MiddleDistal_cmd:out", "RTRig_R_MiddleDistal_output_joint:rot" ],
+        [ "RTRig_R_MiddleIntermediate_cmd:out", "RTRig_R_MiddleIntermediate_output_joint:rot" ],
+        [ "RTRig_R_MiddleMeta_cmd:out", "RTRig_R_MiddleMeta_output_joint:rot" ],
+        [ "RTRig_R_MiddleProximal_cmd:out", "RTRig_R_MiddleProximal_output_joint:rot" ],
+        [ "RTRig_R_PinkyDistal_cmd:out", "RTRig_R_PinkyDistal_output_joint:rot" ],
+        [ "RTRig_R_PinkyIntermediate_cmd:out", "RTRig_R_PinkyIntermediate_output_joint:rot" ],
+        [ "RTRig_R_PinkyMeta_cmd:out", "RTRig_R_PinkyMeta_output_joint:rot" ],
+        [ "RTRig_R_PinkyProximal_cmd:out", "RTRig_R_PinkyProximal_output_joint:rot" ],
+        [ "RTRig_R_RingDistal_cmd:out", "RTRig_R_RingDistal_output_joint:rot" ],
+        [ "RTRig_R_RingIntermediate_cmd:out", "RTRig_R_RingIntermediate_output_joint:rot" ],
+        [ "RTRig_R_RingMeta_cmd:out", "RTRig_R_RingMeta_output_joint:rot" ],
+        [ "RTRig_R_RingProximal_cmd:out", "RTRig_R_RingProximal_output_joint:rot" ],
+        [ "RTRig_R_Shoulder_aim_cmd:aimingRot", "RTRig_R_Shoulder_output_joint:rot" ],
+        [ "RTRig_R_Shoulder_output_joint2:pos", "RTRig_R_Shoulder_aim_cmd:startPos" ],
+        [ "RTRig_R_Shoulder_pointParentConstraint_cmd:out", "RTRig_R_Shoulder_output_joint2:pos" ],
+        [ "RTRig_R_ThumbDistal_cmd:out", "RTRig_R_ThumbDistal_output_joint:rot" ],
+        [ "RTRig_R_ThumbMeta_cmd:out", "RTRig_R_ThumbMeta_output_joint:rot" ],
+        [ "RTRig_R_ThumbProximal_cmd:out", "RTRig_R_ThumbProximal_output_joint:rot" ],
+        [ "RTRig_R_Wrist_cmd:out", "RTRig_R_Wrist_output_joint2:transform" ],
+        [ "RTRig_R_Wrist_output_joint:pos", "RTRig_R_Shoulder_aim_cmd:targetPos" ],
+        [ "RTRig_Root_cmd:out", "RTRig_Root_output_joint:transform" ],
+        [ "RTRig_SpineStart_cmd:out", "RTRig_SpineStart_output_joint:rot" ],
+        [ "RightArmLower_input_joint:pos", "rightElbowPoleTargetEquation:var[pos]" ],
+        [ "RightArmLower_input_joint:transform", "rightElbowPoleTarget_cmd:in" ],
+        [ "RightFootAnkle_has_input:bool", "hasLeftFootAnkleAndRightFootAnkle:inputB" ],
+        [ "RightFootAnkle_input_joint:transform", "RTRig_R_Ankle_cmd:in" ],
+        [ "RightHandIndexDistal_input_joint:rot", "RTRig_R_IndexDistal_cmd:in" ],
+        [ "RightHandIndexIntermediate_input_joint:rot", "RTRig_R_IndexIntermediate_cmd:in" ],
+        [ "RightHandIndexMeta_input_joint:rot", "RTRig_R_IndexMeta_cmd:in" ],
+        [ "RightHandIndexProximal_input_joint:rot", "RTRig_R_IndexProximal_cmd:in" ],
+        [ "RightHandMiddleDistal_input_joint:rot", "RTRig_R_MiddleDistal_cmd:in" ],
+        [ "RightHandMiddleIntermediate_input_joint:rot", "RTRig_R_MiddleIntermediate_cmd:in" ],
+        [ "RightHandMiddleMeta_input_joint:rot", "RTRig_R_MiddleMeta_cmd:in" ],
+        [ "RightHandMiddleProximal_input_joint:rot", "RTRig_R_MiddleProximal_cmd:in" ],
+        [ "RightHandPinkyDistal_input_joint:rot", "RTRig_R_PinkyDistal_cmd:in" ],
+        [ "RightHandPinkyIntermediate_input_joint:rot", "RTRig_R_PinkyIntermediate_cmd:in" ],
+        [ "RightHandPinkyMeta_input_joint:rot", "RTRig_R_PinkyMeta_cmd:in" ],
+        [ "RightHandPinkyProximal_input_joint:rot", "RTRig_R_PinkyProximal_cmd:in" ],
+        [ "RightHandRingDistal_input_joint:rot", "RTRig_R_RingDistal_cmd:in" ],
+        [ "RightHandRingIntermediate_input_joint:rot", "RTRig_R_RingIntermediate_cmd:in" ],
+        [ "RightHandRingMeta_input_joint:rot", "RTRig_R_RingMeta_cmd:in" ],
+        [ "RightHandRingProximal_input_joint:rot", "RTRig_R_RingProximal_cmd:in" ],
+        [ "RightHandThumbDistal_input_joint:rot", "RTRig_R_ThumbDistal_cmd:in" ],
+        [ "RightHandThumbMeta_input_joint:rot", "RTRig_R_ThumbMeta_cmd:in" ],
+        [ "RightHandThumbProximal_input_joint:rot", "RTRig_R_ThumbProximal_cmd:in" ],
+        [ "RightHandWrist_input_joint:transform", "RTRig_R_Wrist_cmd:in" ],
+        [ "RightLegLower_input_joint:pos", "RTRig_R_Hip_aim_cmd:polePos" ],
+        [ "RightShoulder_input_joint:rot", "RTRig_R_Clavicle_cmd:in" ],
+        [ "RightShoulder_input_joint_2:transform", "RTRig_R_Shoulder_pointParentConstraint_cmd:in" ],
+        [ "Root_input_joint:transform", "RTRig_Root_cmd:in" ],
+        [ "SpineLower_input_joint:rot", "RTRig_SpineStart_cmd:in" ],
+        [ "SpineUpper_input_joint:transform", "RTRig_Chest_cmd_1:in" ],
+        [ "dstCharForward2:direction", "rightElbowPoleTargetEquation:var[charForward]" ],
+        [ "dstCharForward:direction", "leftElbowPoleTargetEquation:var[charForward]" ],
+        [ "getLeftElbowLocator:out", "RTRig_L_Shoulder_aim_cmd:polePos" ],
+        [ "getRightElbowLocator:out", "RTRig_R_Shoulder_aim_cmd:polePos" ],
+        [ "hasLeftFootAnkleAndRightFootAnkle:output", "shouldRetargetAnklesR1:inputValue" ],
+        [ "hasLeftFootAnkleAndRightFootAnkle:output", "shouldRetargetAnklesR2:inputValue" ],
+        [ "hasLeftFootAnkleAndRightFootAnkle:output", "shouldRetargetAnklesL1:inputValue" ],
+        [ "hasLeftFootAnkleAndRightFootAnkle:output", "shouldRetargetAnklesL2:inputValue" ],
+        [ "leftElbowPoleTargetEquation:value", "getLeftElbowLocator:initialValue" ],
+        [ "leftElbowPoleTarget_cmd:out", "getLeftElbowLocator:in" ],
+        [ "rightElbowPoleTargetEquation:value", "getRightElbowLocator:initialValue" ],
+        [ "rightElbowPoleTarget_cmd:out", "getRightElbowLocator:in" ],
+        [ "shouldRetargetAnklesL1:output", "RTRig_L_Hip_output_joint:rot" ],
+        [ "shouldRetargetAnklesL2:output", "RTRig_L_Ankle_output_joint:transform" ],
+        [ "shouldRetargetAnklesR1:output", "RTRig_R_Hip_output_joint:rot" ],
+        [ "shouldRetargetAnklesR2:output", "RTRig_R_Ankle_output_joint:transform" ]
+      ]
+    }
+  ],
+  "metadata": {
+    "rigGraphVersion": 2
+  }
+}

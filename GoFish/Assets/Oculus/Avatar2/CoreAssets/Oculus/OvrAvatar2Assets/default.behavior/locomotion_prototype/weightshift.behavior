@@ -1,0 +1,124 @@
+{
+    "graphs": [
+        {
+            "name": "main",
+            "type": "dataflow",
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "weightShiftBiasInputX",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_WeightShiftBiasX"
+                },
+                {
+                    "name": "weightShiftBiasInputZ",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_WeightShiftBiasZ"
+                },
+                {
+                    "name": "leftIdleClip",
+                    "type": "sampleAnimClip",
+                    "clip": "idle_neutral_lean_left_anim",
+                    "looping": true
+                },
+                {
+                    "name": "idleClip",
+                    "type": "sampleAnimClip",
+                    "clip": "idle_neutral_stand_center_anim",
+                    "looping": true
+                },
+                {
+                    "name": "rightIdleClip",
+                    "type": "sampleAnimClip",
+                    "clip": "idle_neutral_lean_right_anim",
+                    "looping": true
+                },
+                {
+                    "name": "fwdIdleClip",
+                    "type": "sampleAnimClip",
+                    "clip": "idle_neutral_lean_fwd_anim",
+                    "looping": true
+                },
+                {
+                    "name": "bkwdIdleClip",
+                    "type": "sampleAnimClip",
+                    "clip": "idle_neutral_lean_bkwd_anim",
+                    "looping": true
+                },
+                {
+                    "name": "weightShiftBlendSpaceX",
+                    "type": "oneDimensionalBlendSpace",
+                    "poseInputs": [
+                        {
+                            "axisValue": -1.0
+                        },
+                        {
+                            "axisValue": 0.0
+                        },
+                        {
+                            "axisValue": 1.0
+                        }
+                    ]
+                },
+                {
+                    "name": "weightShiftBlendSpaceZ",
+                    "type": "oneDimensionalBlendSpace",
+                    "poseInputs": [
+                        {
+                            "axisValue": -1.0
+                        },
+                        {
+                            "axisValue": 0.0
+                        },
+                        {
+                            "axisValue": 1.0
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                [
+                    "weightShiftBiasInputX",
+                    "weightShiftBlendSpaceX:inputAxis"
+                ],
+                [
+                    "weightShiftBiasInputZ",
+                    "weightShiftBlendSpaceZ:inputAxis"
+                ],
+                [
+                    "fwdIdleClip:outputPose",
+                    "weightShiftBlendSpaceZ.poseInputs[0]:inputPose"
+                ],
+                [
+                    "idleClip:outputPose",
+                    "weightShiftBlendSpaceZ.poseInputs[1]:inputPose"
+                ],
+                [
+                    "bkwdIdleClip:outputPose",
+                    "weightShiftBlendSpaceZ.poseInputs[2]:inputPose"
+                ],
+                [
+                    "leftIdleClip:outputPose",
+                    "weightShiftBlendSpaceX.poseInputs[0]:inputPose"
+                ],
+                [
+                    "weightShiftBlendSpaceZ:outputPose",
+                    "weightShiftBlendSpaceX.poseInputs[1]:inputPose"
+                ],
+                [
+                    "rightIdleClip:outputPose",
+                    "weightShiftBlendSpaceX.poseInputs[2]:inputPose"
+                ],
+                [
+                    "weightShiftBlendSpaceX:outputPose",
+                    ":pose"
+                ]
+            ]
+        }
+    ]
+}

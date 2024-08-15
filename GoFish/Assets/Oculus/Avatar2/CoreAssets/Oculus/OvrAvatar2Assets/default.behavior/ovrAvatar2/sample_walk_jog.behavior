@@ -1,0 +1,125 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "name": "main",
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "sawtoothOscillator",
+          "name": "phaseOscillator",
+          "period": 1.0
+        },
+        {
+          "type": "subGraph",
+          "name": "walkJogStateMachine",
+          "graph": "walkJogStateMachine"
+        }
+      ],
+      "links": [
+        [ "phaseOscillator:output", "walkJogStateMachine:inputs[0]" ],
+        [ "walkJogStateMachine:outputs[0]", ":pose" ]
+      ]
+    },
+    {
+      "type": "stateMachine",
+      "name": "walkJogStateMachine",
+      "inputs": [
+        {
+          "type": "float",
+          "name": "inputPhase"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "startingState": "walk",
+      "states": [
+        {
+          "name": "walk",
+          "graph": "walk"
+        },
+        {
+          "name": "jog",
+          "graph": "jog"
+        }
+      ],
+      "transitions": [
+        {
+          "from": "walk",
+          "to": "jog",
+          "event": "NextState",
+          "blendTimeSec": 1.0
+        },
+        {
+          "from": "jog",
+          "to": "walk",
+          "event": "NextState",
+          "blendTimeSec": 1.0
+        }
+      ]
+    },
+    {
+      "name": "walk",
+      "type": "dataflow",
+      "inputs": [
+        {
+          "type": "float",
+          "name": "inputPhase"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "sampleAnimClip",
+          "name": "walk",
+          "clip": "loco_walk_fwd_master"
+        }
+      ],
+      "links": [
+        [ ":inputPhase", "walk:inputPhase" ],
+        [ "walk:outputPose", ":pose" ]
+      ]
+    },
+    {
+      "name": "jog",
+      "type": "dataflow",
+      "inputs": [
+        {
+          "type": "float",
+          "name": "inputPhase"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "sampleAnimClip",
+          "name": "jog",
+          "clip": "loco_jog_fwd_master"
+        }
+      ],
+      "links": [
+        [ ":inputPhase", "jog:inputPhase" ],
+        [ "jog:outputPose", ":pose" ]
+      ]
+    }
+  ]
+}

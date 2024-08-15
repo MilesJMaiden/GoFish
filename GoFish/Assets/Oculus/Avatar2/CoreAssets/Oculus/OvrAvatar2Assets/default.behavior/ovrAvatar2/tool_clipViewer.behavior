@@ -1,0 +1,64 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "getDynamicStoreValueString",
+          "name": "animName",
+          "key": "clipViewer_setAnimName"
+        },
+        {
+          "type": "getDynamicStoreValueFloat",
+          "name": "animPhase",
+          "key": "clipViewer_setAnimPhase"
+        },
+        {
+          "type": "getDynamicStoreValueFloat",
+          "name": "animRate",
+          "key": "clipViewer_setAnimRate"
+        },
+        {
+          "type": "lookUpAnimClip",
+          "name": "lookUpAnimClip"
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "sampleAnimClip"
+        },
+        {
+          "type": "getDefaultPose",
+          "name": "getDefaultPose"
+        },
+        {
+          "type": "layerPoses",
+          "name": "mainLayers",
+          "fillAdditiveBaseWithDefault": true,
+          "layers": [
+            {
+              "name": "sampleClip"
+            },
+            {
+              "name": "defaultPose"
+            }
+          ]
+        }
+      ],
+      "links": [
+        [ "animName:outputValue", "lookUpAnimClip:inputAnimClipName" ],
+        [ "animPhase:outputValue", "sampleAnimClip:inputPhase" ],
+        [ "animRate:outputValue", "sampleAnimClip:inputRate" ],
+        [ "lookUpAnimClip:outputAnimClip", "sampleAnimClip:inputAnimClip" ],
+        [ "sampleAnimClip:outputPose", "mainLayers.layers[sampleClip]:inputPose" ],
+        [ "getDefaultPose:outputPose", "mainLayers.layers[defaultPose]:inputPose" ],
+        [ "mainLayers:outputPose", ":pose" ]
+      ]
+    }
+  ]
+}

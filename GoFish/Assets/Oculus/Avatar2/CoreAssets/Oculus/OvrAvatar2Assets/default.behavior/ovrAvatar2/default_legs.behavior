@@ -1,0 +1,253 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "getDynamicStoreValueFloat",
+          "name": "angleInput",
+          "key": "default_legs_setAngle"
+        },
+        {
+          "type": "getDynamicStoreValueFloat",
+          "name": "velocityInput",
+          "key": "default_legs_setVelocity"
+        },
+        {
+          "type": "constFloat",
+          "name": "clipLength",
+          "value": 1.0
+        },
+        {
+          "type": "mathExpression",
+          "name": "calcClipPeriod",
+          "expression": "clipLength / max(velocity, 0.01)"
+        },
+        {
+          "type": "sawtoothOscillator",
+          "name": "clipPhaseOscillator"
+        },
+        {
+          "type": "mathExpression",
+          "name": "invertedPhase",
+          "expression": "mod((x + 0.5), 1.0)"
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "walkForwardClip",
+          "clip": "loco_walk_fwd_master"
+        },
+
+        {
+          "type": "sampleAnimClip",
+          "name": "jogForwardClip",
+          "clip": "loco_jog_fwd_master"
+        },
+        {
+          "type": "clonePose",
+          "name": "cloneJogForward1"
+        },
+        {
+          "type": "clonePose",
+          "name": "cloneJogForward2"
+        },
+        {
+          "type": "getJointTransform",
+          "name": "getJogRoot",
+          "jointName": "RTRig_Root"
+        },
+        {
+          "type": "getJointTransform",
+          "name": "getJogPelvis",
+          "jointName": "RTRig_Pelvis"
+        },
+        {
+          "type": "getComponentOfTransform",
+          "name": "jogRootComponents"
+        },
+        {
+          "type": "getComponentOfTransform",
+          "name": "jogPelvisComponents"
+        },
+        {
+          "type": "mathExpression",
+          "name": "calculateNewJogPelvisPosition",
+          "expression": "rootPosition + pelvisPosition",
+          "inputsSize": 2
+        },
+        {
+          "type": "makeTransform",
+          "name": "makeJogRootTransform"
+        },
+        {
+          "type": "setJointTransform",
+          "name": "setJogRootTransform",
+          "jointName": "RTRig_Root"
+        },
+        {
+          "type": "makeTransform",
+          "name": "makeJogPelvisTransform"
+        },
+        {
+          "type": "setJointTransform",
+          "name": "setJogPelvisTransform",
+          "jointName": "RTRig_Pelvis"
+        },
+
+        {
+          "type": "sampleAnimClip",
+          "name": "walkBackwardClip",
+          "clip": "loco_walk_bkwd_vr"
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "strafeLeftClip",
+          "clip": "loco_strafe_left_vr"
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "strafeRightClip",
+          "clip": "loco_strafe_right_vr"
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "idleClip",
+          "clip": "loco_idle_master"
+        },
+        {
+          "type": "oneDimensionalBlendSpace",
+          "name": "walkJogForwardBlendSpace",
+          "poseInputs": [
+            {
+              "axisValue": 1.0
+            },
+            {
+              "axisValue": 2.0
+            }
+          ]
+        },
+        {
+          "type": "clonePose",
+          "name": "cloneWalkJogForwardBlendSpaceOutput"
+        },
+        {
+          "type": "oneDimensionalBlendSpace",
+          "name": "walkDirectionBlendSpace",
+          "poseInputs": [
+            {
+              "axisValue": 0.0
+            },
+            {
+              "axisValue": 0.25
+            },
+            {
+              "axisValue": 0.5
+            },
+            {
+              "axisValue": 0.75
+            },
+            {
+              "axisValue": 1.0
+            }
+          ]
+        },
+        {
+          "type": "oneDimensionalBlendSpace",
+          "name": "idleWalkBlendSpace",
+          "poseInputs": [
+            {
+              "axisValue": 0.0
+            },
+            {
+              "axisValue": 0.1
+            }
+          ]
+        },
+        {
+          "type": "mask",
+          "name": "legsMask",
+          "jointNames": [
+            "RTRig_Pelvis",
+            "RTRig_L_Hip",
+            "RTRig_L_Ankle",
+            "RTRig_L_GroundBallPivot",
+            "RTRig_R_Hip",
+            "RTRig_R_Ankle",
+            "RTRig_R_GroundBallPivot"
+          ]
+        },
+
+        {
+          "type": "getDefaultPose",
+          "name": "getDefaultPose"
+        },
+        {
+          "type": "copyJointInCharacterSpace",
+          "name": "snapSpine",
+          "jointNameToCopy": "RTRig_SpineStart"
+        }
+      ],
+      "links": [
+        [ "clipLength", "calcClipPeriod:var[clipLength]" ],
+        [ "velocityInput:outputValue", "calcClipPeriod:var[velocity]" ],
+        [ "calcClipPeriod:value", "clipPhaseOscillator:inputPeriod" ],
+
+        [ "clipPhaseOscillator:output", "invertedPhase:var[x]" ],
+
+        [ "clipPhaseOscillator:output", "walkForwardClip:inputPhase" ],
+        [ "clipPhaseOscillator:output", "jogForwardClip:inputPhase" ],
+        [ "invertedPhase:value", "walkBackwardClip:inputPhase" ],
+        [ "clipPhaseOscillator:output", "strafeLeftClip:inputPhase" ],
+        [ "invertedPhase:value", "strafeRightClip:inputPhase" ],
+
+        [ "jogForwardClip:outputPose", "cloneJogForward1:input" ],
+        [ "cloneJogForward1:output1", "cloneJogForward2:input" ],
+        [ "cloneJogForward1:output2", "getJogRoot:inputPose" ],
+        [ "cloneJogForward2:output1", "getJogPelvis:inputPose" ],
+        [ "getJogRoot:outputTransform", "jogRootComponents:transform" ],
+        [ "getJogPelvis:outputTransform", "jogPelvisComponents:transform" ],
+        [ "jogRootComponents:position", "calculateNewJogPelvisPosition:var[rootPosition]" ],
+        [ "jogPelvisComponents:position", "calculateNewJogPelvisPosition:var[pelvisPosition]" ],
+        [ "calculateNewJogPelvisPosition:value", "makeJogPelvisTransform:position" ],
+        [ "jogPelvisComponents:rotation", "makeJogPelvisTransform:rotation" ],
+        [ "jogPelvisComponents:scale", "makeJogPelvisTransform:scale" ],
+        [ "cloneJogForward2:output2", "setJogRootTransform:inputPose" ],
+        [ "jogRootComponents:rotation", "makeJogRootTransform:rotation" ],
+        [ "jogRootComponents:scale", "makeJogRootTransform:scale" ],
+        [ "makeJogRootTransform:transform", "setJogRootTransform:inputTransform" ],
+        [ "setJogRootTransform:outputPose", "setJogPelvisTransform:inputPose" ],
+        [ "makeJogPelvisTransform:transform", "setJogPelvisTransform:inputTransform" ],
+
+        [ "walkForwardClip:outputPose", "walkJogForwardBlendSpace.poseInputs[0]:inputPose" ],
+        [ "setJogPelvisTransform:outputPose", "walkJogForwardBlendSpace.poseInputs[1]:inputPose" ],
+        [ "velocityInput:outputValue", "walkJogForwardBlendSpace:inputAxis" ],
+
+        [ "walkJogForwardBlendSpace:outputPose", "cloneWalkJogForwardBlendSpaceOutput:input" ],
+
+        [ "cloneWalkJogForwardBlendSpaceOutput:output1", "walkDirectionBlendSpace.poseInputs[0]:inputPose" ],
+        [ "cloneWalkJogForwardBlendSpaceOutput:output2", "walkDirectionBlendSpace.poseInputs[4]:inputPose" ],
+        [ "strafeLeftClip:outputPose", "walkDirectionBlendSpace.poseInputs[1]:inputPose" ],
+        [ "walkBackwardClip:outputPose", "walkDirectionBlendSpace.poseInputs[2]:inputPose" ],
+        [ "strafeRightClip:outputPose", "walkDirectionBlendSpace.poseInputs[3]:inputPose" ],
+        [ "angleInput:outputValue", "walkDirectionBlendSpace:inputAxis" ],
+
+        [ "idleClip:outputPose", "idleWalkBlendSpace.poseInputs[0]:inputPose" ],
+        [ "walkDirectionBlendSpace:outputPose", "idleWalkBlendSpace.poseInputs[1]:inputPose" ],
+        [ "velocityInput:outputValue", "idleWalkBlendSpace:inputAxis" ],
+
+        [ "idleWalkBlendSpace:outputPose", "legsMask:inputPose" ],
+
+        [ "getDefaultPose:outputPose", "snapSpine:inputPoseToCopyJointFrom" ],
+        [ "legsMask:outputPose", "snapSpine:inputPose" ],
+
+        [ "snapSpine:outputPose", ":pose" ]
+      ]
+    }
+  ]
+}

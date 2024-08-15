@@ -1,0 +1,428 @@
+{
+    "graphs": [
+        {
+            "name": "main",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "inPose",
+                    "defaultLink": "locomotion_prototype/tracking_root_transfer:pose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "inPose_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "lockLeftFoot",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LockLeftFoot"
+                },
+                {
+                    "name": "lockRightFoot",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LockRightFoot"
+                },
+                {
+                    "name": "leftFootTX",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LeftFootTX"
+                },
+                {
+                    "name": "leftFootTY",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LeftFootTY"
+                },
+                {
+                    "name": "leftFootTZ",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LeftFootTZ"
+                },
+                {
+                    "name": "leftFootRX",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LeftFootRX"
+                },
+                {
+                    "name": "leftFootRY",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LeftFootRY"
+                },
+                {
+                    "name": "leftFootRZ",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LeftFootRZ"
+                },
+                {
+                    "name": "leftFootRXRadConst",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "leftFootRXDegRadMathExpression",
+                    "type": "mathExpression",
+                    "expression": "leftFootRXRadConst * (3.14159/180)",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "leftFootRYRadConst",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "leftFootRYDegRadMathExpression",
+                    "type": "mathExpression",
+                    "expression": "leftFootRYRadConst * (3.14159/180)",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "leftFootRZRadConst",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "leftFootRZDegRadMathExpression",
+                    "type": "mathExpression",
+                    "expression": "leftFootRZRadConst * (3.14159/180)",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "rightFootTX",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RightFootTX"
+                },
+                {
+                    "name": "rightFootTY",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RightFootTY"
+                },
+                {
+                    "name": "rightFootTZ",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RightFootTZ"
+                },
+                {
+                    "name": "rightFootRX",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RightFootRX"
+                },
+                {
+                    "name": "rightFootRY",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RightFootRY"
+                },
+                {
+                    "name": "rightFootRZ",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RightFootRZ"
+                },
+                {
+                    "name": "rightFootRXRadConst",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "rightFootRXDegRadMathExpression",
+                    "type": "mathExpression",
+                    "expression": "rightFootRXRadConst * (3.14159/180)",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "rightFootRYRadConst",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "rightFootRYDegRadMathExpression",
+                    "type": "mathExpression",
+                    "expression": "rightFootRYRadConst * (3.14159/180)",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "rightFootRZRadConst",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "rightFootRZDegRadMathExpression",
+                    "type": "mathExpression",
+                    "expression": "rightFootRZRadConst * (3.14159/180)",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftAnkle_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_L_Ankle",
+                    "applyAsOffset": false,
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "RightAnkle_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_R_Ankle",
+                    "applyAsOffset": false,
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "left_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "left_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "left_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "left_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "right_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "right_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "right_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "right_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "LeftAnkle_setTransformJointoutputPose_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "LeftAnkle_setTransformJointoutputPose_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "LeftAnkle_setTransformJointoutputPose_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "leftFootMask",
+                    "type": "mask",
+                    "jointNames": [
+                        "RTRig_L_Ankle"
+                    ]
+                },
+                {
+                    "name": "rightFootMask",
+                    "type": "mask",
+                    "jointNames": [
+                        "RTRig_R_Ankle"
+                    ]
+                },
+                {
+                    "name": "lockFootLayers",
+                    "type": "layerPoses",
+                    "layers": [
+                        {
+                            "name": "lockedRight"
+                        },
+                        {
+                            "name": "lockedLeft"
+                        },
+                        {
+                            "name": "base"
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                [
+                    ":inPose",
+                    "inPose_clone_0:input"
+                ],
+                [
+                    "inPose_clone_0:output1",
+                    "inPose_clone_1:input"
+                ],
+                [
+                    "inPose_clone_1:output1",
+                    "inPose_clone_2:input"
+                ],
+                [
+                    "leftFootRX",
+                    "leftFootRXDegRadMathExpression:var[leftFootRXRadConst]"
+                ],
+                [
+                    "leftFootRY",
+                    "leftFootRYDegRadMathExpression:var[leftFootRYRadConst]"
+                ],
+                [
+                    "leftFootRZ",
+                    "leftFootRZDegRadMathExpression:var[leftFootRZRadConst]"
+                ],
+                [
+                    "rightFootRX",
+                    "rightFootRXDegRadMathExpression:var[rightFootRXRadConst]"
+                ],
+                [
+                    "rightFootRY",
+                    "rightFootRYDegRadMathExpression:var[rightFootRYRadConst]"
+                ],
+                [
+                    "rightFootRZ",
+                    "rightFootRZDegRadMathExpression:var[rightFootRZRadConst]"
+                ],
+                [
+                    "leftFootTX",
+                    "left_tra_makeVec3:inputX"
+                ],
+                [
+                    "leftFootTY",
+                    "left_tra_makeVec3:inputY"
+                ],
+                [
+                    "leftFootTZ",
+                    "left_tra_makeVec3:inputZ"
+                ],
+                [
+                    "leftFootRXDegRadMathExpression:value",
+                    "left_rot_makeVec3:inputX"
+                ],
+                [
+                    "leftFootRYDegRadMathExpression:value",
+                    "left_rot_makeVec3:inputY"
+                ],
+                [
+                    "leftFootRZDegRadMathExpression:value",
+                    "left_rot_makeVec3:inputZ"
+                ],
+                [
+                    "rightFootTX",
+                    "right_tra_makeVec3:inputX"
+                ],
+                [
+                    "rightFootTY",
+                    "right_tra_makeVec3:inputY"
+                ],
+                [
+                    "rightFootTZ",
+                    "right_tra_makeVec3:inputZ"
+                ],
+                [
+                    "rightFootRXDegRadMathExpression:value",
+                    "right_rot_makeVec3:inputX"
+                ],
+                [
+                    "rightFootRYDegRadMathExpression:value",
+                    "right_rot_makeVec3:inputY"
+                ],
+                [
+                    "rightFootRZDegRadMathExpression:value",
+                    "right_rot_makeVec3:inputZ"
+                ],
+                [
+                    "left_rot_makeVec3:outputVec3",
+                    "left_eulerToQuat:inputEuler"
+                ],
+                [
+                    "left_tra_makeVec3:outputVec3",
+                    "left_makeTransform:position"
+                ],
+                [
+                    "left_eulerToQuat:outputQuat",
+                    "left_makeTransform:rotation"
+                ],
+                [
+                    "right_rot_makeVec3:outputVec3",
+                    "right_eulerToQuat:inputEuler"
+                ],
+                [
+                    "right_tra_makeVec3:outputVec3",
+                    "right_makeTransform:position"
+                ],
+                [
+                    "right_eulerToQuat:outputQuat",
+                    "right_makeTransform:rotation"
+                ],
+                [
+                    "left_makeTransform:transform",
+                    "LeftAnkle_setTransformJoint:inputTransform"
+                ],
+                [
+                    "right_makeTransform:transform",
+                    "RightAnkle_setTransformJoint:inputTransform"
+                ],
+                [
+                    "inPose_clone_0:output2",
+                    "LeftAnkle_setTransformJoint:inputPose"
+                ],
+                [
+                    "LeftAnkle_setTransformJoint:outputPose",
+                    "LeftAnkle_setTransformJointoutputPose_clone_0:input"
+                ],
+                [
+                    "LeftAnkle_setTransformJointoutputPose_clone_0:output1",
+                    "LeftAnkle_setTransformJointoutputPose_clone_1:input"
+                ],
+                [
+                    "LeftAnkle_setTransformJointoutputPose_clone_1:output1",
+                    "LeftAnkle_setTransformJointoutputPose_clone_2:input"
+                ],
+                [
+                    "LeftAnkle_setTransformJointoutputPose_clone_0:output2",
+                    "RightAnkle_setTransformJoint:inputPose"
+                ],
+                [
+                    "LeftAnkle_setTransformJointoutputPose_clone_1:output2",
+                    "leftFootMask:inputPose"
+                ],
+                [
+                    "RightAnkle_setTransformJoint:outputPose",
+                    "rightFootMask:inputPose"
+                ],
+                [
+                    "inPose_clone_2:output2",
+                    "lockFootLayers.layers[base]:inputPose"
+                ],
+                [
+                    "leftFootMask:outputPose",
+                    "lockFootLayers.layers[lockedLeft]:inputPose"
+                ],
+                [
+                    "lockLeftFoot",
+                    "lockFootLayers.layers[lockedLeft]:inputWeight"
+                ],
+                [
+                    "rightFootMask:outputPose",
+                    "lockFootLayers.layers[lockedRight]:inputPose"
+                ],
+                [
+                    "lockRightFoot",
+                    "lockFootLayers.layers[lockedRight]:inputWeight"
+                ],
+                [
+                    "lockFootLayers",
+                    ":pose"
+                ]
+            ]
+        }
+    ]
+}

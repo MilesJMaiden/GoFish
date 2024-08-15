@@ -1,0 +1,308 @@
+{
+  "events": [
+    {
+      "name": "onClipPlaybackSpeed",
+      "type": "float"
+    },
+    {
+      "name": "NextMood",
+      "type": "void"
+    },
+    {
+      "name": "PrevMood",
+      "type": "void"
+    },
+    {
+      "name": "clipViewer_setAnimName",
+      "type": "string"
+    },
+    {
+      "name": "clipViewer_setAnimPhase",
+      "type": "float"
+    },
+    {
+      "name": "clipViewer_setAnimRate",
+      "type": "float"
+    },
+    {
+      "name": "JumpStart",
+      "type": "void"
+    },
+    {
+      "name": "JumpEnd",
+      "type": "void"
+    },
+    {
+      "name": "NextState",
+      "type": "void"
+    },
+    {
+      "name": "setMood",
+      "type": "string"
+    },
+    {
+      "name": "events_setBlend",
+      "type": "float"
+    },
+    {
+      "name": "angle",
+      "type": "float"
+    },
+    {
+      "name": "velocity",
+      "type": "float"
+    },
+    {
+      "name": "trackingBlendUpper",
+      "type": "float"
+    },
+    {
+      "name": "walkCycleRotationOffset",
+      "type": "float"
+    },
+    {
+      "name": "trackingBlendLeftArm",
+      "type": "float"
+    },
+    {
+      "name": "trackingBlendRightArm",
+      "type": "float"
+    },
+    {
+      "name": "walk_l",
+      "type": "void"
+    },
+    {
+      "name": "walk_r",
+      "type": "void"
+    },
+    {
+      "name": "jog_l",
+      "type": "void"
+    },
+    {
+      "name": "jog_r",
+      "type": "void"
+    },
+    {
+      "name": "default_legs_setAngle",
+      "type": "float"
+    },
+    {
+      "name": "default_legs_setVelocity",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_SpawnIn",
+      "type": "void"
+    },
+    {
+      "name": "locomotion_prototype_SpawnOut",
+      "type": "void"
+    },
+    {
+      "name": "locomotion_prototype_StandUp",
+      "type": "void"
+    },
+    {
+      "name": "locomotion_prototype_SitDown",
+      "type": "void"
+    },
+    {
+      "name": "locomotion_prototype_JumpStart",
+      "type": "void"
+    },
+    {
+      "name": "locomotion_prototype_JumpEnd",
+      "type": "void"
+    },
+    {
+      "name": "locomotion_prototype_BlendRootTransform",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_WeightShiftBiasX",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_WeightShiftBiasZ",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_MovementVelocity",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_MovementAngle",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_Crouch",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_TrackingUpperBlend",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_HipXOffset",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_HipZOffset",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RootRotationOffset",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RootTranslationOffset",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_EyeGazeHorizontalOffset",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_EyeGazeVerticalOffset",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LockLeftFoot",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LockRightFoot",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LeftFootTX",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LeftFootTY",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LeftFootTZ",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LeftFootRX",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LeftFootRY",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LeftFootRZ",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RightFootTX",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RightFootTY",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RightFootTZ",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RightFootRX",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RightFootRY",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RightFootRZ",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_TargetLeftStepAngle",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_TargetRightStepAngle",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LeftStepBlend",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_RightStepBlend",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_FootStepInputPhase",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_HipBias",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_BlendHandFix",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_BodyOffsetZ",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_TrackingAdditiveOverrideX",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_TrackingAdditiveOverrideY",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_TrackingAdditiveOverrideZ",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_CyclePeriod",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_ArmLength",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_LimitArmDistance",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_TrackingYOffset",
+      "type": "float"
+    },
+    {
+      "name": "locomotion_prototype_ResetWalkCycle",
+      "type": "bool"
+    },
+    {
+      "name": "locomotion_prototype_leftstep",
+      "type": "void"
+    },
+    {
+      "name": "locomotion_prototype_rightstep",
+      "type": "void"
+    },
+    {
+      "name": "disableFaceMood",
+      "type": "bool"
+    },
+    {
+      "name": "setEyesClosedAmount",
+      "type": "float"
+    }
+  ]
+}

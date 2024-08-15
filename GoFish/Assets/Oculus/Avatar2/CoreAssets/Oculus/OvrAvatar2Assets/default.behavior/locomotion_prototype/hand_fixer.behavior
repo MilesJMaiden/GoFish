@@ -1,0 +1,635 @@
+{
+    "graphs": [
+        {
+            "name": "main",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "inPose3P",
+                    "defaultLink": "locomotion_prototype/hip_averager:pose"
+                },
+                {
+                    "type": "pose",
+                    "name": "tracking",
+                    "defaultLink": "locomotion_prototype/tracking_cloner:tracking4"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "BlendHandFix",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_BlendHandFix"
+                },
+                {
+                    "name": "TrackingYOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TrackingYOffset"
+                },
+                {
+                    "name": "BodyOffsetZ",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_BodyOffsetZ"
+                },
+                {
+                    "name": "inPose3P_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose3P_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose3P_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose3P_clone_3",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose3P_clone_4",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose3P_clone_5",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose3P_clone_6",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "inPose3P_clone_7",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_0output2_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_0output2_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_0output2_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_0output2_clone_3",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "tracking_clone_0output2_clone_4",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "LeftHand_GetTransform_Tracking",
+                    "type": "getJointTransform",
+                    "jointName": "RTRig_L_Wrist",
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "breakTrackingLeftWrist",
+                    "type": "getComponentOfTransform"
+                },
+                {
+                    "name": "RightHand_GetTransform_Tracking",
+                    "type": "getJointTransform",
+                    "jointName": "RTRig_R_Wrist",
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "breakTrackingRightWrist",
+                    "type": "getComponentOfTransform"
+                },
+                {
+                    "name": "LeftHand_GetTransform_Pose",
+                    "type": "getJointTransform",
+                    "jointName": "RTRig_L_Wrist",
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "breakPoseLeftWrist",
+                    "type": "getComponentOfTransform"
+                },
+                {
+                    "name": "RightHand_GetTransform_Pose",
+                    "type": "getJointTransform",
+                    "jointName": "RTRig_R_Wrist",
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "breakPoseRightWrist",
+                    "type": "getComponentOfTransform"
+                },
+                {
+                    "name": "LeftConstVecXBreakTrackingLeftVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorXBreakTrackingLeftVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecXBreakTrackingLeftVector, vec3(1.0, 0.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecYBreakTrackingLeftVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorYBreakTrackingLeftVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecYBreakTrackingLeftVector, vec3(0.0, 1.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecZBreakTrackingLeftVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorZBreakTrackingLeftVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecZBreakTrackingLeftVector, vec3(0.0, 0.0, 1.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecXBreakPoseLeftVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorXBreakPoseLeftVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecXBreakPoseLeftVector, vec3(1.0, 0.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecYBreakPoseLeftVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorYBreakPoseLeftVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecYBreakPoseLeftVector, vec3(0.0, 1.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecZBreakPoseLeftVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorZBreakPoseLeftVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecZBreakPoseLeftVector, vec3(0.0, 0.0, 1.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecXBreakTrackingRightVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorXBreakTrackingRightVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecXBreakTrackingRightVector, vec3(1.0, 0.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecYBreakTrackingRightVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorYBreakTrackingRightVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecYBreakTrackingRightVector, vec3(0.0, 1.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecZBreakTrackingRightVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorZBreakTrackingRightVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecZBreakTrackingRightVector, vec3(0.0, 0.0, 1.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecXBreakPoseRightVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorXBreakPoseRightVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecXBreakPoseRightVector, vec3(1.0, 0.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecYBreakPoseRightVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorYBreakPoseRightVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecYBreakPoseRightVector, vec3(0.0, 1.0, 0.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstVecZBreakPoseRightVector",
+                    "type": "constVec3",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                {
+                    "name": "BreakLeftVectorZBreakPoseRightVector",
+                    "type": "mathExpression",
+                    "expression": "dot(LeftConstVecZBreakPoseRightVector, vec3(0.0, 0.0, 1.0))",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "LeftConstPoseY",
+                    "type": "constFloat"
+                },
+                {
+                    "name": "LeftStaticOffset",
+                    "type": "constFloat"
+                },
+                {
+                    "name": "LeftMath",
+                    "type": "mathExpression",
+                    "expression": "LeftConstPoseY + LeftStaticOffset"
+                },
+                {
+                    "name": "RightConstPoseY",
+                    "type": "constFloat"
+                },
+                {
+                    "name": "RightStaticOffset",
+                    "type": "constFloat"
+                },
+                {
+                    "name": "RightMath",
+                    "type": "mathExpression",
+                    "expression": "RightConstPoseY + RightStaticOffset"
+                },
+                {
+                    "name": "LeftWristVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "makeLeftHandTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "RightWristVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "makeRightHandTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "LeftWrist_SetJointTransform",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_L_Wrist",
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "RightWrist_SetJointTransform",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_R_Wrist",
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "HandFixBlend_oneDimensionBlendspace",
+                    "type": "oneDimensionalBlendSpace",
+                    "poseInputs": [
+                        {
+                            "axisValue": 0.0
+                        },
+                        {
+                            "axisValue": 1.0
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                [
+                    ":inPose3P",
+                    "inPose3P_clone_0:input"
+                ],
+                [
+                    "inPose3P_clone_0:output1",
+                    "inPose3P_clone_1:input"
+                ],
+                [
+                    "inPose3P_clone_1:output1",
+                    "inPose3P_clone_2:input"
+                ],
+                [
+                    "inPose3P_clone_2:output1",
+                    "inPose3P_clone_3:input"
+                ],
+                [
+                    "inPose3P_clone_3:output1",
+                    "inPose3P_clone_4:input"
+                ],
+                [
+                    "inPose3P_clone_4:output1",
+                    "inPose3P_clone_5:input"
+                ],
+                [
+                    "inPose3P_clone_5:output1",
+                    "inPose3P_clone_6:input"
+                ],
+                [
+                    "inPose3P_clone_6:output1",
+                    "inPose3P_clone_7:input"
+                ],
+                [
+                    ":tracking",
+                    "tracking_clone_0:input"
+                ],
+                [
+                    "tracking_clone_0:output1",
+                    "tracking_clone_1:input"
+                ],
+                [
+                    "tracking_clone_1:output1",
+                    "tracking_clone_2:input"
+                ],
+                [
+                    "tracking_clone_0:output2",
+                    "tracking_clone_0output2_clone_0:input"
+                ],
+                [
+                    "tracking_clone_0output2_clone_0:output1",
+                    "tracking_clone_0output2_clone_1:input"
+                ],
+                [
+                    "tracking_clone_0output2_clone_1:output1",
+                    "tracking_clone_0output2_clone_2:input"
+                ],
+                [
+                    "tracking_clone_0output2_clone_2:output1",
+                    "tracking_clone_0output2_clone_3:input"
+                ],
+                [
+                    "tracking_clone_0output2_clone_3:output1",
+                    "tracking_clone_0output2_clone_4:input"
+                ],
+                [
+                    "tracking_clone_0output2_clone_0:output2",
+                    "LeftHand_GetTransform_Tracking:inputPose"
+                ],
+                [
+                    "LeftHand_GetTransform_Tracking:outputTransform",
+                    "breakTrackingLeftWrist:transform"
+                ],
+                [
+                    "tracking_clone_0output2_clone_1:output2",
+                    "RightHand_GetTransform_Tracking:inputPose"
+                ],
+                [
+                    "RightHand_GetTransform_Tracking:outputTransform",
+                    "breakTrackingRightWrist:transform"
+                ],
+                [
+                    "inPose3P_clone_2:output2",
+                    "LeftHand_GetTransform_Pose:inputPose"
+                ],
+                [
+                    "LeftHand_GetTransform_Pose:outputTransform",
+                    "breakPoseLeftWrist:transform"
+                ],
+                [
+                    "inPose3P_clone_3:output2",
+                    "RightHand_GetTransform_Pose:inputPose"
+                ],
+                [
+                    "RightHand_GetTransform_Pose:outputTransform",
+                    "breakPoseRightWrist:transform"
+                ],
+                [
+                    "breakTrackingLeftWrist:position",
+                    "BreakLeftVectorXBreakTrackingLeftVector:var[LeftConstVecXBreakTrackingLeftVector]"
+                ],
+                [
+                    "breakTrackingLeftWrist:position",
+                    "BreakLeftVectorYBreakTrackingLeftVector:var[LeftConstVecYBreakTrackingLeftVector]"
+                ],
+                [
+                    "breakTrackingLeftWrist:position",
+                    "BreakLeftVectorZBreakTrackingLeftVector:var[LeftConstVecZBreakTrackingLeftVector]"
+                ],
+                [
+                    "breakPoseLeftWrist:position",
+                    "BreakLeftVectorXBreakPoseLeftVector:var[LeftConstVecXBreakPoseLeftVector]"
+                ],
+                [
+                    "breakPoseLeftWrist:position",
+                    "BreakLeftVectorYBreakPoseLeftVector:var[LeftConstVecYBreakPoseLeftVector]"
+                ],
+                [
+                    "breakPoseLeftWrist:position",
+                    "BreakLeftVectorZBreakPoseLeftVector:var[LeftConstVecZBreakPoseLeftVector]"
+                ],
+                [
+                    "breakTrackingRightWrist:position",
+                    "BreakLeftVectorXBreakTrackingRightVector:var[LeftConstVecXBreakTrackingRightVector]"
+                ],
+                [
+                    "breakTrackingRightWrist:position",
+                    "BreakLeftVectorYBreakTrackingRightVector:var[LeftConstVecYBreakTrackingRightVector]"
+                ],
+                [
+                    "breakTrackingRightWrist:position",
+                    "BreakLeftVectorZBreakTrackingRightVector:var[LeftConstVecZBreakTrackingRightVector]"
+                ],
+                [
+                    "breakPoseRightWrist:position",
+                    "BreakLeftVectorXBreakPoseRightVector:var[LeftConstVecXBreakPoseRightVector]"
+                ],
+                [
+                    "breakPoseRightWrist:position",
+                    "BreakLeftVectorYBreakPoseRightVector:var[LeftConstVecYBreakPoseRightVector]"
+                ],
+                [
+                    "breakPoseRightWrist:position",
+                    "BreakLeftVectorZBreakPoseRightVector:var[LeftConstVecZBreakPoseRightVector]"
+                ],
+                [
+                    "BreakLeftVectorYBreakPoseLeftVector:value",
+                    "LeftMath:var[LeftConstPoseY]"
+                ],
+                [
+                    "TrackingYOffset",
+                    "LeftMath:var[LeftStaticOffset]"
+                ],
+                [
+                    "BreakLeftVectorYBreakPoseRightVector:value",
+                    "RightMath:var[RightConstPoseY]"
+                ],
+                [
+                    "TrackingYOffset",
+                    "RightMath:var[RightStaticOffset]"
+                ],
+                [
+                    "BreakLeftVectorXBreakTrackingLeftVector:value",
+                    "LeftWristVec3:inputX"
+                ],
+                [
+                    "LeftMath:value",
+                    "LeftWristVec3:inputY"
+                ],
+                [
+                    "BreakLeftVectorZBreakTrackingLeftVector:value",
+                    "LeftWristVec3:inputZ"
+                ],
+                [
+                    "LeftWristVec3:outputVec3",
+                    "makeLeftHandTransform:position"
+                ],
+                [
+                    "breakTrackingLeftWrist:rotation",
+                    "makeLeftHandTransform:rotation"
+                ],
+                [
+                    "breakTrackingLeftWrist:scale",
+                    "makeLeftHandTransform:scale"
+                ],
+                [
+                    "BreakLeftVectorXBreakTrackingRightVector:value",
+                    "RightWristVec3:inputX"
+                ],
+                [
+                    "RightMath:value",
+                    "RightWristVec3:inputY"
+                ],
+                [
+                    "BreakLeftVectorZBreakTrackingRightVector:value",
+                    "RightWristVec3:inputZ"
+                ],
+                [
+                    "RightWristVec3:outputVec3",
+                    "makeRightHandTransform:position"
+                ],
+                [
+                    "breakTrackingRightWrist:rotation",
+                    "makeRightHandTransform:rotation"
+                ],
+                [
+                    "breakTrackingRightWrist:scale",
+                    "makeRightHandTransform:scale"
+                ],
+                [
+                    "inPose3P_clone_1:output2",
+                    "LeftWrist_SetJointTransform:inputPose"
+                ],
+                [
+                    "makeLeftHandTransform:transform",
+                    "LeftWrist_SetJointTransform:inputTransform"
+                ],
+                [
+                    "LeftWrist_SetJointTransform:outputPose",
+                    "RightWrist_SetJointTransform:inputPose"
+                ],
+                [
+                    "makeRightHandTransform:transform",
+                    "RightWrist_SetJointTransform:inputTransform"
+                ],
+                [
+                    "inPose3P_clone_7:output2",
+                    "HandFixBlend_oneDimensionBlendspace.poseInputs[0]:inputPose"
+                ],
+                [
+                    "RightWrist_SetJointTransform:outputPose",
+                    "HandFixBlend_oneDimensionBlendspace.poseInputs[1]:inputPose"
+                ],
+                [
+                    "BlendHandFix",
+                    "HandFixBlend_oneDimensionBlendspace:inputAxis"
+                ],
+                [
+                    "HandFixBlend_oneDimensionBlendspace:outputPose",
+                    ":pose"
+                ]
+            ]
+        }
+    ]
+}

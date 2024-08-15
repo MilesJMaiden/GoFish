@@ -1,0 +1,41 @@
+{
+    "graphs": [
+        {
+            "name": "main",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "inTrackingPose",
+                    "defaultLink": "locomotion_prototype/tracking_cloner:tracking1"
+                },
+                {
+                    "type": "pose",
+                    "name": "inPose",
+                    "defaultLink": "locomotion_prototype/arm_stretch_limit:pose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                },
+                {
+                    "type": "pose",
+                    "name": "pose3P"
+                }
+            ],
+            "nodes": [],
+            "links": [
+                [
+                    ":inTrackingPose",
+                    ":pose"
+                ],
+                [
+                    ":inPose",
+                    ":pose3P"
+                ]
+            ]
+        }
+    ]
+}

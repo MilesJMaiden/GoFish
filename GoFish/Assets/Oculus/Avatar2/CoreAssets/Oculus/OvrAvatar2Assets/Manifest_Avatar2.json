@@ -1,0 +1,47 @@
+{
+  "avatar_system_config": {
+    "default_model": {
+      "zip_uri": "zip://models/blank.glb.zst"
+    },
+    "controller_rift": {
+      "zip_uri": "zip://models/props/controllers/controller_rift.glb.zst",
+      "left_src_nodes": "left_touch_controller_world,left_controller_rig_grp,left_geometry_null,left_touch_mesh",
+      "right_src_nodes": "right_touch_controller_world,right_controller_rig_grp,right_geometry_null,right_touch_mesh",
+      "left_dst_node": "LeftHandTracker_tgt",
+      "right_dst_node": "RightHandTracker_tgt"
+    },
+    "controller_touch": {
+      "zip_uri": "zip://models/props/controllers/controller_touch.glb.zst",
+      "left_src_nodes": "left_monterey_controller_rig,left_monterey_controller_world,l_controller_ply",
+      "right_src_nodes": "right_monterey_controller_rig,right_monterey_controller_world,r_controller_ply",
+      "left_dst_node": "LeftHandTracker_tgt",
+      "right_dst_node": "RightHandTracker_tgt"
+    },
+    "controller_rainier": {
+      "zip_uri": "zip://models/props/controllers/controller_rainier.glb.zst",
+      "left_src_nodes": "left_oculus_controller_rig,left_oculus_controller_world,oculus_controller_l_mesh,left_laser_begin,leftPlanePivot",
+      "right_src_nodes": "right_oculus_controller_rig,right_oculus_controller_world,oculus_controller_r_mesh,right_laser_begin,rightPlanePivot",
+      "left_dst_node": "LeftHandTracker_tgt",
+      "right_dst_node": "RightHandTracker_tgt"
+    },
+    "controller_olympus": {
+      "zip_uri": "zip://models/props/controllers/controller_olympus.glb.zst",
+      "left_src_nodes": "left_oculus_controller_rig,left_oculus_controller_world,oculus_controller_l_mesh,left_laser_begin,leftPlanePivot",
+      "right_src_nodes": "right_oculus_controller_rig,right_oculus_controller_world,oculus_controller_r_mesh,right_laser_begin,rightPlanePivot",
+      "left_dst_node": "LeftHandTracker_tgt",
+      "right_dst_node": "RightHandTracker_tgt"
+    },
+    "default_anim_package": {
+      "zip_uri": "zip://chr00000CharS00.anim.zip"
+    },
+    "default_behavior_package": {
+      "zip_uri": "zip://default.behavior.zip"
+    },
+    "default_rtrig_package": {
+      "zip_uri": "zip://chr00000CharS00.rig.zip"
+    },
+    "anim_mood_sm": {
+      "zip_uri": "zip://animStateMachine/mood.animstatemachine"
+    }
+  }
+}

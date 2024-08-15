@@ -1,0 +1,77 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "inputs": [
+      ],
+      "nodes": [
+        {
+          "type": "sawtoothOscillator",
+          "name": "clipPhaseOscillator",
+          "period": 1.0
+        },
+        {
+          "type": "getDynamicStoreValueFloat",
+          "name": "blendInput",
+          "key": "events_setBlend"
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "sampleWalk",
+          "clip": "loco_walk_fwd_master",
+          "events": [
+            {
+              "name": "walk_l",
+              "frame": 0.0
+            },
+            {
+              "name": "walk_r",
+              "frame": 16.0
+            }
+          ]
+        },
+        {
+          "type": "sampleAnimClip",
+          "name": "sampleJog",
+          "clip": "loco_jog_fwd_master",
+          "events": [
+            {
+              "name": "jog_l",
+              "frame": 0.0
+            },
+            {
+              "name": "jog_r",
+              "frame": 13.0
+            }
+          ]
+        },
+        {
+          "type": "oneDimensionalBlendSpace",
+          "name": "walkJogBlendSpace",
+          "poseInputs": [
+            {
+              "axisValue": 0.0
+            },
+            {
+              "axisValue": 1.0
+            }
+          ]
+        }
+      ],
+      "links": [
+        [ "clipPhaseOscillator:output", "sampleWalk:inputPhase" ],
+        [ "clipPhaseOscillator:output", "sampleJog:inputPhase" ],
+        [ "sampleWalk:outputPose", "walkJogBlendSpace.poseInputs[0]:inputPose" ],
+        [ "sampleJog:outputPose", "walkJogBlendSpace.poseInputs[1]:inputPose" ],
+        [ "blendInput:outputValue", "walkJogBlendSpace:inputAxis" ],
+        [ "walkJogBlendSpace:outputPose", ":pose" ]
+      ]
+    }
+  ]
+}

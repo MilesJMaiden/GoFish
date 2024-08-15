@@ -1,0 +1,312 @@
+{
+    "graphs": [
+        {
+            "name": "main",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "idlePose",
+                    "defaultLink": "locomotion_prototype/weightshift:pose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "idlePose_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "idlePose_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "idlePose_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "targetRightStepAngleInput",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TargetRightStepAngle"
+                },
+                {
+                    "name": "targetLeftStepAngleInput",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TargetLeftStepAngle"
+                },
+                {
+                    "name": "leftStepBlendInput",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_LeftStepBlend"
+                },
+                {
+                    "name": "rightStepBlendInput",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RightStepBlend"
+                },
+                {
+                    "name": "inputPhase",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_FootStepInputPhase"
+                },
+                {
+                    "name": "turnInPlace_L_0_2Steps",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_0_left_2steps_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_R_0_2Steps",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_0_right_2steps_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_L_45_2Steps",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_45_left_2steps_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_L_90_2Steps",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_90_left_2steps_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_R_45_2Steps",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_45_right_2steps_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_R_90_2Steps",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_90_right_2steps_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_L_90",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_90_left_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_L_180",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_180_left_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_R_90",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_90_right_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnInPlace_R_180",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_neutral_turn_180_right_anim",
+                    "looping": false
+                },
+                {
+                    "name": "turnLeftBlendSpace",
+                    "type": "oneDimensionalBlendSpace",
+                    "poseInputs": [
+                        {
+                            "axisValue": 0.0
+                        },
+                        {
+                            "axisValue": 45.0
+                        },
+                        {
+                            "axisValue": 90.0
+                        },
+                        {
+                            "axisValue": 90.0001
+                        },
+                        {
+                            "axisValue": 180.0
+                        }
+                    ]
+                },
+                {
+                    "name": "turnRightBlendSpace",
+                    "type": "oneDimensionalBlendSpace",
+                    "poseInputs": [
+                        {
+                            "axisValue": 0.0
+                        },
+                        {
+                            "axisValue": 45.0
+                        },
+                        {
+                            "axisValue": 90.0
+                        },
+                        {
+                            "axisValue": 90.0001
+                        },
+                        {
+                            "axisValue": 180.0
+                        }
+                    ]
+                },
+                {
+                    "name": "constFloat1",
+                    "type": "constFloat",
+                    "value": 1.0
+                },
+                {
+                    "name": "directionLayers",
+                    "type": "layerPoses",
+                    "layers": [
+                        {
+                            "name": "left"
+                        },
+                        {
+                            "name": "right"
+                        },
+                        {
+                            "name": "idle"
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                [
+                    ":idlePose",
+                    "idlePose_clone_0:input"
+                ],
+                [
+                    "idlePose_clone_0:output1",
+                    "idlePose_clone_1:input"
+                ],
+                [
+                    "idlePose_clone_1:output1",
+                    "idlePose_clone_2:input"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_L_0_2Steps:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_R_0_2Steps:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_L_45_2Steps:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_R_45_2Steps:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_L_90_2Steps:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_R_90_2Steps:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_L_90:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_L_180:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_R_90:inputPhase"
+                ],
+                [
+                    "inputPhase",
+                    "turnInPlace_R_180:inputPhase"
+                ],
+                [
+                    "turnInPlace_L_0_2Steps:outputPose",
+                    "turnLeftBlendSpace.poseInputs[0]:inputPose"
+                ],
+                [
+                    "turnInPlace_L_45_2Steps:outputPose",
+                    "turnLeftBlendSpace.poseInputs[1]:inputPose"
+                ],
+                [
+                    "turnInPlace_L_90_2Steps:outputPose",
+                    "turnLeftBlendSpace.poseInputs[2]:inputPose"
+                ],
+                [
+                    "turnInPlace_L_90:outputPose",
+                    "turnLeftBlendSpace.poseInputs[3]:inputPose"
+                ],
+                [
+                    "turnInPlace_L_180:outputPose",
+                    "turnLeftBlendSpace.poseInputs[4]:inputPose"
+                ],
+                [
+                    "turnInPlace_R_0_2Steps:outputPose",
+                    "turnRightBlendSpace.poseInputs[0]:inputPose"
+                ],
+                [
+                    "turnInPlace_R_45_2Steps:outputPose",
+                    "turnRightBlendSpace.poseInputs[1]:inputPose"
+                ],
+                [
+                    "turnInPlace_R_90_2Steps:outputPose",
+                    "turnRightBlendSpace.poseInputs[2]:inputPose"
+                ],
+                [
+                    "turnInPlace_R_90:outputPose",
+                    "turnRightBlendSpace.poseInputs[3]:inputPose"
+                ],
+                [
+                    "turnInPlace_R_180:outputPose",
+                    "turnRightBlendSpace.poseInputs[4]:inputPose"
+                ],
+                [
+                    "targetLeftStepAngleInput",
+                    "turnLeftBlendSpace:inputAxis"
+                ],
+                [
+                    "targetRightStepAngleInput",
+                    "turnRightBlendSpace:inputAxis"
+                ],
+                [
+                    "idlePose_clone_0:output2",
+                    "directionLayers.layers[idle]:inputPose"
+                ],
+                [
+                    "turnLeftBlendSpace:outputPose",
+                    "directionLayers.layers[left]:inputPose"
+                ],
+                [
+                    "turnRightBlendSpace:outputPose",
+                    "directionLayers.layers[right]:inputPose"
+                ],
+                [
+                    "constFloat1:outputValue",
+                    "directionLayers.layers[idle]:inputWeight"
+                ],
+                [
+                    "leftStepBlendInput",
+                    "directionLayers.layers[left]:inputWeight"
+                ],
+                [
+                    "rightStepBlendInput",
+                    "directionLayers.layers[right]:inputWeight"
+                ],
+                [
+                    "directionLayers:outputPose",
+                    ":pose"
+                ]
+            ]
+        }
+    ]
+}

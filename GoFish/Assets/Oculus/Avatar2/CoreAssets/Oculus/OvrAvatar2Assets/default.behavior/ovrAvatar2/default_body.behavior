@@ -1,0 +1,27 @@
+{
+  "graphs": [
+    {
+      "type": "dataflow",
+      "outputs": [
+        {
+          "type": "pose",
+          "name": "pose"
+        }
+      ],
+      "nodes": [
+        {
+          "type": "mixer_retarget",
+          "name": "mixer_retarget"
+        },
+        {
+          "type": "mixer_skeletalContraintSolver",
+          "name": "mixer_skeletalContraintSolver"
+        }
+      ],
+      "links": [
+        [ "mixer_retarget:output", "mixer_skeletalContraintSolver:input" ],
+        [ "mixer_skeletalContraintSolver:output", ":pose" ]
+      ]
+    }
+  ]
+}

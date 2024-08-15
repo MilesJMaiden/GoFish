@@ -1,0 +1,88 @@
+{
+  "initialState": "Mood",
+  "states": [
+    {
+      "name": "Intro",
+      "tree": {
+        "type": "clip",
+        "animName": "expression_blend",
+        "animNameParameter": "introAnim"
+      },
+      "phaseAnimNameParameter": "introAnim",
+      "transitions": [
+        {
+          "name": "auto",
+          "destState": "Mood",
+          "blendTime": 0.25,
+          "conditions": [
+            {
+              "parameterName": "phase",
+              "minValue": 0.0
+            }
+          ]
+        },
+        {
+          "name": "changeMood",
+          "destState": "Intro",
+          "blendTime": 0.0,
+          "conditions": [
+            {
+              "parameterName": "useIntroAnim",
+              "minValue": 0.5
+            }
+          ]
+        },
+        {
+          "name": "changeMood",
+          "destState": "Mood",
+          "blendTime": 0.2,
+          "conditions": [
+            {
+              "parameterName": "useIntroAnim",
+              "maxValue": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mood",
+      "tree": {
+        "type": "blend",
+        "left": {
+          "type": "clip",
+          "animNameParameter": "moodAnim"
+        },
+        "right": {
+          "type": "clip",
+          "animNameParameter": "moodSpeakingAnim"
+        },
+        "blendWeightParameter": "speaking"
+      },
+      "transitions": [
+        {
+          "name": "changeMood",
+          "destState": "Intro",
+          "blendTime": 0.2,
+          "conditions": [
+            {
+              "parameterName": "useIntroAnim",
+              "minValue": 0.5
+            }
+          ]
+        },
+        {
+          "name": "changeMood",
+          "destState": "Mood",
+          "blendTime": 0.2,
+          "conditions": [
+            {
+              "parameterName": "useIntroAnim",
+              "maxValue": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

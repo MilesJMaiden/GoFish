@@ -1,0 +1,1309 @@
+{
+    "graphs": [
+        {
+            "name": "LocoGraph",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "trackingPose_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "trackingPose_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "trackingPose_clone_2",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "trackingPose_clone_3",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "trackingPose_clone_4",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "trackingBlendUpperInput",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TrackingUpperBlend"
+                },
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "AnimConstFloat0",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "featherBlend",
+                    "type": "featherBlend",
+                    "blendPoses": [
+                        {
+                            "depth": 1,
+                            "blendJoint": "RTRig_SpineStart",
+                            "blendSpace": "character"
+                        }
+                    ]
+                },
+                {
+                    "name": "fixMask",
+                    "type": "mask",
+                    "jointNames": [
+                        "RTRig_Pelvis"
+                    ]
+                },
+                {
+                    "name": "fixLayer",
+                    "type": "layerPoses",
+                    "layers": [
+                        {
+                            "name": "add"
+                        },
+                        {
+                            "name": "base"
+                        }
+                    ]
+                },
+                {
+                    "name": "hipXOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_HipXOffset"
+                },
+                {
+                    "name": "hipZOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_HipZOffset"
+                },
+                {
+                    "name": "hipXOffsethNeg",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "hipZOffsethNeg",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "crouch",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_Crouch"
+                },
+                {
+                    "name": "crouchNeg",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "crouchNegMath",
+                    "type": "mathExpression",
+                    "expression": "crouchNeg * -1",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "HipXNegMath",
+                    "type": "mathExpression",
+                    "expression": "hipXOffsethNeg * -1",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "HipZNegMath",
+                    "type": "mathExpression",
+                    "expression": "hipZOffsethNeg * -1",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "makeVec3Neg",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "LfootRotOverride",
+                    "type": "constQuat",
+                    "value": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "LfootScaleOverride",
+                    "type": "constVec3",
+                    "value": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "hipTransformOffset",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "footTransformOffset",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "setHipJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Pelvis",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "setLFootJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_L_Ankle",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "character"
+                },
+                {
+                    "name": "setRFootJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_R_Ankle",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "character"
+                }
+            ],
+            "links": [
+                [
+                    ":trackingPose",
+                    "trackingPose_clone_0:input"
+                ],
+                [
+                    "trackingPose_clone_0:output1",
+                    "trackingPose_clone_1:input"
+                ],
+                [
+                    "trackingPose_clone_1:output1",
+                    "trackingPose_clone_2:input"
+                ],
+                [
+                    "trackingPose_clone_2:output1",
+                    "trackingPose_clone_3:input"
+                ],
+                [
+                    "trackingPose_clone_3:output1",
+                    "trackingPose_clone_4:input"
+                ],
+                [
+                    ":cyclesPose",
+                    "featherBlend:inputPose"
+                ],
+                [
+                    "trackingPose_clone_1:output2",
+                    "featherBlend.blendPoses[0]:inputPose"
+                ],
+                [
+                    "trackingBlendUpperInput",
+                    "featherBlend.blendPoses[0]:jointBaseWeight"
+                ],
+                [
+                    "trackingBlendUpperInput",
+                    "featherBlend.blendPoses[0]:floatWeight"
+                ],
+                [
+                    "AnimConstFloat0:outputValue",
+                    "featherBlend.blendPoses[0]:eventWeight"
+                ],
+                [
+                    "crouch",
+                    "crouchNegMath:var[crouchNeg]"
+                ],
+                [
+                    "hipXOffset",
+                    "HipXNegMath:var[hipXOffsethNeg]"
+                ],
+                [
+                    "hipZOffset",
+                    "HipZNegMath:var[hipZOffsethNeg]"
+                ],
+                [
+                    "crouch",
+                    "makeVec3:inputY"
+                ],
+                [
+                    "crouchNegMath:value",
+                    "makeVec3Neg:inputY"
+                ],
+                [
+                    "hipXOffset",
+                    "makeVec3:inputX"
+                ],
+                [
+                    "HipXNegMath:value",
+                    "makeVec3Neg:inputX"
+                ],
+                [
+                    "hipZOffset",
+                    "makeVec3:inputZ"
+                ],
+                [
+                    "HipZNegMath:value",
+                    "makeVec3Neg:inputZ"
+                ],
+                [
+                    "featherBlend:outputPose",
+                    "setHipJoint:inputPose"
+                ],
+                [
+                    "makeVec3Neg:outputVec3",
+                    "hipTransformOffset:position"
+                ],
+                [
+                    "LfootRotOverride:outputValue",
+                    "hipTransformOffset:rotation"
+                ],
+                [
+                    "LfootScaleOverride:outputValue",
+                    "hipTransformOffset:scale"
+                ],
+                [
+                    "hipTransformOffset:transform",
+                    "setHipJoint:inputTransform"
+                ],
+                [
+                    "setHipJoint:outputPose",
+                    "setLFootJoint:inputPose"
+                ],
+                [
+                    "makeVec3:outputVec3",
+                    "footTransformOffset:position"
+                ],
+                [
+                    "LfootRotOverride:outputValue",
+                    "footTransformOffset:rotation"
+                ],
+                [
+                    "LfootScaleOverride:outputValue",
+                    "footTransformOffset:scale"
+                ],
+                [
+                    "footTransformOffset:transform",
+                    "setLFootJoint:inputTransform"
+                ],
+                [
+                    "setLFootJoint:outputPose",
+                    "setRFootJoint:inputPose"
+                ],
+                [
+                    "makeVec3:outputVec3",
+                    "footTransformOffset:position"
+                ],
+                [
+                    "LfootRotOverride:outputValue",
+                    "footTransformOffset:rotation"
+                ],
+                [
+                    "LfootScaleOverride:outputValue",
+                    "footTransformOffset:scale"
+                ],
+                [
+                    "footTransformOffset:transform",
+                    "setRFootJoint:inputTransform"
+                ],
+                [
+                    "setRFootJoint:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "type": "stateMachine",
+            "name": "LocomotionStateMachine",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "startingState": "Cycles",
+            "states": [
+                {
+                    "name": "Cycles",
+                    "graph": "LocoGraph"
+                },
+                {
+                    "name": "JumpStartState",
+                    "graph": "jumpStartDataFlow"
+                },
+                {
+                    "name": "JumpMidState",
+                    "graph": "jumpMidDataFlow"
+                },
+                {
+                    "name": "JumpEndState",
+                    "graph": "jumpEndDataFlow"
+                },
+                {
+                    "name": "SpawnInState",
+                    "graph": "spawnInDataFlow"
+                },
+                {
+                    "name": "SpawnOutState",
+                    "graph": "spawnOutDataFlow"
+                },
+                {
+                    "name": "SitLoop",
+                    "graph": "sittingLoopDataFlow"
+                },
+                {
+                    "name": "SitDown",
+                    "graph": "sitDownDataFlow"
+                },
+                {
+                    "name": "StandUp",
+                    "graph": "standUpDataFlow"
+                }
+            ],
+            "transitions": [
+                {
+                    "from": "Cycles",
+                    "to": "JumpStartState",
+                    "event": "locomotion_prototype_JumpStart",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "JumpStartState",
+                    "to": "JumpMidState",
+                    "event": "animationFinished",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "JumpMidState",
+                    "to": "JumpEndState",
+                    "event": "locomotion_prototype_JumpEnd",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "JumpEndState",
+                    "to": "Cycles",
+                    "event": "animationFinished",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "Cycles",
+                    "to": "SpawnInState",
+                    "event": "locomotion_prototype_SpawnIn",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "SpawnOutState",
+                    "to": "SpawnInState",
+                    "event": "SpawnIn",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "SpawnInState",
+                    "to": "Cycles",
+                    "event": "animationFinished",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "Cycles",
+                    "to": "SpawnOutState",
+                    "event": "locomotion_prototype_SpawnOut",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "Cycles",
+                    "to": "SitDown",
+                    "event": "locomotion_prototype_SitDown",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "SitDown",
+                    "to": "SitLoop",
+                    "event": "animationFinished",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "SitLoop",
+                    "to": "StandUp",
+                    "event": "locomotion_prototype_StandUp",
+                    "blendTimeSec": 0.25
+                },
+                {
+                    "from": "StandUp",
+                    "to": "Cycles",
+                    "event": "animationFinished",
+                    "blendTimeSec": 0.25
+                }
+            ]
+        },
+        {
+            "name": "main",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose",
+                    "defaultLink": "locomotion_prototype/tracking_cloner:tracking0"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose",
+                    "defaultLink": "locomotion_prototype/cycles:pose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "trackingPose_clone_0",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "trackingPose_clone_1",
+                    "type": "clonePose"
+                },
+                {
+                    "name": "nestedStateMachine",
+                    "type": "subGraph",
+                    "graph": "LocomotionStateMachine"
+                }
+            ],
+            "links": [
+                [
+                    ":trackingPose",
+                    "trackingPose_clone_0:input"
+                ],
+                [
+                    "trackingPose_clone_0:output1",
+                    "trackingPose_clone_1:input"
+                ],
+                [
+                    "trackingPose_clone_0:output2",
+                    "nestedStateMachine:inputs[0]"
+                ],
+                [
+                    ":cyclesPose",
+                    "nestedStateMachine:inputs[1]"
+                ],
+                [
+                    "nestedStateMachine:outputs[0]",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "jumpStartDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "jumpStartClip",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_jump_takeoff_northstar",
+                    "looping": false
+                },
+                {
+                    "name": "jumpStartRootOffset_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "jumpStartRootOffset_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "jumpStartRootOffset_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "jumpStartRootOffset_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "jumpStartRootOffset_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Pelvis",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "local"
+                },
+                {
+                    "name": "jumpStartRootOffsetconstDegrees",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "jumpStartRootOffset_degtoRad",
+                    "type": "mathExpression",
+                    "expression": "jumpStartRootOffsetconstDegrees * (3.14159/180)",
+                    "inputsSize": 1
+                }
+            ],
+            "links": [
+                [
+                    "rootTranslationOffset",
+                    "jumpStartRootOffset_tra_makeVec3:inputY"
+                ],
+                [
+                    "jumpStartRootOffset_tra_makeVec3:outputVec3",
+                    "jumpStartRootOffset_makeTransform:position"
+                ],
+                [
+                    "rootRotationOffset",
+                    "jumpStartRootOffset_degtoRad:var[jumpStartRootOffsetconstDegrees]"
+                ],
+                [
+                    "jumpStartRootOffset_degtoRad:value",
+                    "jumpStartRootOffset_rot_makeVec3:inputY"
+                ],
+                [
+                    "jumpStartRootOffset_rot_makeVec3:outputVec3",
+                    "jumpStartRootOffset_eulerToQuat:inputEuler"
+                ],
+                [
+                    "jumpStartRootOffset_eulerToQuat:outputQuat",
+                    "jumpStartRootOffset_makeTransform:rotation"
+                ],
+                [
+                    "jumpStartClip:outputPose",
+                    "jumpStartRootOffset_setTransformJoint:inputPose"
+                ],
+                [
+                    "jumpStartRootOffset_makeTransform:transform",
+                    "jumpStartRootOffset_setTransformJoint:inputTransform"
+                ],
+                [
+                    "jumpStartRootOffset_setTransformJoint:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "jumpMidDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "jumpMidClip",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_jump_midair_northstar",
+                    "looping": true
+                },
+                {
+                    "name": "jumpMidRootOffset_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "jumpMidRootOffset_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "jumpMidRootOffset_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "jumpMidRootOffset_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "jumpMidRootOffset_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Pelvis",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "local"
+                },
+                {
+                    "name": "jumpMidRootOffsetconstDegrees",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "jumpMidRootOffset_degtoRad",
+                    "type": "mathExpression",
+                    "expression": "jumpMidRootOffsetconstDegrees * (3.14159/180)",
+                    "inputsSize": 1
+                }
+            ],
+            "links": [
+                [
+                    "rootTranslationOffset",
+                    "jumpMidRootOffset_tra_makeVec3:inputY"
+                ],
+                [
+                    "jumpMidRootOffset_tra_makeVec3:outputVec3",
+                    "jumpMidRootOffset_makeTransform:position"
+                ],
+                [
+                    "rootRotationOffset",
+                    "jumpMidRootOffset_degtoRad:var[jumpMidRootOffsetconstDegrees]"
+                ],
+                [
+                    "jumpMidRootOffset_degtoRad:value",
+                    "jumpMidRootOffset_rot_makeVec3:inputY"
+                ],
+                [
+                    "jumpMidRootOffset_rot_makeVec3:outputVec3",
+                    "jumpMidRootOffset_eulerToQuat:inputEuler"
+                ],
+                [
+                    "jumpMidRootOffset_eulerToQuat:outputQuat",
+                    "jumpMidRootOffset_makeTransform:rotation"
+                ],
+                [
+                    "jumpMidClip:outputPose",
+                    "jumpMidRootOffset_setTransformJoint:inputPose"
+                ],
+                [
+                    "jumpMidRootOffset_makeTransform:transform",
+                    "jumpMidRootOffset_setTransformJoint:inputTransform"
+                ],
+                [
+                    "jumpMidRootOffset_setTransformJoint:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "jumpEndDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "jumpEndClip",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_jump_landing_northstar",
+                    "looping": false,
+                    "endFrame": 13
+                },
+                {
+                    "name": "jumpEndRootOffset_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "jumpEndRootOffset_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "jumpEndRootOffset_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "jumpEndRootOffset_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "jumpEndRootOffset_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Pelvis",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "local"
+                },
+                {
+                    "name": "jumpEndRootOffsetconstDegrees",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "jumpEndRootOffset_degtoRad",
+                    "type": "mathExpression",
+                    "expression": "jumpEndRootOffsetconstDegrees * (3.14159/180)",
+                    "inputsSize": 1
+                }
+            ],
+            "links": [
+                [
+                    "rootTranslationOffset",
+                    "jumpEndRootOffset_tra_makeVec3:inputY"
+                ],
+                [
+                    "jumpEndRootOffset_tra_makeVec3:outputVec3",
+                    "jumpEndRootOffset_makeTransform:position"
+                ],
+                [
+                    "rootRotationOffset",
+                    "jumpEndRootOffset_degtoRad:var[jumpEndRootOffsetconstDegrees]"
+                ],
+                [
+                    "jumpEndRootOffset_degtoRad:value",
+                    "jumpEndRootOffset_rot_makeVec3:inputY"
+                ],
+                [
+                    "jumpEndRootOffset_rot_makeVec3:outputVec3",
+                    "jumpEndRootOffset_eulerToQuat:inputEuler"
+                ],
+                [
+                    "jumpEndRootOffset_eulerToQuat:outputQuat",
+                    "jumpEndRootOffset_makeTransform:rotation"
+                ],
+                [
+                    "jumpEndClip:outputPose",
+                    "jumpEndRootOffset_setTransformJoint:inputPose"
+                ],
+                [
+                    "jumpEndRootOffset_makeTransform:transform",
+                    "jumpEndRootOffset_setTransformJoint:inputTransform"
+                ],
+                [
+                    "jumpEndRootOffset_setTransformJoint:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "spawnInDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "spawnInClip",
+                    "type": "sampleAnimClip",
+                    "clip": "S00_defaultBehavior_neutral_spawnIn_anim",
+                    "looping": false,
+                    "endFrame": 24
+                }
+            ],
+            "links": [
+                [
+                    "spawnInClip:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "spawnOutDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "spawnOutClip",
+                    "type": "sampleAnimClip",
+                    "clip": "S00_defaultBehavior_neutral_leave_anim",
+                    "looping": false,
+                    "endFrame": 33
+                }
+            ],
+            "links": [
+                [
+                    "spawnOutClip:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "sittingLoopDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "trackingBlendUpperInput",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_TrackingUpperBlend"
+                },
+                {
+                    "name": "sitLoopClip",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_sit_idle_sit_northstar",
+                    "looping": true
+                },
+                {
+                    "name": "sitLoopRootOffset_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "sitLoopRootOffset_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "sitLoopRootOffset_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "sitLoopRootOffset_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "sitLoopRootOffset_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Pelvis",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "local"
+                },
+                {
+                    "name": "sitLoopRootOffsetconstDegrees",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "sitLoopRootOffset_degtoRad",
+                    "type": "mathExpression",
+                    "expression": "sitLoopRootOffsetconstDegrees * (3.14159/180)",
+                    "inputsSize": 1
+                },
+                {
+                    "name": "SitGraphConst0",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "featherBlend",
+                    "type": "featherBlend",
+                    "blendPoses": [
+                        {
+                            "depth": 1,
+                            "blendSpace": "character",
+                            "blendJoint": "RTRig_SpineStart"
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                [
+                    "rootTranslationOffset",
+                    "sitLoopRootOffset_tra_makeVec3:inputY"
+                ],
+                [
+                    "sitLoopRootOffset_tra_makeVec3:outputVec3",
+                    "sitLoopRootOffset_makeTransform:position"
+                ],
+                [
+                    "rootRotationOffset",
+                    "sitLoopRootOffset_degtoRad:var[sitLoopRootOffsetconstDegrees]"
+                ],
+                [
+                    "sitLoopRootOffset_degtoRad:value",
+                    "sitLoopRootOffset_rot_makeVec3:inputY"
+                ],
+                [
+                    "sitLoopRootOffset_rot_makeVec3:outputVec3",
+                    "sitLoopRootOffset_eulerToQuat:inputEuler"
+                ],
+                [
+                    "sitLoopRootOffset_eulerToQuat:outputQuat",
+                    "sitLoopRootOffset_makeTransform:rotation"
+                ],
+                [
+                    "sitLoopClip:outputPose",
+                    "sitLoopRootOffset_setTransformJoint:inputPose"
+                ],
+                [
+                    "sitLoopRootOffset_makeTransform:transform",
+                    "sitLoopRootOffset_setTransformJoint:inputTransform"
+                ],
+                [
+                    "sitLoopRootOffset_setTransformJoint:outputPose",
+                    "featherBlend:inputPose"
+                ],
+                [
+                    ":trackingPose",
+                    "featherBlend.blendPoses[0]:inputPose"
+                ],
+                [
+                    "trackingBlendUpperInput",
+                    "featherBlend.blendPoses[0]:jointBaseWeight"
+                ],
+                [
+                    "trackingBlendUpperInput",
+                    "featherBlend.blendPoses[0]:floatWeight"
+                ],
+                [
+                    "SitGraphConst0:outputValue",
+                    "featherBlend.blendPoses[0]:eventWeight"
+                ],
+                [
+                    "featherBlend:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "sitDownDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "sitDownClip",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_sit_idleToSit_northstar",
+                    "looping": false,
+                    "endFrame": 42
+                },
+                {
+                    "name": "sitDownRootOffset_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "sitDownRootOffset_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "sitDownRootOffset_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "sitDownRootOffset_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "sitDownRootOffset_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Pelvis",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "local"
+                },
+                {
+                    "name": "sitDownRootOffsetconstDegrees",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "sitDownRootOffset_degtoRad",
+                    "type": "mathExpression",
+                    "expression": "sitDownRootOffsetconstDegrees * (3.14159/180)",
+                    "inputsSize": 1
+                }
+            ],
+            "links": [
+                [
+                    "rootTranslationOffset",
+                    "sitDownRootOffset_tra_makeVec3:inputY"
+                ],
+                [
+                    "sitDownRootOffset_tra_makeVec3:outputVec3",
+                    "sitDownRootOffset_makeTransform:position"
+                ],
+                [
+                    "rootRotationOffset",
+                    "sitDownRootOffset_degtoRad:var[sitDownRootOffsetconstDegrees]"
+                ],
+                [
+                    "sitDownRootOffset_degtoRad:value",
+                    "sitDownRootOffset_rot_makeVec3:inputY"
+                ],
+                [
+                    "sitDownRootOffset_rot_makeVec3:outputVec3",
+                    "sitDownRootOffset_eulerToQuat:inputEuler"
+                ],
+                [
+                    "sitDownRootOffset_eulerToQuat:outputQuat",
+                    "sitDownRootOffset_makeTransform:rotation"
+                ],
+                [
+                    "sitDownClip:outputPose",
+                    "sitDownRootOffset_setTransformJoint:inputPose"
+                ],
+                [
+                    "sitDownRootOffset_makeTransform:transform",
+                    "sitDownRootOffset_setTransformJoint:inputTransform"
+                ],
+                [
+                    "sitDownRootOffset_setTransformJoint:outputPose",
+                    ":pose"
+                ]
+            ]
+        },
+        {
+            "name": "standUpDataFlow",
+            "type": "dataflow",
+            "inputs": [
+                {
+                    "type": "pose",
+                    "name": "trackingPose"
+                },
+                {
+                    "type": "pose",
+                    "name": "cyclesPose"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "pose",
+                    "name": "pose"
+                }
+            ],
+            "nodes": [
+                {
+                    "name": "rootRotationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootRotationOffset"
+                },
+                {
+                    "name": "rootTranslationOffset",
+                    "type": "getDynamicStoreValueFloat",
+                    "key": "locomotion_prototype_RootTranslationOffset"
+                },
+                {
+                    "name": "standUpClip",
+                    "type": "sampleAnimClip",
+                    "clip": "loco_sit_sitToIdle_northstar",
+                    "looping": false,
+                    "startFrame": 120,
+                    "endFrame": 170
+                },
+                {
+                    "name": "standUpRootOffset_rot_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "standUpRootOffset_tra_makeVec3",
+                    "type": "makeVec3"
+                },
+                {
+                    "name": "standUpRootOffset_eulerToQuat",
+                    "type": "eulerToQuat"
+                },
+                {
+                    "name": "standUpRootOffset_makeTransform",
+                    "type": "makeTransform"
+                },
+                {
+                    "name": "standUpRootOffset_setTransformJoint",
+                    "type": "setJointTransform",
+                    "jointName": "RTRig_Pelvis",
+                    "applyAsOffset": true,
+                    "coordinateSpace": "local"
+                },
+                {
+                    "name": "standUpRootOffsetconstDegrees",
+                    "type": "constFloat",
+                    "value": 0.0
+                },
+                {
+                    "name": "standUpRootOffset_degtoRad",
+                    "type": "mathExpression",
+                    "expression": "standUpRootOffsetconstDegrees * (3.14159/180)",
+                    "inputsSize": 1
+                }
+            ],
+            "links": [
+                [
+                    "rootTranslationOffset",
+                    "standUpRootOffset_tra_makeVec3:inputY"
+                ],
+                [
+                    "standUpRootOffset_tra_makeVec3:outputVec3",
+                    "standUpRootOffset_makeTransform:position"
+                ],
+                [
+                    "rootRotationOffset",
+                    "standUpRootOffset_degtoRad:var[standUpRootOffsetconstDegrees]"
+                ],
+                [
+                    "standUpRootOffset_degtoRad:value",
+                    "standUpRootOffset_rot_makeVec3:inputY"
+                ],
+                [
+                    "standUpRootOffset_rot_makeVec3:outputVec3",
+                    "standUpRootOffset_eulerToQuat:inputEuler"
+                ],
+                [
+                    "standUpRootOffset_eulerToQuat:outputQuat",
+                    "standUpRootOffset_makeTransform:rotation"
+                ],
+                [
+                    "standUpClip:outputPose",
+                    "standUpRootOffset_setTransformJoint:inputPose"
+                ],
+                [
+                    "standUpRootOffset_makeTransform:transform",
+                    "standUpRootOffset_setTransformJoint:inputTransform"
+                ],
+                [
+                    "standUpRootOffset_setTransformJoint:outputPose",
+                    ":pose"
+                ]
+            ]
+        }
+    ]
+}
