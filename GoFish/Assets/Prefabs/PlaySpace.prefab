@@ -90,11 +90,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6093592463355912122, guid: 643e3c7281c1af64e89f0c2a710eeacb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 87deb81725c69db45a735f9030fb2df5, type: 2}
+    - target: {fileID: -4683669308469848369, guid: 643e3c7281c1af64e89f0c2a710eeacb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 87deb81725c69db45a735f9030fb2df5, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 643e3c7281c1af64e89f0c2a710eeacb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 87deb81725c69db45a735f9030fb2df5, type: 2}
+    - target: {fileID: -804731622281664130, guid: 643e3c7281c1af64e89f0c2a710eeacb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 87deb81725c69db45a735f9030fb2df5, type: 2}
+    - target: {fileID: -678588488315902003, guid: 643e3c7281c1af64e89f0c2a710eeacb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 87deb81725c69db45a735f9030fb2df5, type: 2}
     - target: {fileID: 919132149155446097, guid: 643e3c7281c1af64e89f0c2a710eeacb,
         type: 3}
       propertyPath: m_Name
       value: 202408_GoFish_PlaySpace_blend_V4 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5290405102292030261, guid: 643e3c7281c1af64e89f0c2a710eeacb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ad7e7be03bc31a40b12523231a9ba91, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
