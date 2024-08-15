@@ -38,8 +38,8 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     private void Update() {
-        UpdateRotation();
         UpdatePosition();
+        UpdateRotation();
         UpdateScale();
         UpdateUILayer();
     }
@@ -59,13 +59,19 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
             var distance = Vector2.Distance(rectTransform.position, target);
             /*var repositionSpeed = rectTransform.position.y > target.y || rectTransform.position.y < 0
-                ? animationSpeedConfig.releasePosition
-                : animationSpeedConfig.position;
-            rectTransform.position = Vector2.Lerp(rectTransform.position, target,
-                repositionSpeed / distance * Time.deltaTime);*/
+                ? 1000
+                : 300; */
+            //rectTransform.position = Vector2.Lerp(rectTransform.position, target,
+            //    500 / distance * Time.deltaTime);
         }
         else {
-            var delta = ((Vector2)Input.mousePosition + dragStartPos);
+            //IF DRAGGED
+
+            var delta = (Vector2)Input;
+            delta.x = dragStartPos.x + Input.mousePosition.x;
+            delta.y = dragStartPos.y + Input.mousePosition.y;
+
+            //Update position of card based on delta input values
             rectTransform.position = new Vector2(delta.x, delta.y);
         }
     }
@@ -98,7 +104,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         var newDelta = Mathf.Abs(adjustedCurrent - adjustedTarget);
 
         var nextRotation = Mathf.Lerp(adjustedCurrent, adjustedTarget,
-            -60 / newDelta * Time.deltaTime); //60
+            60 / newDelta * Time.deltaTime); //60
         rectTransform.rotation = Quaternion.Euler(0, 0, nextRotation);
         
         }
