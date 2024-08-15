@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
 {
     //public TextMeshProUGUI playerHandText;
     public TextMeshProUGUI playerScoreText;
+    public TextMeshProUGUI playerScoreText2;
     //public TextMeshProUGUI[] aiHandTexts;
     public TextMeshProUGUI[] aiScoreTexts;
+    public TextMeshProUGUI[] aiScoreTexts1;
     public TextMeshProUGUI deckText;
     public TextMeshProUGUI messageText;
     public GameObject cardButtonPrefab;
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
 
         //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
+        playerScoreText2.gameObject.SetActive(false);
         //foreach (var aiHandText in aiHandTexts)
         //{
         //    aiHandText.gameObject.SetActive(false);
@@ -79,6 +82,11 @@ public class GameManager : MonoBehaviour
         {
             aiScoreText.gameObject.SetActive(false);
         }
+        foreach (var aiScoreText1 in aiScoreTexts)
+        {
+            aiScoreText1.gameObject.SetActive(false);
+        }
+
         gameEndMessageText.gameObject.SetActive(false);
     }
 
@@ -102,10 +110,16 @@ public class GameManager : MonoBehaviour
 
         //playerHandText.gameObject.SetActive(true);
         playerScoreText.gameObject.SetActive(true);
+        playerScoreText2.gameObject.SetActive(true);
         for (int i = 0; i < numberOfAIPlayers; i++)
         {
             //aiHandTexts[i].gameObject.SetActive(true);
             aiScoreTexts[i].gameObject.SetActive(true);
+        }
+        for (int i = 0; i < numberOfAIPlayers; i++)
+        {
+            //aiHandTexts[i].gameObject.SetActive(true);
+            aiScoreTexts1[i].gameObject.SetActive(true);
         }
 
         InitializePlayers(numberOfAIPlayers);
@@ -332,6 +346,7 @@ public class GameManager : MonoBehaviour
         gameEndMessageText.gameObject.SetActive(false);
         //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
+        playerScoreText2.gameObject.SetActive(false);
         //foreach (var aiHandText in aiHandTexts)
         //{
         //    aiHandText.gameObject.SetActive(false);
@@ -339,6 +354,10 @@ public class GameManager : MonoBehaviour
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
+        }        
+        foreach (var aiScoreText1 in aiScoreTexts)
+        {
+            aiScoreText1.gameObject.SetActive(false);
         }
         deckText.gameObject.SetActive(false);
         messageText.gameObject.SetActive(false);

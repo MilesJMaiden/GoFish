@@ -67,12 +67,14 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else {
             //IF DRAGGED
 
-            var delta = (Vector2)Input;
-            delta.x = dragStartPos.x + Input.mousePosition.x;
-            delta.y = dragStartPos.y + Input.mousePosition.y;
+            return;
 
-            //Update position of card based on delta input values
-            rectTransform.position = new Vector2(delta.x, delta.y);
+            //var delta = (Vector2)Input;
+            //delta.x = dragStartPos.x + Input.mousePosition.x;
+            //delta.y = dragStartPos.y + Input.mousePosition.y;
+
+            ////Update position of card based on delta input values
+            //rectTransform.position = new Vector2(delta.x, delta.y);
         }
     }
 
