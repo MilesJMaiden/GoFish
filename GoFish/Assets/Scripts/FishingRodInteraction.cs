@@ -14,19 +14,19 @@ public class FishingRodInteraction : MonoBehaviour
     public bool startGoFish = false;
 
     [Header("Casting")]
-    public AudioClip waterSplashSound;             
-    public GameObject waterSplashEffect;           
+    public AudioClip waterSplashSound;
+    public GameObject waterSplashEffect;
     public bool rodCasting = false;
 
     [Header("Catching")]
-    public GameObject waterBubblingEffect;         
-    public AudioClip rodTensionSound;              
-    public AudioClip fishStruggleSound;            
+    public GameObject waterBubblingEffect;
+    public AudioClip rodTensionSound;
+    public AudioClip fishStruggleSound;
     public bool fishOnHook = false;
 
     [Header("Reeling")]
-    public AudioClip reelSplashSound;              
-    public GameObject fishSplashEffect;           
+    public AudioClip reelSplashSound;
+    public GameObject fishSplashEffect;
     public bool fishComesOut = false;
 
     void Start()
@@ -46,6 +46,7 @@ public class FishingRodInteraction : MonoBehaviour
 
     void StartInteraction()
     {
+        Debug.Log("Starting interaction: Switching to Casting state.");
         currentState = State.Casting;
     }
 
@@ -54,18 +55,22 @@ public class FishingRodInteraction : MonoBehaviour
         switch (currentState)
         {
             case State.Idle:
+                Debug.Log("Handling Idle state.");
                 HandleIdleState();
                 break;
 
             case State.Casting:
+                Debug.Log("Handling Casting state.");
                 HandleCastingState();
                 break;
 
             case State.Catching:
+                Debug.Log("Handling Catching state.");
                 HandleCatchingState();
                 break;
 
             case State.Reeling:
+                Debug.Log("Handling Reeling state.");
                 HandleReelingState();
                 break;
         }
@@ -73,6 +78,7 @@ public class FishingRodInteraction : MonoBehaviour
 
     void HandleIdleState()
     {
+        Debug.Log("In Idle state: Resetting state variables.");
         stateTimer = 0f;
         fishOnHook = false;
         rod.SetActive(false);
@@ -80,11 +86,12 @@ public class FishingRodInteraction : MonoBehaviour
 
     void HandleCastingState()
     {
+        Debug.Log("In Casting state: Preparing rod for casting.");
         PrepareRodForCasting(true);
 
         if (rodCasting)
         {
-            
+            Debug.Log("Rod casting triggered.");
             ExecuteRodCast("CastRod", waterSplashSound, waterSplashEffect);
             currentState = State.Catching;
             stateTimer = 0f;
@@ -93,11 +100,12 @@ public class FishingRodInteraction : MonoBehaviour
 
     void HandleCatchingState()
     {
-        
+        Debug.Log("In Catching state: Attempting to catch a fish.");
         ExecuteCatching("CatchFish", rodTensionSound, fishStruggleSound, waterBubblingEffect);
 
         if (fishOnHook)
         {
+            Debug.Log("Fish on hook! Switching to Reeling state.");
             currentState = State.Reeling;
             stateTimer = 0f;
         }
@@ -105,11 +113,12 @@ public class FishingRodInteraction : MonoBehaviour
 
     void HandleReelingState()
     {
+        Debug.Log("In Reeling state: Preparing to reel in the fish.");
         PrepareReeling();
 
         if (fishComesOut)
         {
-            
+            Debug.Log("Fish comes out of the water! Returning to Idle state.");
             ExecuteReeling("ReelInFish", reelSplashSound, fishSplashEffect);
             currentState = State.Idle;
         }
@@ -117,6 +126,7 @@ public class FishingRodInteraction : MonoBehaviour
 
     void PrepareRodForCasting(bool rodVisibility)
     {
+        Debug.Log("Setting rod visibility to: " + rodVisibility);
         rod.SetActive(rodVisibility);
         InstructPlayerToCast();
     }
@@ -128,6 +138,7 @@ public class FishingRodInteraction : MonoBehaviour
 
     void ExecuteRodCast(string animName, AudioClip splashSound, GameObject splashEffect)
     {
+        Debug.Log("Executing rod cast with animation: " + animName);
         rodAnimator.SetTrigger(animName);
         PlaySound(splashSound);
         ActivateEffect(splashEffect);
@@ -135,6 +146,7 @@ public class FishingRodInteraction : MonoBehaviour
 
     void ExecuteCatching(string animName, AudioClip tensionSound, AudioClip struggleSound, GameObject bubblingEffect)
     {
+        Debug.Log("Executing catching sequence with animation: " + animName);
         rodAnimator.SetTrigger(animName);
         PlaySound(tensionSound);
         PlaySound(struggleSound);
@@ -143,12 +155,14 @@ public class FishingRodInteraction : MonoBehaviour
 
     void PrepareReeling()
     {
+        Debug.Log("Preparing to reel in the fish.");
         fishOnHook = true;
         rodAnimator.SetTrigger("ReelIn");
     }
 
     void ExecuteReeling(string animName, AudioClip splashSound, GameObject splashEffect)
     {
+        Debug.Log("Executing reeling with animation: " + animName);
         rodAnimator.SetTrigger(animName);
         PlaySound(splashSound);
         ActivateEffect(splashEffect);
@@ -156,11 +170,13 @@ public class FishingRodInteraction : MonoBehaviour
 
     void PlaySound(AudioClip clip)
     {
+        Debug.Log("Playing sound: " + clip.name);
         audioSource.PlayOneShot(clip);
     }
 
     void ActivateEffect(GameObject effect)
     {
+        Debug.Log("Activating effect: " + effect.name);
         effect.SetActive(true);
     }
 
