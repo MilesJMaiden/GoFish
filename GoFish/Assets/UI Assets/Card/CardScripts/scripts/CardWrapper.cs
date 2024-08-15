@@ -16,7 +16,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Canvas canvas;
 
     public ZoomConfig zoomConfig;
-    public AnimationSpeedConfig animationSpeedConfig;
+    //public AnimationSpeedConfig animationSpeedConfig;
     public CardSort container;
 
     private bool isHovered;
@@ -51,36 +51,39 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     private void UpdatePosition() {
-        if (!isDragged)
-        {
+        if (!isDragged) {
             var target = new Vector2(targetPosition.x, targetPosition.y + targetVerticalDisplacement);
-            if (isHovered && zoomConfig.overrideYPosition != -1)
-            {
+            if (isHovered && zoomConfig.overrideYPosition != -1) {
                 target = new Vector2(target.x, zoomConfig.overrideYPosition);
             }
 
             var distance = Vector2.Distance(rectTransform.position, target);
-            var repositionSpeed = rectTransform.position.y > target.y || rectTransform.position.y < 0
-                ? animationSpeedConfig.releasePosition
-                : animationSpeedConfig.position;
-            rectTransform.position = Vector2.Lerp(rectTransform.position, target,
-                repositionSpeed / distance * Time.deltaTime);
+            /*var repositionSpeed = rectTransform.position.y > target.y || rectTransform.position.y < 0
+                ? 1000
+                : 300; */
+            //rectTransform.position = Vector2.Lerp(rectTransform.position, target,
+            //    500 / distance * Time.deltaTime);
         }
-        else
-        {
+        else {
             //IF DRAGGED
-            //Update position of card based on delta input values
-            var delta = ((Vector2)Input.mousePosition + dragStartPos);
-            rectTransform.position = new Vector2(delta.x, delta.y);
+
+            return;
+
+            //var delta = (Vector2)Input;
+            //delta.x = dragStartPos.x + Input.mousePosition.x;
+            //delta.y = dragStartPos.y + Input.mousePosition.y;
+
+            ////Update position of card based on delta input values
+            //rectTransform.position = new Vector2(delta.x, delta.y);
         }
     }
 
     private void UpdateScale() {
         var targetZoom = (isDragged || isHovered) && zoomConfig.zoomOnHover ? zoomConfig.multiplier : 1;
         var delta = Mathf.Abs(rectTransform.localScale.x - targetZoom);
-         var newZoom = Mathf.Lerp(rectTransform.localScale.x, targetZoom,
+        /* var newZoom = Mathf.Lerp(rectTransform.localScale.x, targetZoom,
        animationSpeedConfig.zoom / delta * Time.deltaTime);
-        rectTransform.localScale = new Vector3(newZoom, newZoom, 1);
+        rectTransform.localScale = new Vector3(newZoom, newZoom, 1); */
     }
 
     private void UpdateRotation() {
@@ -103,7 +106,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         var newDelta = Mathf.Abs(adjustedCurrent - adjustedTarget);
 
         var nextRotation = Mathf.Lerp(adjustedCurrent, adjustedTarget,
-            animationSpeedConfig.rotation / newDelta * Time.deltaTime); //60
+            60 / newDelta * Time.deltaTime); //60
         rectTransform.rotation = Quaternion.Euler(0, 0, nextRotation);
         
         }
@@ -141,8 +144,6 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         isDragged = true;
         dragStartPos = new Vector2(transform.position.x - eventData.position.x,
             transform.position.y - eventData.position.y);
-        Debug.Log(dragStartPos + " " + eventData.position);
-         
         container.OnCardDragStart(this);
         eventsConfig?.OnCardUnhover?.Invoke(new CardUnhover(this));
     }

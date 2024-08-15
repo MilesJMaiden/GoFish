@@ -11,10 +11,12 @@ using TMPro;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI playerHandText;
+    //public TextMeshProUGUI playerHandText;
     public TextMeshProUGUI playerScoreText;
-    public TextMeshProUGUI[] aiHandTexts;
+    public TextMeshProUGUI playerScoreText2;
+    //public TextMeshProUGUI[] aiHandTexts;
     public TextMeshProUGUI[] aiScoreTexts;
+    public TextMeshProUGUI[] aiScoreTexts1;
     public TextMeshProUGUI deckText;
     public TextMeshProUGUI messageText;
     public GameObject cardButtonPrefab;
@@ -69,16 +71,22 @@ public class GameManager : MonoBehaviour
         cardButtonParent.gameObject.SetActive(false);
         playerSelectionButtonParent.gameObject.SetActive(false);
 
-        playerHandText.gameObject.SetActive(false);
+        //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
-        foreach (var aiHandText in aiHandTexts)
-        {
-            aiHandText.gameObject.SetActive(false);
-        }
+        playerScoreText2.gameObject.SetActive(false);
+        //foreach (var aiHandText in aiHandTexts)
+        //{
+        //    aiHandText.gameObject.SetActive(false);
+        //}
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
         }
+        foreach (var aiScoreText1 in aiScoreTexts)
+        {
+            aiScoreText1.gameObject.SetActive(false);
+        }
+
         gameEndMessageText.gameObject.SetActive(false);
     }
 
@@ -100,12 +108,18 @@ public class GameManager : MonoBehaviour
         cardButtonParent.gameObject.SetActive(true);
         playerSelectionButtonParent.gameObject.SetActive(false);
 
-        playerHandText.gameObject.SetActive(true);
+        //playerHandText.gameObject.SetActive(true);
         playerScoreText.gameObject.SetActive(true);
+        playerScoreText2.gameObject.SetActive(true);
         for (int i = 0; i < numberOfAIPlayers; i++)
         {
-            aiHandTexts[i].gameObject.SetActive(true);
+            //aiHandTexts[i].gameObject.SetActive(true);
             aiScoreTexts[i].gameObject.SetActive(true);
+        }
+        for (int i = 0; i < numberOfAIPlayers; i++)
+        {
+            //aiHandTexts[i].gameObject.SetActive(true);
+            aiScoreTexts1[i].gameObject.SetActive(true);
         }
 
         InitializePlayers(numberOfAIPlayers);
@@ -330,15 +344,20 @@ public class GameManager : MonoBehaviour
 
         // Reset UI elements
         gameEndMessageText.gameObject.SetActive(false);
-        playerHandText.gameObject.SetActive(false);
+        //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
-        foreach (var aiHandText in aiHandTexts)
-        {
-            aiHandText.gameObject.SetActive(false);
-        }
+        playerScoreText2.gameObject.SetActive(false);
+        //foreach (var aiHandText in aiHandTexts)
+        //{
+        //    aiHandText.gameObject.SetActive(false);
+        //}
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
+        }        
+        foreach (var aiScoreText1 in aiScoreTexts)
+        {
+            aiScoreText1.gameObject.SetActive(false);
         }
         deckText.gameObject.SetActive(false);
         messageText.gameObject.SetActive(false);
@@ -527,12 +546,12 @@ public class GameManager : MonoBehaviour
     private void UpdateUI()
     {
         Debug.Log("Updating UI.");
-        playerHandText.text = $"Human Player: {string.Join(", ", players[0].Hand.Select(card => card.Name))}";
+        //playerHandText.text = $"Human Player: {string.Join(", ", players[0].Hand.Select(card => card.Name))}";
         playerScoreText.text = $"Human Player Score: {players[0].Score}";
         CreateCardButtons(players[0]); // Refresh card buttons for human player
         for (int i = 0; i < numberOfAIPlayers; i++)
         {
-            aiHandTexts[i].text = $"{players[i + 1].Name}: {players[i + 1].Hand.Count} cards"; // Show number of cards instead of card names for AI
+            //aiHandTexts[i].text = $"{players[i + 1].Name}: {players[i + 1].Hand.Count} cards"; // Show number of cards instead of card names for AI
             aiScoreTexts[i].text = $"{players[i + 1].Name} Score: {players[i + 1].Score}";
             UpdateAICardDisplay(players[i + 1], aiPlayerCardParents[i]);
         }
