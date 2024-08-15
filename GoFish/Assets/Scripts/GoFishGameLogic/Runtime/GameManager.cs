@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Oculus.Voice;
+using Meta.WitAi.Json;
+using System;
 
 /// <summary>
 /// Manages the game flow, including initializing players, dealing cards, processing turns,
@@ -48,7 +51,8 @@ public class GameManager : MonoBehaviour
     // Add this field to your GameManager class
     public SuitImages[] cardImagesBySuit = new SuitImages[4]; // Array for 4 suits
 
-    private bool isGoFishSpoken = false; // Flag to check if "Go Fish" was spoken
+    public AppVoiceExperience voiceExperience; // Reference to the voice SDK component
+    private bool goFishSaid = false; // Flag to track if "Go Fish" was said
 
     [System.Serializable]
     public class SuitImages
@@ -486,10 +490,10 @@ public class GameManager : MonoBehaviour
             StopAllCoroutines(); // Stop the game loop
         }
     }
-    /// <summary>
+ /// <summary>
     /// Shows the "Go Fish" text, allows the current player to draw a card from the deck,
     /// handles joker card effects, and updates the UI accordingly.
-    /// If the drawn card matches the requested rank, the player gets another turn.
+    /// The user must say "Go Fish" to proceed.
     /// </summary>
     /// <param name="currentPlayer">The player taking the turn.</param>
     /// <param name="nextPlayer">The player being asked for a card.</param>
@@ -499,13 +503,16 @@ public class GameManager : MonoBehaviour
     {
         goFishText.gameObject.SetActive(true);
 
-        // Wait for the player to say "Go Fish"
-        isGoFishSpoken = false;
-        yield return new WaitUntil(() => isGoFishSpoken);
+        // Activate microphone for voice input
+        ActivateVoiceInput();
+
+        StartCoroutine(WaitForGoFish());
+
+        // Deactivate the microphone
+        DeactivateVoiceInput();
 
         goFishText.gameObject.SetActive(false);
 
-        // Continue with drawing the card logic
         var drawnCard = deck.Draw();
         if (drawnCard != null)
         {
@@ -548,6 +555,38 @@ public class GameManager : MonoBehaviour
             StopAllCoroutines(); // Stop the game loop
         }
     }
+
+    private void ActivateVoiceInput()
+    {
+        if (!voiceExperience.MicActive)
+        {
+            // Subscribe to the OnResponse event to capture the voice response
+            voiceExperience.VoiceEvents.OnResponse.AddListener(OnVoiceResponse);
+            voiceExperience.Activate();
+        }
+    }
+
+    private void DeactivateVoiceInput()
+    {
+        if (voiceExperience.MicActive)
+        {
+            voiceExperience.Deactivate();
+            // Unsubscribe from the OnResponse event to avoid memory leaks
+            voiceExperience.VoiceEvents.OnResponse.RemoveListener(OnVoiceResponse);
+        }
+    }
+
+
+    /// <summary>
+    /// Checks if the user has said "Go Fish".
+    /// </summary>
+    /// <returns>True if "Go Fish" was recognized.</returns>
+    private bool IsGoFishSaid()
+    {
+        // Return the value of the flag
+        return goFishSaid;
+    }
+
 
     /// <summary>
     /// Updates the UI to reflect the current state of the game.
@@ -649,16 +688,32 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// This method should be called when the player says "Go Fish".
+    /// Handles the voice response and checks if "Go Fish" was said.
     /// </summary>
-    /// <param name="response">The detected voice input.</param>
-    public void HandleVoiceInput(string[] response)
+    /// <param name="response">The response from the voice service.</param>
+    private void OnVoiceResponse(WitResponseNode response)
     {
-        if (response.Length > 0 && response[0].ToLower() == "go fish")
+        // Check if "Go fish" was said
+        string transcript = response["text"]?.Value;
+        if (!string.IsNullOrEmpty(transcript) && transcript.Equals("Go fish", StringComparison.OrdinalIgnoreCase))
         {
-            Debug.Log("Player said 'Go Fish'. Continuing the game logic.");
-            isGoFishSpoken = true; // Set the flag to true to continue the game logic
+            goFishSaid = true;
         }
+    }
+
+    private IEnumerator WaitForGoFish()
+    {
+        // Activate voice input
+        ActivateVoiceInput();
+
+        // Wait until "Go Fish" is said
+        yield return new WaitUntil(() => IsGoFishSaid());
+
+        // Deactivate voice input once "Go Fish" is recognized
+        DeactivateVoiceInput();
+
+        // Reset the flag
+        goFishSaid = false;
     }
 
 }
