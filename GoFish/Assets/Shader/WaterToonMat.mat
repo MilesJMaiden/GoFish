@@ -52,7 +52,7 @@ Material:
     - _Specular_Size: 0
     m_Colors:
     - _Color: {r: 0.43529412, g: 0.7421756, b: 0.8627451, a: 1}
-    - _LighDir: {r: 0, g: 1.2, b: 0, a: 0}
+    - _LighDir: {r: 0, g: 0.375, b: 0, a: 0}
     - _LightColor: {r: 1, g: 1, b: 1, a: 0.6666667}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
     - _Vector4: {r: 0, g: 0, b: 0, a: 0.33}

@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI goFishText;
     public Button aiPlayerButton1, aiPlayerButton2, aiPlayerButton3;
     public GameObject cardBackSpritePrefab;
-    public Transform[] aiPlayerCardParents;
 
     public TextMeshProUGUI aiPlayerSelectionMessageText; // New field for AI player selection message
     public TextMeshProUGUI gameEndMessageText; // New field for game end message
@@ -40,6 +39,12 @@ public class GameManager : MonoBehaviour
     private IPlayer selectedPlayer;
     private CardRank requestedCardRank;
     private int numberOfAIPlayers;
+
+    // Replace AI-specific Transform references with GameObject references
+    public GameObject player1CardParent;
+    public GameObject player2CardParent;
+    public GameObject player3CardParent;
+
 
     /// <summary>
     /// Initializes the game by setting up the players, deck, and UI elements.
@@ -584,21 +589,43 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the display for the AI players' cards with card back sprites.
+    /// Updates the display for a player's cards with card back sprites.
     /// </summary>
-    /// <param name="player">The AI player whose cards are being updated.</param>
-    /// <param name="parent">The parent transform where card back sprites are added.</param>
-    private void UpdateAICardDisplay(IPlayer player, Transform parent)
+    /// <param name="player">The player whose cards are being updated.</param>
+    /// <param name="playerIndex">The index of the player (1, 2, or 3).</param>
+    private void UpdatePlayerCardDisplay(IPlayer player, int playerIndex)
     {
-        Debug.Log("Updating AI card display for: " + player.Name);
-        foreach (Transform child in parent)
+        Debug.Log("Updating card display for: " + player.Name);
+
+        GameObject parentGameObject = null;
+
+        switch (playerIndex)
+        {
+            case 1:
+                parentGameObject = player1CardParent;
+                break;
+            case 2:
+                parentGameObject = player2CardParent;
+                break;
+            case 3:
+                parentGameObject = player3CardParent;
+                break;
+            default:
+                Debug.LogError("Invalid player index.");
+                return;
+        }
+
+        // Clear existing card display
+        foreach (Transform child in parentGameObject.transform)
         {
             Destroy(child.gameObject);
         }
 
+        // Add card back sprites for each card in the player's hand
         for (int i = 0; i < player.Hand.Count; i++)
         {
-            Instantiate(cardBackSpritePrefab, parent);
+            Instantiate(cardBackSpritePrefab, parentGameObject.transform);
         }
     }
+
 }
