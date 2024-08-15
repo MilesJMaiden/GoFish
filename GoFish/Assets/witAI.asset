@@ -32,10 +32,10 @@ MonoBehaviour:
     lang: en
     isPrivate: 0
     createdAt: 2024-06-17T14:45:46-0700
-    trainingStatus: 1
-    lastTrainDuration: 54
-    lastTrainedAt: 2024-08-14T08:22:29-0700
-    nextTrainAt: 2024-08-14T08:21:35-0700
+    trainingStatus: 3
+    lastTrainDuration: 56
+    lastTrainedAt: 2024-08-15T01:51:37-0700
+    nextTrainAt: 2024-08-15T02:28:06-0700
     intents:
     - id: 448158871477584
       name: color_this
@@ -56,6 +56,11 @@ MonoBehaviour:
         id: 510616521290324
       - name: shape:shape
         id: 473951398345668
+    - id: 905067328303371
+      name: number
+      entities:
+      - name: number:number
+        id: 1167408491221497
     entities:
     - name: color
       id: 995249335510975
@@ -111,6 +116,27 @@ MonoBehaviour:
       - keyword: Go fish
         synonyms:
         - go fish
+    - name: number
+      id: 1646148829517717
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: number
+        id: 1167408491221497
+      keywords:
+      - keyword: four
+        synonyms:
+        - four
+      - keyword: nine
+        synonyms:
+        - nine
+      - keyword: seven
+        synonyms:
+        - seven
+      - keyword: three
+        synonyms:
+        - three
     - name: shape
       id: 437595395903275
       lookups:
