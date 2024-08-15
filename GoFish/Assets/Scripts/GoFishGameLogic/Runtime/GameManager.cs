@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Oculus.Voice;
+using Meta.WitAi.Json;
+using System;
 
 /// <summary>
 /// Manages the game flow, including initializing players, dealing cards, processing turns,
@@ -45,6 +48,17 @@ public class GameManager : MonoBehaviour
     public GameObject player2CardParent;
     public GameObject player3CardParent;
 
+    // Add this field to your GameManager class
+    public SuitImages[] cardImagesBySuit = new SuitImages[4]; // Array for 4 suits
+
+    public AppVoiceExperience voiceExperience; // Reference to the voice SDK component
+    private bool goFishSaid = false; // Flag to track if "Go Fish" was said
+
+    [System.Serializable]
+    public class SuitImages
+    {
+        public Texture2D[] rankImages = new Texture2D[13]; // Array for 13 card ranks (Ace to King)
+    }
 
     /// <summary>
     /// Initializes the game by setting up the players, deck, and UI elements.
@@ -66,7 +80,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Showing AI player selection buttons.");
         aiPlayerSelectionMessageText.gameObject.SetActive(true);
-        aiPlayerSelectionMessageText.text = "Please select the number of AI opponents:";
         aiPlayerButton1.gameObject.SetActive(true);
         aiPlayerButton2.gameObject.SetActive(true);
         aiPlayerButton3.gameObject.SetActive(true);
@@ -79,21 +92,19 @@ public class GameManager : MonoBehaviour
         //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
         playerScoreText2.gameObject.SetActive(false);
-        //foreach (var aiHandText in aiHandTexts)
-        //{
-        //    aiHandText.gameObject.SetActive(false);
-        //}
+
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
         }
-        foreach (var aiScoreText1 in aiScoreTexts)
+        foreach (var aiScoreText1 in aiScoreTexts1)
         {
             aiScoreText1.gameObject.SetActive(false);
         }
 
         gameEndMessageText.gameObject.SetActive(false);
     }
+
 
 
     /// <summary>
@@ -103,7 +114,6 @@ public class GameManager : MonoBehaviour
     public void OnAIPlayerSelected(int numAIPlayers)
     {
         Debug.Log("AI players selected: " + numAIPlayers);
-        numberOfAIPlayers = numAIPlayers;
         aiPlayerSelectionMessageText.gameObject.SetActive(false);
         aiPlayerButton1.gameObject.SetActive(false);
         aiPlayerButton2.gameObject.SetActive(false);
@@ -116,21 +126,19 @@ public class GameManager : MonoBehaviour
         //playerHandText.gameObject.SetActive(true);
         playerScoreText.gameObject.SetActive(true);
         playerScoreText2.gameObject.SetActive(true);
-        for (int i = 0; i < numberOfAIPlayers; i++)
+
+        for (int i = 0; i < numAIPlayers; i++)
         {
-            //aiHandTexts[i].gameObject.SetActive(true);
             aiScoreTexts[i].gameObject.SetActive(true);
         }
-        for (int i = 0; i < numberOfAIPlayers; i++)
+        for (int i = 0; i < numAIPlayers; i++)
         {
-            //aiHandTexts[i].gameObject.SetActive(true);
             aiScoreTexts1[i].gameObject.SetActive(true);
         }
 
-        InitializePlayers(numberOfAIPlayers);
+        InitializePlayers(numAIPlayers);
         StartGame();
     }
-
 
     /// <summary>
     /// Initializes the players in the game.
@@ -349,18 +357,14 @@ public class GameManager : MonoBehaviour
 
         // Reset UI elements
         gameEndMessageText.gameObject.SetActive(false);
-        //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
         playerScoreText2.gameObject.SetActive(false);
-        //foreach (var aiHandText in aiHandTexts)
-        //{
-        //    aiHandText.gameObject.SetActive(false);
-        //}
+
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
-        }        
-        foreach (var aiScoreText1 in aiScoreTexts)
+        }
+        foreach (var aiScoreText1 in aiScoreTexts1)
         {
             aiScoreText1.gameObject.SetActive(false);
         }
@@ -486,11 +490,10 @@ public class GameManager : MonoBehaviour
             StopAllCoroutines(); // Stop the game loop
         }
     }
-
-    /// <summary>
+ /// <summary>
     /// Shows the "Go Fish" text, allows the current player to draw a card from the deck,
     /// handles joker card effects, and updates the UI accordingly.
-    /// If the drawn card matches the requested rank, the player gets another turn.
+    /// The user must say "Go Fish" to proceed.
     /// </summary>
     /// <param name="currentPlayer">The player taking the turn.</param>
     /// <param name="nextPlayer">The player being asked for a card.</param>
@@ -499,7 +502,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator ShowGoFishAndDrawCard(IPlayer currentPlayer, IPlayer nextPlayer, CardRank requestedCardRank)
     {
         goFishText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1);
+
+        // Activate microphone for voice input
+        ActivateVoiceInput();
+
+        StartCoroutine(WaitForGoFish());
+
+        // Deactivate the microphone
+        DeactivateVoiceInput();
+
         goFishText.gameObject.SetActive(false);
 
         var drawnCard = deck.Draw();
@@ -545,6 +556,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ActivateVoiceInput()
+    {
+        if (!voiceExperience.MicActive)
+        {
+            // Subscribe to the OnResponse event to capture the voice response
+            voiceExperience.VoiceEvents.OnResponse.AddListener(OnVoiceResponse);
+            voiceExperience.Activate();
+        }
+    }
+
+    private void DeactivateVoiceInput()
+    {
+        if (voiceExperience.MicActive)
+        {
+            voiceExperience.Deactivate();
+            // Unsubscribe from the OnResponse event to avoid memory leaks
+            voiceExperience.VoiceEvents.OnResponse.RemoveListener(OnVoiceResponse);
+        }
+    }
+
+
+    /// <summary>
+    /// Checks if the user has said "Go Fish".
+    /// </summary>
+    /// <returns>True if "Go Fish" was recognized.</returns>
+    private bool IsGoFishSaid()
+    {
+        // Return the value of the flag
+        return goFishSaid;
+    }
+
+
     /// <summary>
     /// Updates the UI to reflect the current state of the game.
     /// </summary>
@@ -573,7 +616,7 @@ public class GameManager : MonoBehaviour
 
 
     /// <summary>
-    /// Creates buttons for each card in the human player's hand.
+    /// Creates buttons for each card in the player's hand.
     /// </summary>
     /// <param name="player">The player whose cards are being displayed.</param>
     private void CreateCardButtons(IPlayer player)
@@ -587,8 +630,15 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < player.Hand.Count; i++)
         {
             var cardButton = Instantiate(cardButtonPrefab, cardButtonParent);
-            var cardNameText = cardButton.GetComponentInChildren<TextMeshProUGUI>();
-            cardNameText.text = player.Hand[i].Name;
+            var cardImage = cardButton.GetComponentInChildren<RawImage>(); // Use RawImage instead of Image for Texture2D
+
+            ICard card = player.Hand[i];
+            int suitIndex = (int)card.Suit; // Assuming Suit is an enum and can be cast to int
+            int rankIndex = (int)card.Rank; // Assuming Rank is an enum and can be cast to int
+
+            // Set the appropriate image based on suit and rank
+            cardImage.texture = cardImagesBySuit[suitIndex].rankImages[rankIndex];
+
             int index = i; // Prevent closure issue
             cardButton.GetComponent<Button>().onClick.AddListener(() => OnCardButtonClicked(index));
         }
@@ -635,6 +685,35 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(cardBackSpritePrefab, parentGameObject.transform);
         }
+    }
+
+    /// <summary>
+    /// Handles the voice response and checks if "Go Fish" was said.
+    /// </summary>
+    /// <param name="response">The response from the voice service.</param>
+    private void OnVoiceResponse(WitResponseNode response)
+    {
+        // Check if "Go fish" was said
+        string transcript = response["text"]?.Value;
+        if (!string.IsNullOrEmpty(transcript) && transcript.Equals("Go fish", StringComparison.OrdinalIgnoreCase))
+        {
+            goFishSaid = true;
+        }
+    }
+
+    private IEnumerator WaitForGoFish()
+    {
+        // Activate voice input
+        ActivateVoiceInput();
+
+        // Wait until "Go Fish" is said
+        yield return new WaitUntil(() => IsGoFishSaid());
+
+        // Deactivate voice input once "Go Fish" is recognized
+        DeactivateVoiceInput();
+
+        // Reset the flag
+        goFishSaid = false;
     }
 
 }
