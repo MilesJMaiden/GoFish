@@ -548,20 +548,29 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Updates the UI to reflect the current state of the game.
     /// </summary>
+    /// <summary>
+    /// Updates the UI to reflect the current state of the game.
+    /// </summary>
     private void UpdateUI()
     {
         Debug.Log("Updating UI.");
-        //playerHandText.text = $"Human Player: {string.Join(", ", players[0].Hand.Select(card => card.Name))}";
-        playerScoreText.text = $"Human Player Score: {players[0].Score}";
-        CreateCardButtons(players[0]); // Refresh card buttons for human player
-        for (int i = 0; i < numberOfAIPlayers; i++)
+
+        // Update player 1 (human player) UI
+        playerScoreText.text = $"Player 1 Score: {players[0].Score}";
+        CreateCardButtons(players[0]); // Refresh card buttons for player 1
+
+        // Update UI for the other players
+        for (int i = 1; i < players.Count; i++)
         {
-            //aiHandTexts[i].text = $"{players[i + 1].Name}: {players[i + 1].Hand.Count} cards"; // Show number of cards instead of card names for AI
-            aiScoreTexts[i].text = $"{players[i + 1].Name} Score: {players[i + 1].Score}";
-            UpdateAICardDisplay(players[i + 1], aiPlayerCardParents[i]);
+            aiScoreTexts[i - 1].text = $"{players[i].Name} Score: {players[i].Score}";
+
+            // Update the card display for each player
+            UpdatePlayerCardDisplay(players[i], i); // Pass the correct player index (1 for player 2, 2 for player 3, etc.)
         }
+
         deckText.text = $"Deck: {deck.Count} cards remaining"; // Use the Count property
     }
+
 
     /// <summary>
     /// Creates buttons for each card in the human player's hand.
