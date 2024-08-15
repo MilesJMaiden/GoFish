@@ -1,0 +1,662 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6238641658111518522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c2918ba0e7451694416d42d69e0944, type: 3}
+  m_Name: WitComposerData
+  m_EditorClassIdentifier: 
+  canvases: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5a46bda3295124c99b0e6537ac7252, type: 3}
+  m_Name: witAI
+  m_EditorClassIdentifier: 
+  _clientAccessToken: ADIXZK2A2BV4H5NUNNJB2MOZCLFWGYID
+  _appInfo:
+    name: voicerecognitiondemo
+    id: 433335469508435
+    lang: en
+    isPrivate: 0
+    createdAt: 2024-06-17T14:45:46-0700
+    trainingStatus: 1
+    lastTrainDuration: 54
+    lastTrainedAt: 2024-08-14T08:22:29-0700
+    nextTrainAt: 2024-08-14T08:21:35-0700
+    intents:
+    - id: 448158871477584
+      name: color_this
+      entities:
+      - name: color:color
+        id: 3928175900787698
+      - name: shape:shape
+        id: 473951398345668
+    - id: 1538192340401229
+      name: fishing
+      entities:
+      - name: fishing:fishing
+        id: 1258065105641588
+    - id: 1640319813472448
+      name: move_shape
+      entities:
+      - name: direction:direction
+        id: 510616521290324
+      - name: shape:shape
+        id: 473951398345668
+    entities:
+    - name: color
+      id: 995249335510975
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: color
+        id: 3928175900787698
+      keywords:
+      - keyword: Go fish
+        synonyms:
+        - Go fish
+      - keyword: black
+        synonyms:
+        - black
+      - keyword: blue
+        synonyms:
+        - blue
+      - keyword: red
+        synonyms:
+        - red
+    - name: direction
+      id: 535853408800699
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: direction
+        id: 510616521290324
+      keywords:
+      - keyword: backward
+        synonyms:
+        - backward
+      - keyword: forward
+        synonyms:
+        - forward
+      - keyword: left
+        synonyms:
+        - left
+      - keyword: right
+        synonyms:
+        - right
+    - name: fishing
+      id: 536044628996963
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: fishing
+        id: 1258065105641588
+      keywords:
+      - keyword: Go fish
+        synonyms:
+        - go fish
+    - name: shape
+      id: 437595395903275
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: shape
+        id: 473951398345668
+      keywords:
+      - keyword: cube
+        synonyms:
+        - cube
+      - keyword: cylinder
+        synonyms:
+        - cylinder
+      - keyword: sphere
+        synonyms:
+        - sphere
+    traits: []
+    versionTags: []
+    voices:
+    - name: wit$British Butler
+      locale: en_GB
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cael
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cam
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Carl
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cartoon Baby
+      locale: en_US
+      gender: nonbinary
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cartoon Kid
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cartoon Villain
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Charlie
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cockney Accent
+      locale: en_GB
+      gender: nonbinary
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cody
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Colin
+      locale: en_CA
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Connor
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cooper
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Disaffected
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Hollywood
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Kenyan Accent
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Overconfident
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Pirate
+      locale: en_GB
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Prospector
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Railey
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Rebecca
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Remi
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Rosie
+      locale: en_CA
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Rubie
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Southern Accent
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Surfer
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Trendy
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Vampire
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Whimsical
+      locale: en_GB
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Wizard
+      locale: en_GB
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+  _configData:
+  - {fileID: -6238641658111518522}
+  _configurationId: 482eca4d-22a6-4dbf-8b2e-cd5bdfb7d9dd
+  _requestType: 0
+  _requestTimeoutMs: 10000
+  endpointConfiguration:
+    _uriScheme: 
+    _authority: 
+    _port: 0
+    _witApiVersion: 
+    _message: 
+    _speech: 
+    _dictation: 
+    _synthesize: 
+    _event: 
+    _converse: 
+  isDemoOnly: 0
+  useConduit: 1
+  _manifestLocalPath: ConduitManifest-bdd54be7-1acd-45ff-893d-5ab3ab272227.json
+  excludedAssemblies:
+  - Oculus.Voice.Demo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - Meta.WitAi.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  relaxedResolution: 0
