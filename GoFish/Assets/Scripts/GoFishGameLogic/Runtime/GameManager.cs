@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Showing AI player selection buttons.");
         aiPlayerSelectionMessageText.gameObject.SetActive(true);
-        aiPlayerSelectionMessageText.text = "Please select the number of AI opponents:";
         aiPlayerButton1.gameObject.SetActive(true);
         aiPlayerButton2.gameObject.SetActive(true);
         aiPlayerButton3.gameObject.SetActive(true);
@@ -79,21 +78,19 @@ public class GameManager : MonoBehaviour
         //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
         playerScoreText2.gameObject.SetActive(false);
-        //foreach (var aiHandText in aiHandTexts)
-        //{
-        //    aiHandText.gameObject.SetActive(false);
-        //}
+
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
         }
-        foreach (var aiScoreText1 in aiScoreTexts)
+        foreach (var aiScoreText1 in aiScoreTexts1)
         {
             aiScoreText1.gameObject.SetActive(false);
         }
 
         gameEndMessageText.gameObject.SetActive(false);
     }
+
 
 
     /// <summary>
@@ -103,7 +100,6 @@ public class GameManager : MonoBehaviour
     public void OnAIPlayerSelected(int numAIPlayers)
     {
         Debug.Log("AI players selected: " + numAIPlayers);
-        numberOfAIPlayers = numAIPlayers;
         aiPlayerSelectionMessageText.gameObject.SetActive(false);
         aiPlayerButton1.gameObject.SetActive(false);
         aiPlayerButton2.gameObject.SetActive(false);
@@ -116,21 +112,19 @@ public class GameManager : MonoBehaviour
         //playerHandText.gameObject.SetActive(true);
         playerScoreText.gameObject.SetActive(true);
         playerScoreText2.gameObject.SetActive(true);
-        for (int i = 0; i < numberOfAIPlayers; i++)
+
+        for (int i = 0; i < numAIPlayers; i++)
         {
-            //aiHandTexts[i].gameObject.SetActive(true);
             aiScoreTexts[i].gameObject.SetActive(true);
         }
-        for (int i = 0; i < numberOfAIPlayers; i++)
+        for (int i = 0; i < numAIPlayers; i++)
         {
-            //aiHandTexts[i].gameObject.SetActive(true);
             aiScoreTexts1[i].gameObject.SetActive(true);
         }
 
-        InitializePlayers(numberOfAIPlayers);
+        InitializePlayers(numAIPlayers);
         StartGame();
     }
-
 
     /// <summary>
     /// Initializes the players in the game.
@@ -349,18 +343,14 @@ public class GameManager : MonoBehaviour
 
         // Reset UI elements
         gameEndMessageText.gameObject.SetActive(false);
-        //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
         playerScoreText2.gameObject.SetActive(false);
-        //foreach (var aiHandText in aiHandTexts)
-        //{
-        //    aiHandText.gameObject.SetActive(false);
-        //}
+
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
-        }        
-        foreach (var aiScoreText1 in aiScoreTexts)
+        }
+        foreach (var aiScoreText1 in aiScoreTexts1)
         {
             aiScoreText1.gameObject.SetActive(false);
         }
