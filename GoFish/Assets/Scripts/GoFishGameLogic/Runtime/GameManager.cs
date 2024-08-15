@@ -45,6 +45,14 @@ public class GameManager : MonoBehaviour
     public GameObject player2CardParent;
     public GameObject player3CardParent;
 
+    // Add this field to your GameManager class
+    public SuitImages[] cardImagesBySuit = new SuitImages[4]; // Array for 4 suits
+
+    [System.Serializable]
+    public class SuitImages
+    {
+        public Texture2D[] rankImages = new Texture2D[13]; // Array for 13 card ranks (Ace to King)
+    }
 
     /// <summary>
     /// Initializes the game by setting up the players, deck, and UI elements.
@@ -563,7 +571,7 @@ public class GameManager : MonoBehaviour
 
 
     /// <summary>
-    /// Creates buttons for each card in the human player's hand.
+    /// Creates buttons for each card in the player's hand.
     /// </summary>
     /// <param name="player">The player whose cards are being displayed.</param>
     private void CreateCardButtons(IPlayer player)
@@ -577,8 +585,15 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < player.Hand.Count; i++)
         {
             var cardButton = Instantiate(cardButtonPrefab, cardButtonParent);
-            var cardNameText = cardButton.GetComponentInChildren<TextMeshProUGUI>();
-            cardNameText.text = player.Hand[i].Name;
+            var cardImage = cardButton.GetComponentInChildren<RawImage>(); // Use RawImage instead of Image for Texture2D
+
+            ICard card = player.Hand[i];
+            int suitIndex = (int)card.Suit; // Assuming Suit is an enum and can be cast to int
+            int rankIndex = (int)card.Rank; // Assuming Rank is an enum and can be cast to int
+
+            // Set the appropriate image based on suit and rank
+            cardImage.texture = cardImagesBySuit[suitIndex].rankImages[rankIndex];
+
             int index = i; // Prevent closure issue
             cardButton.GetComponent<Button>().onClick.AddListener(() => OnCardButtonClicked(index));
         }
