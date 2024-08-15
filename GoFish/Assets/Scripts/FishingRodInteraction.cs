@@ -3,7 +3,7 @@ using UnityEngine;
 public class FishingRodInteraction : MonoBehaviour
 {
     public enum State { Idle, Casting, Catching, Reeling }
-    State currentState = State.Idle;
+    private State currentState = State.Idle;
 
     [Header("Idle")]
     public Animator rodAnimator;
@@ -14,20 +14,20 @@ public class FishingRodInteraction : MonoBehaviour
     public bool startGoFish = false;
 
     [Header("Casting")]
-    public AudioClip waterSplash;
-    public GameObject splashEffect;
+    public AudioClip waterSplashSound;             
+    public GameObject waterSplashEffect;           
     public bool rodCasting = false;
 
     [Header("Catching")]
-    public GameObject bubbleEffect;
-    public AudioClip rodTension;
-    public AudioClip fishStruggle;
-    public bool bubblePoppinEnd = false;
+    public GameObject waterBubblingEffect;         
+    public AudioClip rodTensionSound;              
+    public AudioClip fishStruggleSound;            
+    public bool fishOnHook = false;
 
     [Header("Reeling")]
-    public GameObject fishOnHook;
+    public AudioClip reelSplashSound;              
+    public GameObject fishSplashEffect;           
     public bool fishComesOut = false;
-
 
     void Start()
     {
@@ -54,121 +54,114 @@ public class FishingRodInteraction : MonoBehaviour
         switch (currentState)
         {
             case State.Idle:
-                stateTimer = 0f;
-                fishOnHook.SetActive(false);
-                rod.SetActive(false);
+                HandleIdleState();
                 break;
 
             case State.Casting:
-                
-                BeforeCast(true);
-
-                if (rodCasting)
-                {
-                    HandleRodCast("waterSplash",waterSplash, splashEffect);
-                    
-
-                    currentState = State.Catching;
-                    stateTimer = 0f;
-                }
-             
+                HandleCastingState();
                 break;
 
             case State.Catching:
-                
-                BeforeCatching("waterSplash", waterSplash, splashEffect);
-
-                if (bubblePoppinEnd)
-                {
-                    HandleCatching("waterSplash", waterSplash, splashEffect);
-
-                    currentState = State.Reeling;
-                    stateTimer = 0f;                  
-                }               
-                
+                HandleCatchingState();
                 break;
 
             case State.Reeling:
-
-                BeforeReeling();
-
-                if (fishComesOut)
-                {
-                    HandleReeling("ReelIn", waterSplash, splashEffect);
-
-                }
-                
+                HandleReelingState();
                 break;
         }
     }
 
-
-    void BeforeCast(bool rodvisibility)
+    void HandleIdleState()
     {
-        rod.SetActive(rodvisibility);// Enable the rod
+        stateTimer = 0f;
+        fishOnHook = false;
+        rod.SetActive(false);
+    }
+
+    void HandleCastingState()
+    {
+        PrepareRodForCasting(true);
+
+        if (rodCasting)
+        {
+            
+            ExecuteRodCast("CastRod", waterSplashSound, waterSplashEffect);
+            currentState = State.Catching;
+            stateTimer = 0f;
+        }
+    }
+
+    void HandleCatchingState()
+    {
         
-        // Instruct player to cast
-        IntructPlayerToCast();
+        ExecuteCatching("CatchFish", rodTensionSound, fishStruggleSound, waterBubblingEffect);
 
+        if (fishOnHook)
+        {
+            currentState = State.Reeling;
+            stateTimer = 0f;
+        }
     }
 
-
-    void IntructPlayerToCast()
+    void HandleReelingState()
     {
-        // Some vfx again
-        Debug.Log("I'm intructing the player to cast rod!");
+        PrepareReeling();
+
+        if (fishComesOut)
+        {
+            
+            ExecuteReeling("ReelInFish", reelSplashSound, fishSplashEffect);
+            currentState = State.Idle;
+        }
     }
 
-    void HandleRodCast(string animName, AudioClip clip, GameObject vfx)
+    void PrepareRodForCasting(bool rodVisibility)
     {
-
-        rodAnimator.SetTrigger(animName);
-
-        audioSource.PlayOneShot(clip);
-
-        vfx.SetActive(true);
+        rod.SetActive(rodVisibility);
+        InstructPlayerToCast();
     }
-   
 
-    void BeforeCatching(string animName, AudioClip clip, GameObject vfx)
+    void InstructPlayerToCast()
     {
-        // Instantiate the vfx
-
-        // Wait 2 second
-
-        // Destroy the bubble poppin vfx
-
-        // Turn the bool to true
+        Debug.Log("Instructing the player to cast the rod!");
     }
 
-    void HandleCatching(string animName, AudioClip clip, GameObject vfx)
+    void ExecuteRodCast(string animName, AudioClip splashSound, GameObject splashEffect)
     {
         rodAnimator.SetTrigger(animName);
-
-        audioSource.PlayOneShot(clip);
-
-        vfx.SetActive(true);
-
+        PlaySound(splashSound);
+        ActivateEffect(splashEffect);
     }
 
-    void BeforeReeling()
-    {
-        fishOnHook.SetActive(true);// Enable fish gameobject
-
-        // Check if the fish comes out
-    }
-
-    void HandleReeling(string animName, AudioClip clip, GameObject vfx)
+    void ExecuteCatching(string animName, AudioClip tensionSound, AudioClip struggleSound, GameObject bubblingEffect)
     {
         rodAnimator.SetTrigger(animName);
+        PlaySound(tensionSound);
+        PlaySound(struggleSound);
+        ActivateEffect(bubblingEffect);
+    }
 
+    void PrepareReeling()
+    {
+        fishOnHook = true;
+        rodAnimator.SetTrigger("ReelIn");
+    }
+
+    void ExecuteReeling(string animName, AudioClip splashSound, GameObject splashEffect)
+    {
+        rodAnimator.SetTrigger(animName);
+        PlaySound(splashSound);
+        ActivateEffect(splashEffect);
+    }
+
+    void PlaySound(AudioClip clip)
+    {
         audioSource.PlayOneShot(clip);
+    }
 
-        vfx.SetActive(true);
-
-
-        // After a few amount of time, turn everything to idle
-
+    void ActivateEffect(GameObject effect)
+    {
+        effect.SetActive(true);
     }
 
 
