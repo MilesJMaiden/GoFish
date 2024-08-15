@@ -17,7 +17,7 @@ namespace demo {
         private float previewScale = 1f;
         
         [SerializeField]
-        private int previewSortingOrder = 1;
+        private int previewSortingOrder = 101;
         
         private Dictionary<CardWrapper, Transform> previews = new();
         
@@ -40,6 +40,7 @@ namespace demo {
         }
 
         private void CreateCloneForCard(CardWrapper card) {
+            //Create clone of hovered card
             var clone = Instantiate(card.gameObject, transform);
             clone.transform.position = card.transform.position;
             clone.transform.localScale = Vector3.one * previewScale;
