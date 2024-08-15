@@ -3379,7 +3379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &405552233
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7579,7 +7579,7 @@ GameObject:
   - component: {fileID: 834411155}
   - component: {fileID: 834411154}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AIPlayAmountSelectionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7601,7 +7601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.125}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &834411154
@@ -12091,7 +12091,7 @@ MonoBehaviour:
   aiPlayerButton3: {fileID: 1158958002}
   cardBackSpritePrefab: {fileID: 3843864089856401488, guid: a99522e1477cef64ba53d583d3f4154c,
     type: 3}
-  aiPlayerSelectionMessageText: {fileID: 423821553}
+  aiPlayerSelectionMessageText: {fileID: 834411154}
   gameEndMessageText: {fileID: 788221235}
   player1CardParent: {fileID: 295398579}
   player2CardParent: {fileID: 243507136}
