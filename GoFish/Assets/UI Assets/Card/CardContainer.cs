@@ -110,10 +110,10 @@ public class CardContainer : MonoBehaviour
 
             // Pass child card any extra config it should be aware of
             wrapper.zoomConfig = zoomConfig;
-            wrapper.animationSpeedConfig = animationSpeedConfig;
+            //wrapper.animationSpeedConfig = animationSpeedConfig;
             wrapper.eventsConfig = eventsConfig;
             wrapper.preventCardInteraction = preventCardInteraction;
-            wrapper.container = this;
+            //wrapper.container = this;
         }
     }
 
@@ -269,7 +269,7 @@ public class CardContainer : MonoBehaviour
     public void DestroyCard(CardWrapper card)
     {
         cards.Remove(card);
-        eventsConfig.OnCardDestroy?.Invoke(new CardDestroy(card));
+       // eventsConfig.OnCardDestroy?.Invoke(new CardDestroy(card));
         Destroy(card.gameObject);
     }
     /*

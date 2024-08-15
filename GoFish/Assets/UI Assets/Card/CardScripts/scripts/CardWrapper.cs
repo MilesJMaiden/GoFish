@@ -16,8 +16,8 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Canvas canvas;
 
     public ZoomConfig zoomConfig;
-    public AnimationSpeedConfig animationSpeedConfig;
-    public CardContainer container;
+    //public AnimationSpeedConfig animationSpeedConfig;
+    public CardSort container;
 
     private bool isHovered;
     private bool isDragged;
@@ -58,11 +58,11 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
 
             var distance = Vector2.Distance(rectTransform.position, target);
-            var repositionSpeed = rectTransform.position.y > target.y || rectTransform.position.y < 0
+            /*var repositionSpeed = rectTransform.position.y > target.y || rectTransform.position.y < 0
                 ? animationSpeedConfig.releasePosition
                 : animationSpeedConfig.position;
             rectTransform.position = Vector2.Lerp(rectTransform.position, target,
-                repositionSpeed / distance * Time.deltaTime);
+                repositionSpeed / distance * Time.deltaTime);*/
         }
         else {
             var delta = ((Vector2)Input.mousePosition + dragStartPos);
@@ -73,9 +73,9 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private void UpdateScale() {
         var targetZoom = (isDragged || isHovered) && zoomConfig.zoomOnHover ? zoomConfig.multiplier : 1;
         var delta = Mathf.Abs(rectTransform.localScale.x - targetZoom);
-        var newZoom = Mathf.Lerp(rectTransform.localScale.x, targetZoom,
-            animationSpeedConfig.zoom / delta * Time.deltaTime);
-        rectTransform.localScale = new Vector3(newZoom, newZoom, 1);
+        /* var newZoom = Mathf.Lerp(rectTransform.localScale.x, targetZoom,
+       animationSpeedConfig.zoom / delta * Time.deltaTime);
+        rectTransform.localScale = new Vector3(newZoom, newZoom, 1); */
     }
 
     private void UpdateRotation() {
@@ -97,10 +97,11 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             : tempTargetRotation;
         var newDelta = Mathf.Abs(adjustedCurrent - adjustedTarget);
 
-        var nextRotation = Mathf.Lerp(adjustedCurrent, adjustedTarget,
+       /* var nextRotation = Mathf.Lerp(adjustedCurrent, adjustedTarget,
             animationSpeedConfig.rotation / newDelta * Time.deltaTime);
         rectTransform.rotation = Quaternion.Euler(0, 0, nextRotation);
-    }
+        */
+        }
 
 
     public void SetAnchor(Vector2 min, Vector2 max) {
@@ -142,6 +143,6 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerUp(PointerEventData eventData) {
         isDragged = false;
-       // container.OnCardDragEnd();
+        container.OnCardDragEnd();
     }
 }
