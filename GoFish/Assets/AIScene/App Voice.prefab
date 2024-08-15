@@ -181,8 +181,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GoFishResponse, Assembly-CSharp
-        m_MethodName: SetGoFish
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: HandleVoiceInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

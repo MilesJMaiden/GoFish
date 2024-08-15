@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
     // Add this field to your GameManager class
     public SuitImages[] cardImagesBySuit = new SuitImages[4]; // Array for 4 suits
 
+    private bool isGoFishSpoken = false; // Flag to check if "Go Fish" was spoken
+
     [System.Serializable]
     public class SuitImages
     {
@@ -484,7 +486,6 @@ public class GameManager : MonoBehaviour
             StopAllCoroutines(); // Stop the game loop
         }
     }
-
     /// <summary>
     /// Shows the "Go Fish" text, allows the current player to draw a card from the deck,
     /// handles joker card effects, and updates the UI accordingly.
@@ -497,9 +498,14 @@ public class GameManager : MonoBehaviour
     private IEnumerator ShowGoFishAndDrawCard(IPlayer currentPlayer, IPlayer nextPlayer, CardRank requestedCardRank)
     {
         goFishText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1);
+
+        // Wait for the player to say "Go Fish"
+        isGoFishSpoken = false;
+        yield return new WaitUntil(() => isGoFishSpoken);
+
         goFishText.gameObject.SetActive(false);
 
+        // Continue with drawing the card logic
         var drawnCard = deck.Draw();
         if (drawnCard != null)
         {
@@ -639,6 +645,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < player.Hand.Count; i++)
         {
             Instantiate(cardBackSpritePrefab, parentGameObject.transform);
+        }
+    }
+
+    /// <summary>
+    /// This method should be called when the player says "Go Fish".
+    /// </summary>
+    /// <param name="response">The detected voice input.</param>
+    public void HandleVoiceInput(string[] response)
+    {
+        if (response.Length > 0 && response[0].ToLower() == "go fish")
+        {
+            Debug.Log("Player said 'Go Fish'. Continuing the game logic.");
+            isGoFishSpoken = true; // Set the flag to true to continue the game logic
         }
     }
 
