@@ -8,10 +8,12 @@ public class LureHandler : MonoBehaviour
     private AudioSource audioSource;
     private Rigidbody lureRB;
     private bool inWater = false;
+    public GameObject SplashEffect;
 
     // Bobbing parameters
-    public float bobbingAmplitude = 0.5f; // How high/low the object bobs
-    public float bobbingSpeed = 1.0f;     // How fast the object bobs
+    public float bobbingAmplitude = 0.1f; // How high/low the object bobs
+    public float bobbingSpeed = 5.0f;     // How fast the object bobs
+    private float offset = 0.1f;
 
     // Original position of the object
     private Vector3 startPosition;
@@ -30,7 +32,7 @@ public class LureHandler : MonoBehaviour
         if (inWater)
         {
             // Calculate the new Y position using a sine wave
-            float newY = startPosition.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingAmplitude;
+            float newY = (startPosition.y + offset) + Mathf.Sin(Time.time * bobbingSpeed) * bobbingAmplitude;
 
             // Apply the new Y position to the object
             transform.position = new Vector3(transform.position.x, newY, transform.position.z);
@@ -47,7 +49,7 @@ public class LureHandler : MonoBehaviour
             inWater = true;
             audioSource.Play();
             lureRB.isKinematic = true;
-            lureRB.gameObject.transform.position += new Vector3(0, 10.0f * Time.deltaTime, 0); //Bob
+            SplashEffect.SetActive(true);
             Debug.Log("Splash! Lure hit the water.");
         }
     }

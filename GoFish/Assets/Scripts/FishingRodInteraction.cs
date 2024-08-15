@@ -30,6 +30,8 @@ public class FishingRodInteraction : MonoBehaviour
     public GameObject waterSplashEffect;
     public bool rodCasting = false;
     public GameObject lure;
+    public GameObject miniLure;
+
     private Rigidbody lureRB;
     public float forwardVelocityThreshold = 2.0f;
 
@@ -49,6 +51,9 @@ public class FishingRodInteraction : MonoBehaviour
     public AudioClip reelSplashSound;
     public GameObject fishSplashEffect;
     public bool fishComesOut = false;
+
+    private GameObject dynamicLure;
+    private bool activeLure = false;
 
     void Start()
     {
@@ -164,15 +169,29 @@ public class FishingRodInteraction : MonoBehaviour
 
         void castLure(bool isLeft)
         {
-            PlaySound(whooshAudio);
-            lureRB = lure.GetComponent<Rigidbody>();
-            lureRB.useGravity = true;
-            if (isLeft) {
-                lureRB.AddForce(leftControllerVelocity*10);
+
+            if (!activeLure)
+            {
+                PlaySound(whooshAudio);
+                lure.SetActive(false);
+                dynamicLure = Instantiate(miniLure, lure.transform.position, Quaternion.identity);
+                activeLure = true;
+                dynamicLure.SetActive(true);
+                lureRB = dynamicLure.GetComponent<Rigidbody>();
+                lureRB.useGravity = true;
+                if (isLeft)
+                {
+                    lureRB.AddForce(leftControllerVelocity * 10);
+                }
+                else
+                {
+                    lureRB.AddForce(rightControllerVelocity * 10);
+                }
             } else
             {
-                lureRB.AddForce(rightControllerVelocity*10);
+
             }
+
         }
 
         void HandleCatchingState()
@@ -243,6 +262,7 @@ public class FishingRodInteraction : MonoBehaviour
         {
             Debug.Log("Executing catching sequence with animation: ");
 
+            fishOnHook = true;
             StartCoroutine(TriggerHapticFeedback(OVRInput.Controller.RTouch));
             //PlaySound(struggleSound);
         }
@@ -250,20 +270,19 @@ public class FishingRodInteraction : MonoBehaviour
         void ExecuteReeling()
         {
             Debug.Log("Preparing to reel in the fish.");
-            fishOnHook = true;
+            fishComesOut = true;
 
             StopCoroutine(TriggerHapticFeedback(OVRInput.Controller.RTouch));
             //play exit sound
             PlaySound(reelSplashSound);
 
             //turn off center reel
-            
-            
+            Destroy(dynamicLure);
+
             //Turn off rod
             rod.SetActive(false);
 
             //rodAnimator.SetTrigger("ReelIn");
-            fishComesOut = true;
         }
         
         /*

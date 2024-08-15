@@ -5594,7 +5594,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.33
+      value: 0.16
       mode: 0
       spread: 0
       speed:
