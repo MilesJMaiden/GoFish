@@ -112,7 +112,7 @@ public class CardContainer : MonoBehaviour
             wrapper.zoomConfig = zoomConfig;
             //wrapper.animationSpeedConfig = animationSpeedConfig;
             wrapper.eventsConfig = eventsConfig;
-            wrapper.preventCardInteraction = preventCardInteraction;
+           // wrapper.preventCardInteraction = preventCardInteraction;
             //wrapper.container = this;
         }
     }
