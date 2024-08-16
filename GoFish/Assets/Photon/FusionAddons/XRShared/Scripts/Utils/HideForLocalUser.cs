@@ -73,7 +73,7 @@ namespace Fusion.XR.Shared.Utils
                 int layer = LayerMask.NameToLayer(localUserLayer);
                 if (layer == -1)
                 {
-                    Debug.LogError($"Local will be visible and may obstruct you vision. Please add a {localUserLayer} layer (it will be automatically removed on the camera culling mask)");
+                    //Debug.LogError($"Local will be visible and may obstruct you vision. Please add a {localUserLayer} layer (it will be automatically removed on the camera culling mask)");
                 }
                 else
                 {
