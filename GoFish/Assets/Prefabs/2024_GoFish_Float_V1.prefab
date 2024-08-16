@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splashSound: {fileID: 8300000, guid: 96439fdce0245e347a8498bb4ce6bf8d, type: 3}
   SplashEffect: {fileID: 0}
-  bobbingAmplitude: 0.2
+  bobbingAmplitude: 0.05
   bobbingSpeed: 1
 --- !u!135 &3043146542155383693
 SphereCollider:
