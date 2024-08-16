@@ -19149,7 +19149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  bobbingAmplitude: 0.5
+  bobbingAmplitude: 0.1
   bobbingSpeed: 1
 --- !u!224 &4876860924444517889
 RectTransform:
