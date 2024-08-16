@@ -3617,10 +3617,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  colorMapEditorContrast: -0.127
-  colorMapEditorBrightness: 0.502
+  colorMapEditorContrast: -0.183
+  colorMapEditorBrightness: 0.564
   colorMapEditorPosterize: 0.346
-  colorMapEditorSaturation: 0
+  colorMapEditorSaturation: 0.031
   _colorLutSourceTexture: {fileID: 0}
   _colorLutTargetTexture: {fileID: 0}
   _lutWeight: 1
