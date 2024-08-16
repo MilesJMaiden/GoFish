@@ -55,6 +55,10 @@ public class GameManager : MonoBehaviour
     public AppVoiceExperience voiceExperience; // Reference to the voice SDK component
     private bool goFishSaid = false; // Flag to track if "Go Fish" was said
 
+    public GameObject goFishVFXPrefab; // Reference to the VFX Prefab
+    public Transform vfxSpawnPosition; // Reference to the Transform for VFX spawn position
+
+
     [System.Serializable]
     public class SuitImages
     {
@@ -707,8 +711,18 @@ public class GameManager : MonoBehaviour
         if (!string.IsNullOrEmpty(transcript) && transcript.Equals("Go fish", StringComparison.OrdinalIgnoreCase))
         {
             goFishSaid = true;
+
+            // Instantiate the VFX Prefab at the specified position
+            if (goFishVFXPrefab != null && vfxSpawnPosition != null)
+            {
+                GameObject vfxInstance = Instantiate(goFishVFXPrefab, vfxSpawnPosition.position, Quaternion.identity);
+
+                // Destroy the VFX after 1 second
+                Destroy(vfxInstance, 1f);
+            }
         }
     }
+
 
     private IEnumerator WaitForGoFish()
     {
