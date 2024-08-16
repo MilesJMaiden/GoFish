@@ -3,6 +3,9 @@ using events;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+    /*
+     * Core mechanics based on https://github.com/lelexy100/unity-card-play \
+     */
 public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler,
     IPointerUpHandler {
     private const float EPS = 0.01f;

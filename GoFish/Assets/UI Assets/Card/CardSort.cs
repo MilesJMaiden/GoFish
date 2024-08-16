@@ -1,12 +1,13 @@
 using config;
-using DefaultNamespace;
-using events;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*
+ * Core mechanics based on https://github.com/lelexy100/unity-card-play \
+ */
 public class CardSort : MonoBehaviour
 {
 
