@@ -627,19 +627,21 @@ public class GameManager : MonoBehaviour
         deckText.text = $"Deck: {deck.Count} cards remaining"; // Use the Count property
     }
 
-
     /// <summary>
     /// Creates buttons for each card in the player's hand.
     /// </summary>
     /// <param name="player">The player whose cards are being displayed.</param>
     private void CreateCardButtons(IPlayer player)
     {
-        Debug.Log("Creating card buttons for human player's hand");
+        Debug.Log("Creating card buttons for player's hand");
+
+        // Clear existing card buttons
         foreach (Transform child in cardButtonParent)
         {
             Destroy(child.gameObject);
         }
 
+        // Iterate through each card in the player's hand
         for (int i = 0; i < player.Hand.Count; i++)
         {
             var cardButton = Instantiate(cardButtonPrefab, cardButtonParent);
@@ -647,7 +649,14 @@ public class GameManager : MonoBehaviour
 
             ICard card = player.Hand[i];
             int suitIndex = (int)card.Suit; // Assuming Suit is an enum and can be cast to int
-            int rankIndex = (int)card.Rank; // Assuming Rank is an enum and can be cast to int
+            int rankIndex = GetRankIndex(card.Rank); // Use mapping function for rank
+
+            // Ensure the rankIndex is within the valid range
+            if (rankIndex < 0 || rankIndex >= cardImagesBySuit[suitIndex].rankImages.Length)
+            {
+                Debug.LogError($"Rank index {rankIndex} is out of bounds.");
+                continue; // Skip this card to prevent a crash
+            }
 
             // Set the appropriate image based on suit and rank
             cardImage.texture = cardImagesBySuit[suitIndex].rankImages[rankIndex];
@@ -659,6 +668,29 @@ public class GameManager : MonoBehaviour
         // Disable card buttons initially until a player is selected
         EnableCardButtons(false);
     }
+    private int GetRankIndex(CardRank rank)
+    {
+        switch (rank)
+        {
+            case CardRank.Ace: return 0;
+            case CardRank.Two: return 1;
+            case CardRank.Three: return 2;
+            case CardRank.Four: return 3;
+            case CardRank.Five: return 4;
+            case CardRank.Six: return 5;
+            case CardRank.Seven: return 6;
+            case CardRank.Eight: return 7;
+            case CardRank.Nine: return 8;
+            case CardRank.Ten: return 9;
+            case CardRank.Jack: return 10;
+            case CardRank.Queen: return 11;
+            case CardRank.King: return 12;
+            default:
+                Debug.LogError($"Unexpected rank: {rank}");
+                return -1; // Return an invalid index if the rank is unexpected
+        }
+    }
+
 
     /// <summary>
     /// Updates the display for a player's cards with card back sprites.
@@ -738,5 +770,66 @@ public class GameManager : MonoBehaviour
         // Reset the flag
         goFishSaid = false;
     }
+
+    void Update()
+    {
+        // Debugging: Select the number of AI players
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            OnAIPlayerSelected(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            OnAIPlayerSelected(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            OnAIPlayerSelected(3);
+        }
+
+        // Debugging: Request a random card from a random AI player
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (players != null && players.Count > 1) // Ensure there are AI players
+            {
+                RequestRandomCard();
+            }
+        }
+
+        // Debugging: Skip "Go Fish" voice interaction
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (goFishText.gameObject.activeSelf)
+            {
+                goFishSaid = true; // Simulate the "Go Fish" command being recognized
+            }
+        }
+    }
+
+    private void RequestRandomCard()
+    {
+        // Ensure that the player has cards in hand
+        if (players[0].Hand.Count > 0)
+        {
+            // Select a random card from the player's hand
+            int randomCardIndex = random.Next(players[0].Hand.Count);
+            CardRank randomCardRank = players[0].Hand[randomCardIndex].Rank;
+
+            // Select a random AI player
+            List<IPlayer> aiPlayers = players.Where(p => p != players[0]).ToList();
+            IPlayer randomAIPlayer = aiPlayers[random.Next(aiPlayers.Count)];
+
+            // Log the action
+            Debug.Log($"Requesting card: {randomCardRank} from {randomAIPlayer.Name}");
+
+            // Process the turn
+            ProcessTurn(players[0], randomAIPlayer, randomCardRank);
+        }
+        else
+        {
+            Debug.LogWarning("No cards in hand to request.");
+        }
+    }
+
 
 }
