@@ -7,6 +7,7 @@ using TMPro;
 using Oculus.Voice;
 using Meta.WitAi.Json;
 using System;
+using Fusion;
 
 /// <summary>
 /// Manages the game flow, including initializing players, dealing cards, processing turns,
@@ -158,6 +159,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Starts the game by shuffling the deck, dealing cards, adding jokers to the deck, and initiating the game loop.
     /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void StartGame()
     {
         Debug.Log("Starting game.");
@@ -301,6 +303,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Announces the winner of the game, displays player rankings, and starts the process to return to AI selection screen.
     /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void AnnounceWinner()
     {
         var rankedPlayers = players.OrderByDescending(player => player.Score).ToList();
@@ -345,6 +348,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Resets the game to the initial state, ready for a new game.
     /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void ResetGame()
     {
         Debug.Log("Resetting game.");
@@ -433,6 +437,7 @@ public class GameManager : MonoBehaviour
     /// Called when a card button is clicked.
     /// </summary>
     /// <param name="cardIndex">The index of the card that was clicked.</param>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void OnCardButtonClicked(int cardIndex)
     {
         requestedCardRank = players[0].Hand[cardIndex].Rank; // Human player's hand is at index 0
@@ -444,7 +449,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="currentPlayer">The player taking the turn.</param>
     /// <param name="nextPlayer">The player being asked for a card.</param>
-    /// <param name="requestedCardRank">The rank of the card being requested.</param>
+    /// <param name="requestedCardRank">The rank of the card being requested.</param> 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void ProcessTurn(IPlayer currentPlayer, IPlayer nextPlayer, CardRank requestedCardRank)
     {
         Debug.Log($"{currentPlayer.Name} is requesting '{requestedCardRank}' from {nextPlayer.Name}");
@@ -490,7 +496,7 @@ public class GameManager : MonoBehaviour
             StopAllCoroutines(); // Stop the game loop
         }
     }
- /// <summary>
+    /// <summary>
     /// Shows the "Go Fish" text, allows the current player to draw a card from the deck,
     /// handles joker card effects, and updates the UI accordingly.
     /// The user must say "Go Fish" to proceed.
@@ -499,6 +505,7 @@ public class GameManager : MonoBehaviour
     /// <param name="nextPlayer">The player being asked for a card.</param>
     /// <param name="requestedCardRank">The rank of the card that was requested.</param>
     /// <returns>IEnumerator for coroutine.</returns>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private IEnumerator ShowGoFishAndDrawCard(IPlayer currentPlayer, IPlayer nextPlayer, CardRank requestedCardRank)
     {
         goFishText.gameObject.SetActive(true);
@@ -581,6 +588,7 @@ public class GameManager : MonoBehaviour
     /// Checks if the user has said "Go Fish".
     /// </summary>
     /// <returns>True if "Go Fish" was recognized.</returns>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private bool IsGoFishSaid()
     {
         // Return the value of the flag
@@ -594,6 +602,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Updates the UI to reflect the current state of the game.
     /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void UpdateUI()
     {
         Debug.Log("Updating UI.");
