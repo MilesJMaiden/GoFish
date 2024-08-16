@@ -218,6 +218,7 @@ public class GameManager : MonoBehaviour
         while (!IsGameOver())
         {
             var currentPlayer = players[currentPlayerIndex];
+
             if (currentPlayer.Hand.Count == 0)
             {
                 Debug.Log($"{currentPlayer.Name} has no cards left.");
@@ -243,9 +244,11 @@ public class GameManager : MonoBehaviour
 
             if (currentPlayer.Name == "Human Player")
             {
+                // Enable player selection buttons when it's the human player's turn
+                playerSelectionButtonParent.gameObject.SetActive(true);
+
                 CreatePlayerSelectionButtons();
                 messageText.text = "Select a player to ask.";
-                playerSelectionButtonParent.gameObject.SetActive(true);
                 Debug.Log("Waiting for player to select another player.");
                 yield return new WaitUntil(() => selectedPlayer != null);
 
@@ -256,21 +259,33 @@ public class GameManager : MonoBehaviour
 
                 EnableCardButtons(false);
                 DestroyPlayerSelectionButtons();
+
+                // Process the turn and disable the player selection buttons
+                ProcessTurn(currentPlayer, selectedPlayer, requestedCardRank);
                 playerSelectionButtonParent.gameObject.SetActive(false);
 
-                ProcessTurn(currentPlayer, selectedPlayer, requestedCardRank);
                 requestedCardRank = default;
                 selectedPlayer = null;
+
+                // Let AI players continue their turns automatically
+                yield return StartCoroutine(ContinueWithAITurns());
+
+                // Re-enable player selection buttons when it's the human player's turn again
+                playerSelectionButtonParent.gameObject.SetActive(true);
             }
             else
             {
+                // Disable player selection buttons during AI turns
+                playerSelectionButtonParent.gameObject.SetActive(false);
+
                 LogAIAction(currentPlayer);
-                yield return new WaitForSeconds(2);
-                currentPlayer.TakeTurn(players, deck);
+                yield return new WaitForSeconds(2); // Add a small delay to simulate AI thinking
+                currentPlayer.TakeTurn(players, deck); // AI takes turn automatically
+
+                UpdateUI();
             }
 
             currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
-            UpdateUI();
 
             // Check if the game is over after each turn
             if (IsGameOver())
@@ -280,6 +295,8 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+
 
     /// <summary>
     /// Logs the action of the AI player and ensures AI requests cards from different players.
@@ -771,9 +788,8 @@ public class GameManager : MonoBehaviour
         goFishSaid = false;
     }
 
-    void Update()
+    private void Update()
     {
-        // Debugging: Select the number of AI players
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             OnAIPlayerSelected(1);
@@ -786,50 +802,61 @@ public class GameManager : MonoBehaviour
         {
             OnAIPlayerSelected(3);
         }
-
-        // Debugging: Request a random card from a random AI player
-        if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.R) && players[currentPlayerIndex].Name == "Human Player")
         {
-            if (players != null && players.Count > 1) // Ensure there are AI players
-            {
-                RequestRandomCard();
-            }
+            // Disable player selection buttons when R is pressed
+            playerSelectionButtonParent.gameObject.SetActive(false);
+
+            // Request a random card from a random AI player
+            RequestRandomCardFromAI();
+
+            // Let AI players take their turns after the human player
+            StartCoroutine(ContinueWithAITurns());
         }
-
-        // Debugging: Skip "Go Fish" voice interaction
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
-            if (goFishText.gameObject.activeSelf)
-            {
-                goFishSaid = true; // Simulate the "Go Fish" command being recognized
-            }
+            // Simulate saying "Go Fish"
+            goFishSaid = true;
         }
     }
 
-    private void RequestRandomCard()
+
+    private void RequestRandomCardFromAI()
     {
-        // Ensure that the player has cards in hand
-        if (players[0].Hand.Count > 0)
-        {
-            // Select a random card from the player's hand
-            int randomCardIndex = random.Next(players[0].Hand.Count);
-            CardRank randomCardRank = players[0].Hand[randomCardIndex].Rank;
+        var humanPlayer = players[0];
+        var randomAIPlayer = players[UnityEngine.Random.Range(1, players.Count)];
+        var randomCardRank = humanPlayer.Hand[UnityEngine.Random.Range(0, humanPlayer.Hand.Count)].Rank;
 
-            // Select a random AI player
-            List<IPlayer> aiPlayers = players.Where(p => p != players[0]).ToList();
-            IPlayer randomAIPlayer = aiPlayers[random.Next(aiPlayers.Count)];
-
-            // Log the action
-            Debug.Log($"Requesting card: {randomCardRank} from {randomAIPlayer.Name}");
-
-            // Process the turn
-            ProcessTurn(players[0], randomAIPlayer, randomCardRank);
-        }
-        else
-        {
-            Debug.LogWarning("No cards in hand to request.");
-        }
+        ProcessTurn(humanPlayer, randomAIPlayer, randomCardRank);
     }
 
 
+    private IEnumerator ContinueWithAITurns()
+    {
+        while (true)
+        {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+            var currentPlayer = players[currentPlayerIndex];
+
+            if (currentPlayer.Name != "Human Player")
+            {
+                LogAIAction(currentPlayer);
+                yield return new WaitForSeconds(2); // Add a small delay to simulate AI thinking
+                currentPlayer.TakeTurn(players, deck); // AI takes turn automatically
+
+                // Check if the game is over after each AI turn
+                if (IsGameOver())
+                {
+                    AnnounceWinner();
+                    yield break; // Exit the game loop
+                }
+
+                UpdateUI();
+            }
+            else
+            {
+                break; // Exit loop when it's the human player's turn again
+            }
+        }
+    }
 }
