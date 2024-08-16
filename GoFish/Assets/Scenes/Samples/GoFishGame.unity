@@ -3430,7 +3430,7 @@ MonoBehaviour:
   overridePerLayerColorScaleAndOffset: 0
   colorScale: {x: 1, y: 1, z: 1, w: 1}
   colorOffset: {x: 0, y: 0, z: 0, w: 0}
-  colorMapEditorType_: 0
+  colorMapEditorType_: 3
   colorMapEditorGradient:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
@@ -3461,9 +3461,9 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  colorMapEditorContrast: 0
-  colorMapEditorBrightness: 0
-  colorMapEditorPosterize: 0
+  colorMapEditorContrast: -0.127
+  colorMapEditorBrightness: 0.502
+  colorMapEditorPosterize: 0.346
   colorMapEditorSaturation: 0
   _colorLutSourceTexture: {fileID: 0}
   _colorLutTargetTexture: {fileID: 0}
@@ -3473,7 +3473,7 @@ MonoBehaviour:
   textureOpacity_: 1
   edgeRenderingEnabled_: 0
   edgeColor_: {r: 1, g: 1, b: 1, a: 1}
-  colorMapType: 0
+  colorMapType: 2
 --- !u!114 &402194452
 MonoBehaviour:
   m_ObjectHideFlags: 0
