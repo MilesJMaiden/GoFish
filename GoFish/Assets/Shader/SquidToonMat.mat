@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3002
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -47,11 +47,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: 2
     - _SpecularSize: 5.79
     - _Specular_Size: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.65039504, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.9305451, b: 0.801, a: 1}
     - _LighDir: {r: 0, g: 30, b: 0, a: 0}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
