@@ -3617,7 +3617,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  colorMapEditorContrast: -0.127
+  colorMapEditorContrast: -0.177
   colorMapEditorBrightness: 0.502
   colorMapEditorPosterize: 0.346
   colorMapEditorSaturation: 0
@@ -3628,7 +3628,7 @@ MonoBehaviour:
   serializedSurfaceGeometry: []
   textureOpacity_: 1
   edgeRenderingEnabled_: 0
-  edgeColor_: {r: 1, g: 1, b: 1, a: 1}
+  edgeColor_: {r: 0, g: 0.3584906, b: 0.35418868, a: 1}
   colorMapType: 2
 --- !u!114 &402194452
 MonoBehaviour:
