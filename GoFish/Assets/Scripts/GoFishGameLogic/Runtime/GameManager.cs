@@ -612,7 +612,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Updating UI.");
 
         // Update player 1 (human player) UI
-        playerScoreText.text = $"Player 1 Score: {players[0].Score}";
+        playerScoreText.text = $"{players[0].Score}";
         CreateCardButtons(players[0]); // Refresh card buttons for player 1
 
         // Update UI for the other players
