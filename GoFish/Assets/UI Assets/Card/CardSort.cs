@@ -1,12 +1,13 @@
 using config;
-using DefaultNamespace;
-using events;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*
+ * Core mechanics based on https://github.com/lelexy100/unity-card-play \
+ */
 public class CardSort : MonoBehaviour
 {
 
@@ -77,7 +78,7 @@ public class CardSort : MonoBehaviour
 
             // Pass child card any extra config it should be aware of
             wrapper.zoomConfig = zoomConfig;
-            wrapper.animationSpeedConfig = animationSpeedConfig;
+            //wrapper.animationSpeedConfig = animationSpeedConfig;
             wrapper.eventsConfig = eventsConfig;
             //wrapper.preventCardInteraction = preventCardInteraction;
             wrapper.container = this;

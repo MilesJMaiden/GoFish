@@ -69,8 +69,8 @@ namespace Fusion.XR.Shared.Locomotion
 
         private void Start()
         {
-            if (locomotionLayerMask == 0)
-                Debug.LogError("RigLocomotion: for locomotion to be possible, at least one layer has to be added to locomotionLayerMask, add used on locomotion surface colliders");
+           // if (locomotionLayerMask == 0)
+               // Debug.LogError("RigLocomotion: for locomotion to be possible, at least one layer has to be added to locomotionLayerMask, add used on locomotion surface colliders");
         }
 
         protected virtual void Update()

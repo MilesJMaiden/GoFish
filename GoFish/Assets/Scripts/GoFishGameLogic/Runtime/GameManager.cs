@@ -4,6 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Oculus.Voice;
+using Meta.WitAi.Json;
+using System;
+using Fusion;
 
 /// <summary>
 /// Manages the game flow, including initializing players, dealing cards, processing turns,
@@ -11,10 +15,12 @@ using TMPro;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI playerHandText;
+    //public TextMeshProUGUI playerHandText;
     public TextMeshProUGUI playerScoreText;
-    public TextMeshProUGUI[] aiHandTexts;
+    public TextMeshProUGUI playerScoreText2;
+    //public TextMeshProUGUI[] aiHandTexts;
     public TextMeshProUGUI[] aiScoreTexts;
+    public TextMeshProUGUI[] aiScoreTexts1;
     public TextMeshProUGUI deckText;
     public TextMeshProUGUI messageText;
     public GameObject cardButtonPrefab;
@@ -24,7 +30,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI goFishText;
     public Button aiPlayerButton1, aiPlayerButton2, aiPlayerButton3;
     public GameObject cardBackSpritePrefab;
-    public Transform[] aiPlayerCardParents;
 
     public TextMeshProUGUI aiPlayerSelectionMessageText; // New field for AI player selection message
     public TextMeshProUGUI gameEndMessageText; // New field for game end message
@@ -38,6 +43,27 @@ public class GameManager : MonoBehaviour
     private IPlayer selectedPlayer;
     private CardRank requestedCardRank;
     private int numberOfAIPlayers;
+
+    // Replace AI-specific Transform references with GameObject references
+    public GameObject player1CardParent;
+    public GameObject player2CardParent;
+    public GameObject player3CardParent;
+
+    // Add this field to your GameManager class
+    public SuitImages[] cardImagesBySuit = new SuitImages[4]; // Array for 4 suits
+
+    public AppVoiceExperience voiceExperience; // Reference to the voice SDK component
+    private bool goFishSaid = false; // Flag to track if "Go Fish" was said
+
+    public GameObject goFishVFXPrefab; // Reference to the VFX Prefab
+    public Transform vfxSpawnPosition; // Reference to the Transform for VFX spawn position
+
+
+    [System.Serializable]
+    public class SuitImages
+    {
+        public Texture2D[] rankImages = new Texture2D[13]; // Array for 13 card ranks (Ace to King)
+    }
 
     /// <summary>
     /// Initializes the game by setting up the players, deck, and UI elements.
@@ -59,7 +85,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Showing AI player selection buttons.");
         aiPlayerSelectionMessageText.gameObject.SetActive(true);
-        aiPlayerSelectionMessageText.text = "Please select the number of AI opponents:";
         aiPlayerButton1.gameObject.SetActive(true);
         aiPlayerButton2.gameObject.SetActive(true);
         aiPlayerButton3.gameObject.SetActive(true);
@@ -69,18 +94,22 @@ public class GameManager : MonoBehaviour
         cardButtonParent.gameObject.SetActive(false);
         playerSelectionButtonParent.gameObject.SetActive(false);
 
-        playerHandText.gameObject.SetActive(false);
+        //playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
-        foreach (var aiHandText in aiHandTexts)
-        {
-            aiHandText.gameObject.SetActive(false);
-        }
+        playerScoreText2.gameObject.SetActive(false);
+
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
         }
+        foreach (var aiScoreText1 in aiScoreTexts1)
+        {
+            aiScoreText1.gameObject.SetActive(false);
+        }
+
         gameEndMessageText.gameObject.SetActive(false);
     }
+
 
 
     /// <summary>
@@ -90,7 +119,6 @@ public class GameManager : MonoBehaviour
     public void OnAIPlayerSelected(int numAIPlayers)
     {
         Debug.Log("AI players selected: " + numAIPlayers);
-        numberOfAIPlayers = numAIPlayers;
         aiPlayerSelectionMessageText.gameObject.SetActive(false);
         aiPlayerButton1.gameObject.SetActive(false);
         aiPlayerButton2.gameObject.SetActive(false);
@@ -100,18 +128,22 @@ public class GameManager : MonoBehaviour
         cardButtonParent.gameObject.SetActive(true);
         playerSelectionButtonParent.gameObject.SetActive(false);
 
-        playerHandText.gameObject.SetActive(true);
+        //playerHandText.gameObject.SetActive(true);
         playerScoreText.gameObject.SetActive(true);
-        for (int i = 0; i < numberOfAIPlayers; i++)
+        playerScoreText2.gameObject.SetActive(true);
+
+        for (int i = 0; i < numAIPlayers; i++)
         {
-            aiHandTexts[i].gameObject.SetActive(true);
             aiScoreTexts[i].gameObject.SetActive(true);
         }
+        for (int i = 0; i < numAIPlayers; i++)
+        {
+            aiScoreTexts1[i].gameObject.SetActive(true);
+        }
 
-        InitializePlayers(numberOfAIPlayers);
+        InitializePlayers(numAIPlayers);
         StartGame();
     }
-
 
     /// <summary>
     /// Initializes the players in the game.
@@ -131,6 +163,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Starts the game by shuffling the deck, dealing cards, adding jokers to the deck, and initiating the game loop.
     /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void StartGame()
     {
         Debug.Log("Starting game.");
@@ -274,6 +307,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Announces the winner of the game, displays player rankings, and starts the process to return to AI selection screen.
     /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void AnnounceWinner()
     {
         var rankedPlayers = players.OrderByDescending(player => player.Score).ToList();
@@ -318,6 +352,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Resets the game to the initial state, ready for a new game.
     /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void ResetGame()
     {
         Debug.Log("Resetting game.");
@@ -330,15 +365,16 @@ public class GameManager : MonoBehaviour
 
         // Reset UI elements
         gameEndMessageText.gameObject.SetActive(false);
-        playerHandText.gameObject.SetActive(false);
         playerScoreText.gameObject.SetActive(false);
-        foreach (var aiHandText in aiHandTexts)
-        {
-            aiHandText.gameObject.SetActive(false);
-        }
+        playerScoreText2.gameObject.SetActive(false);
+
         foreach (var aiScoreText in aiScoreTexts)
         {
             aiScoreText.gameObject.SetActive(false);
+        }
+        foreach (var aiScoreText1 in aiScoreTexts1)
+        {
+            aiScoreText1.gameObject.SetActive(false);
         }
         deckText.gameObject.SetActive(false);
         messageText.gameObject.SetActive(false);
@@ -405,6 +441,7 @@ public class GameManager : MonoBehaviour
     /// Called when a card button is clicked.
     /// </summary>
     /// <param name="cardIndex">The index of the card that was clicked.</param>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void OnCardButtonClicked(int cardIndex)
     {
         requestedCardRank = players[0].Hand[cardIndex].Rank; // Human player's hand is at index 0
@@ -416,7 +453,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="currentPlayer">The player taking the turn.</param>
     /// <param name="nextPlayer">The player being asked for a card.</param>
-    /// <param name="requestedCardRank">The rank of the card being requested.</param>
+    /// <param name="requestedCardRank">The rank of the card being requested.</param> 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void ProcessTurn(IPlayer currentPlayer, IPlayer nextPlayer, CardRank requestedCardRank)
     {
         Debug.Log($"{currentPlayer.Name} is requesting '{requestedCardRank}' from {nextPlayer.Name}");
@@ -462,20 +500,28 @@ public class GameManager : MonoBehaviour
             StopAllCoroutines(); // Stop the game loop
         }
     }
-
     /// <summary>
     /// Shows the "Go Fish" text, allows the current player to draw a card from the deck,
     /// handles joker card effects, and updates the UI accordingly.
-    /// If the drawn card matches the requested rank, the player gets another turn.
+    /// The user must say "Go Fish" to proceed.
     /// </summary>
     /// <param name="currentPlayer">The player taking the turn.</param>
     /// <param name="nextPlayer">The player being asked for a card.</param>
     /// <param name="requestedCardRank">The rank of the card that was requested.</param>
     /// <returns>IEnumerator for coroutine.</returns>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private IEnumerator ShowGoFishAndDrawCard(IPlayer currentPlayer, IPlayer nextPlayer, CardRank requestedCardRank)
     {
         goFishText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1);
+
+        // Activate microphone for voice input
+        ActivateVoiceInput();
+
+        StartCoroutine(WaitForGoFish());
+
+        // Deactivate the microphone
+        DeactivateVoiceInput();
+
         goFishText.gameObject.SetActive(false);
 
         var drawnCard = deck.Draw();
@@ -521,26 +567,69 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ActivateVoiceInput()
+    {
+        if (!voiceExperience.MicActive)
+        {
+            // Subscribe to the OnResponse event to capture the voice response
+            voiceExperience.VoiceEvents.OnResponse.AddListener(OnVoiceResponse);
+            voiceExperience.Activate();
+        }
+    }
+
+    private void DeactivateVoiceInput()
+    {
+        if (voiceExperience.MicActive)
+        {
+            voiceExperience.Deactivate();
+            // Unsubscribe from the OnResponse event to avoid memory leaks
+            voiceExperience.VoiceEvents.OnResponse.RemoveListener(OnVoiceResponse);
+        }
+    }
+
+
+    /// <summary>
+    /// Checks if the user has said "Go Fish".
+    /// </summary>
+    /// <returns>True if "Go Fish" was recognized.</returns>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private bool IsGoFishSaid()
+    {
+        // Return the value of the flag
+        return goFishSaid;
+    }
+
+
     /// <summary>
     /// Updates the UI to reflect the current state of the game.
     /// </summary>
+    /// <summary>
+    /// Updates the UI to reflect the current state of the game.
+    /// </summary>
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void UpdateUI()
     {
         Debug.Log("Updating UI.");
-        playerHandText.text = $"Human Player: {string.Join(", ", players[0].Hand.Select(card => card.Name))}";
-        playerScoreText.text = $"Human Player Score: {players[0].Score}";
-        CreateCardButtons(players[0]); // Refresh card buttons for human player
-        for (int i = 0; i < numberOfAIPlayers; i++)
+
+        // Update player 1 (human player) UI
+        playerScoreText.text = $"Player 1 Score: {players[0].Score}";
+        CreateCardButtons(players[0]); // Refresh card buttons for player 1
+
+        // Update UI for the other players
+        for (int i = 1; i < players.Count; i++)
         {
-            aiHandTexts[i].text = $"{players[i + 1].Name}: {players[i + 1].Hand.Count} cards"; // Show number of cards instead of card names for AI
-            aiScoreTexts[i].text = $"{players[i + 1].Name} Score: {players[i + 1].Score}";
-            UpdateAICardDisplay(players[i + 1], aiPlayerCardParents[i]);
+            aiScoreTexts[i - 1].text = $"{players[i].Name} Score: {players[i].Score}";
+
+            // Update the card display for each player
+            UpdatePlayerCardDisplay(players[i], i); // Pass the correct player index (1 for player 2, 2 for player 3, etc.)
         }
+
         deckText.text = $"Deck: {deck.Count} cards remaining"; // Use the Count property
     }
 
+
     /// <summary>
-    /// Creates buttons for each card in the human player's hand.
+    /// Creates buttons for each card in the player's hand.
     /// </summary>
     /// <param name="player">The player whose cards are being displayed.</param>
     private void CreateCardButtons(IPlayer player)
@@ -554,8 +643,15 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < player.Hand.Count; i++)
         {
             var cardButton = Instantiate(cardButtonPrefab, cardButtonParent);
-            var cardNameText = cardButton.GetComponentInChildren<TextMeshProUGUI>();
-            cardNameText.text = player.Hand[i].Name;
+            var cardImage = cardButton.GetComponentInChildren<RawImage>(); // Use RawImage instead of Image for Texture2D
+
+            ICard card = player.Hand[i];
+            int suitIndex = (int)card.Suit; // Assuming Suit is an enum and can be cast to int
+            int rankIndex = (int)card.Rank; // Assuming Rank is an enum and can be cast to int
+
+            // Set the appropriate image based on suit and rank
+            cardImage.texture = cardImagesBySuit[suitIndex].rankImages[rankIndex];
+
             int index = i; // Prevent closure issue
             cardButton.GetComponent<Button>().onClick.AddListener(() => OnCardButtonClicked(index));
         }
@@ -565,21 +661,82 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the display for the AI players' cards with card back sprites.
+    /// Updates the display for a player's cards with card back sprites.
     /// </summary>
-    /// <param name="player">The AI player whose cards are being updated.</param>
-    /// <param name="parent">The parent transform where card back sprites are added.</param>
-    private void UpdateAICardDisplay(IPlayer player, Transform parent)
+    /// <param name="player">The player whose cards are being updated.</param>
+    /// <param name="playerIndex">The index of the player (1, 2, or 3).</param>
+    private void UpdatePlayerCardDisplay(IPlayer player, int playerIndex)
     {
-        Debug.Log("Updating AI card display for: " + player.Name);
-        foreach (Transform child in parent)
+        Debug.Log("Updating card display for: " + player.Name);
+
+        GameObject parentGameObject = null;
+
+        switch (playerIndex)
+        {
+            case 1:
+                parentGameObject = player1CardParent;
+                break;
+            case 2:
+                parentGameObject = player2CardParent;
+                break;
+            case 3:
+                parentGameObject = player3CardParent;
+                break;
+            default:
+                Debug.LogError("Invalid player index.");
+                return;
+        }
+
+        // Clear existing card display
+        foreach (Transform child in parentGameObject.transform)
         {
             Destroy(child.gameObject);
         }
 
+        // Add card back sprites for each card in the player's hand
         for (int i = 0; i < player.Hand.Count; i++)
         {
-            Instantiate(cardBackSpritePrefab, parent);
+            Instantiate(cardBackSpritePrefab, parentGameObject.transform);
         }
     }
+
+    /// <summary>
+    /// Handles the voice response and checks if "Go Fish" was said.
+    /// </summary>
+    /// <param name="response">The response from the voice service.</param>
+    private void OnVoiceResponse(WitResponseNode response)
+    {
+        // Check if "Go fish" was said
+        string transcript = response["text"]?.Value;
+        if (!string.IsNullOrEmpty(transcript) && transcript.Equals("Go fish", StringComparison.OrdinalIgnoreCase))
+        {
+            goFishSaid = true;
+
+            // Instantiate the VFX Prefab at the specified position
+            if (goFishVFXPrefab != null && vfxSpawnPosition != null)
+            {
+                GameObject vfxInstance = Instantiate(goFishVFXPrefab, vfxSpawnPosition.position, Quaternion.identity);
+
+                // Destroy the VFX after 1 second
+                Destroy(vfxInstance, 1f);
+            }
+        }
+    }
+
+
+    private IEnumerator WaitForGoFish()
+    {
+        // Activate voice input
+        ActivateVoiceInput();
+
+        // Wait until "Go Fish" is said
+        yield return new WaitUntil(() => IsGoFishSaid());
+
+        // Deactivate voice input once "Go Fish" is recognized
+        DeactivateVoiceInput();
+
+        // Reset the flag
+        goFishSaid = false;
+    }
+
 }

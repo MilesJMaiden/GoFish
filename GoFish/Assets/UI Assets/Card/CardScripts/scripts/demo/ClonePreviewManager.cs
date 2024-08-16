@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using events;
 using UnityEngine;
 using UnityEngine.UI;
+    
+/*
+     * Core mechanics based on https://github.com/lelexy100/unity-card-play \
+     */
 
 namespace demo {
-    /**
-     * Offers a preview of a card when hovering over it by cloning the original card and placing it on top of the original.
-     * Allows setting the global preview position and scale.
-     */
     public class ClonePreviewManager : MonoBehaviour, CardPreviewManager {
         
         [SerializeField]
