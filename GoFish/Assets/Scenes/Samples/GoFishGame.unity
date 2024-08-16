@@ -22051,7 +22051,7 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 44289d798f28ce8498d5126bc5b236fa, type: 3}
     - {fileID: 2800000, guid: ec2b74d7d48244b48babd183b1e3db99, type: 3}
     - {fileID: 2800000, guid: 0f4f59d54e46dc746887f1dd3a5acf25, type: 3}
-    - {fileID: 0}
+    - {fileID: 2800000, guid: 66693388f380ea948a5de57b7eb2a22c, type: 3}
   - rankImages:
     - {fileID: 2800000, guid: 8efc5996ddf226b448ddbbbb9012a769, type: 3}
     - {fileID: 2800000, guid: 708525ecd2519204192b95cceb96bf57, type: 3}
@@ -22065,7 +22065,7 @@ MonoBehaviour:
     - {fileID: 2800000, guid: bf59174bd015948409451e7a30458c8e, type: 3}
     - {fileID: 2800000, guid: 9f1a83aa57624bd429f5ffc733671469, type: 3}
     - {fileID: 2800000, guid: 10ceffd7222dff242922f21182f9029a, type: 3}
-    - {fileID: 0}
+    - {fileID: 2800000, guid: b7e42796d58f1cf468c3528e86a53b12, type: 3}
   - rankImages:
     - {fileID: 2800000, guid: e4ec0a58bc8bf5a41b96c64dd7105699, type: 3}
     - {fileID: 2800000, guid: 3b9895896bfa5e94eb5269877777f16a, type: 3}
@@ -22079,7 +22079,7 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 57c2c1026555ca24eadad14cc706a132, type: 3}
     - {fileID: 2800000, guid: ab9e5067fcbf88742a2cb478bc8e9136, type: 3}
     - {fileID: 2800000, guid: 1fa08d7a25f4fad45b46470c978cb0df, type: 3}
-    - {fileID: 0}
+    - {fileID: 2800000, guid: c38983099cd1fc340ae77a6bf987a3ea, type: 3}
   - rankImages:
     - {fileID: 2800000, guid: f33d5821d46e4c746a376aca17663c95, type: 3}
     - {fileID: 2800000, guid: ea9bc24f27a0c374ba4ded06f80bd5ad, type: 3}
@@ -22093,7 +22093,7 @@ MonoBehaviour:
     - {fileID: 2800000, guid: bf59174bd015948409451e7a30458c8e, type: 3}
     - {fileID: 2800000, guid: 9f1a83aa57624bd429f5ffc733671469, type: 3}
     - {fileID: 2800000, guid: 10ceffd7222dff242922f21182f9029a, type: 3}
-    - {fileID: 0}
+    - {fileID: 2800000, guid: b7e42796d58f1cf468c3528e86a53b12, type: 3}
   voiceExperience: {fileID: 517871822}
 --- !u!4 &1309187594
 Transform:
@@ -46854,20 +46854,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4401435062362233857, guid: 586c0376322825a4a8c76bda577dc4e4,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4534417524223395397, guid: 586c0376322825a4a8c76bda577dc4e4,
         type: 3}
       propertyPath: m_Name
       value: PlaySpace
-      objectReference: {fileID: 0}
-    - target: {fileID: 6008730580736108798, guid: 586c0376322825a4a8c76bda577dc4e4,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
