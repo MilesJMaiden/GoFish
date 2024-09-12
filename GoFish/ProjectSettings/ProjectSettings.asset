@@ -929,7 +929,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -949,11 +955,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 4bb73701-05fd-4578-8263-b9e1825257c6
+  cloudProjectId: da7269f6-a7b1-4416-82f0-35c7fe8c124c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: GoFish 2024-08-12_11-25-09
-  organizationId: miles_maiden
+  projectName: GoFish
+  organizationId: jakeboulton
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
