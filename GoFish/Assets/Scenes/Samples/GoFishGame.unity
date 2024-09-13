@@ -12061,7 +12061,7 @@ PrefabInstance:
     - target: {fileID: 5846110721797509278, guid: e98e1b11a278aad4088675dbdcf2ebda,
         type: 3}
       propertyPath: _size.y
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5846110721797509278, guid: e98e1b11a278aad4088675dbdcf2ebda,
         type: 3}
@@ -14848,6 +14848,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player4HandSurface
       objectReference: {fileID: 0}
+    - target: {fileID: 5846110721797509278, guid: e98e1b11a278aad4088675dbdcf2ebda,
+        type: 3}
+      propertyPath: _size.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6741123168044250534, guid: e98e1b11a278aad4088675dbdcf2ebda,
         type: 3}
       propertyPath: m_Pivot.x
@@ -15028,6 +15033,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player3HandSurface
       objectReference: {fileID: 0}
+    - target: {fileID: 5846110721797509278, guid: e98e1b11a278aad4088675dbdcf2ebda,
+        type: 3}
+      propertyPath: _size.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6741123168044250534, guid: e98e1b11a278aad4088675dbdcf2ebda,
         type: 3}
       propertyPath: m_Pivot.x
@@ -15061,12 +15071,12 @@ PrefabInstance:
     - target: {fileID: 6741123168044250534, guid: e98e1b11a278aad4088675dbdcf2ebda,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 2.68
       objectReference: {fileID: 0}
     - target: {fileID: 6741123168044250534, guid: e98e1b11a278aad4088675dbdcf2ebda,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 6741123168044250534, guid: e98e1b11a278aad4088675dbdcf2ebda,
         type: 3}
@@ -15874,11 +15884,41 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1309187593}
+    - target: {fileID: 3472550118819941904, guid: d2cf911b5d89d6b468d957c8e0c6e7ae,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3472550118819941904, guid: d2cf911b5d89d6b468d957c8e0c6e7ae,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8106936753367733781, guid: d2cf911b5d89d6b468d957c8e0c6e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1309187593}
+    - target: {fileID: 8379498493328842769, guid: d2cf911b5d89d6b468d957c8e0c6e7ae,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379498493328842769, guid: d2cf911b5d89d6b468d957c8e0c6e7ae,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379498493328842769, guid: d2cf911b5d89d6b468d957c8e0c6e7ae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379498493328842769, guid: d2cf911b5d89d6b468d957c8e0c6e7ae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.266
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16143,6 +16183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player1HandCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464161520420399885, guid: dc3e11c94ccb1af48be191597bfef007,
+        type: 3}
+      propertyPath: _size.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6532276553853175979, guid: dc3e11c94ccb1af48be191597bfef007,
         type: 3}
